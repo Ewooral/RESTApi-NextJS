@@ -2,12 +2,12 @@
 import withAuth from '@/components/HigherOrderComponent';
 import logout from '@/components/LogOut'
 
+
 const DashboardPage = () => {
 
   return (
-    <div>
-     {/* <div className="flex h-screen bg-gray-200"> */}
-      {/* <div className="p-5 bg-white rounded shadow-sm w-64 md:w-64 h-full overflow-auto">
+     <div className="">
+       {/* <div className="p-5 bg-white rounded shadow-sm w-64 md:w-64 h-full overflow-auto"> 
         <h2 className="text-xl font-semibold text-gray-800">Dashboard</h2>
         <nav className="mt-5 space-y-2">
           <a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-500 hover:text-white">
@@ -23,12 +23,12 @@ const DashboardPage = () => {
             Logout
           </a>
         </nav>
-      </div> */}
+      </div> 
       <div className="flex-1 p-10 text-2xl font-bold">
        
        <span> Content goes here...</span>
     
-      </div>
+      </div> */}
     </div>
   );
 };

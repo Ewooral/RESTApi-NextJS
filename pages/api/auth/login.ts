@@ -10,6 +10,7 @@ const my_secret_key = process.env.MY_SECRET_PIN;
 const encryptionKey = crypto.scryptSync("G@d!$g@@d", "salt", 32);
 const iv = crypto.randomBytes(16);
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -41,12 +42,9 @@ export default async function handler(
 
       if (
         !user ||
-        !(await bcrypt.compare(password, user.password)) ||
-        (role !== user.role && secretPin !== my_secret_key) 
+        !(await bcrypt.compare(password, user.password)) 
       ) {
-        console.log("Invalid credentials");
-
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "Invalid Password!" });
         1;
       }
 
@@ -113,16 +111,18 @@ export default async function handler(
           finalToken,
           message: "Admin logged in successfully",
           isAdmin: true,
-          user: user
+          loggedIn: true
+        });
+      } else{
+        res.status(200).json({
+          finalToken,
+          message: "User logged in successfully",
+          isAdmin: false,
+          loggedIn: true
         });
       }
 
-      res.status(200).json({
-        finalToken,
-        message: "User logged in successfully",
-        isAdmin: false,
-        user: user
-      });
+    
     } catch (error: any) {
       res
         .status(500)

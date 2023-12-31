@@ -1,93 +1,78 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import bcrypt from 'bcryptjs'
-import connectToDatabase from '@/lib/connectToDatabase';
 import multer from 'multer';
+import sharp from 'sharp';
+import { promises as fs } from 'fs';
 import path from 'path';
-import fs from 'fs';
+import bcrypt from 'bcryptjs';
+import connectToDatabase from '@/lib/connectToDatabase';
 
 interface MulterRequest extends NextApiRequest {
   file: any;
 }
 
-/**
- *  'uploads/' is the directory where the uploaded files will be stored. 
- *   You can change this to fit your needs.
+const upload = multer({ storage: multer.memoryStorage() });
 
- */
-
-// Create the uploads directory if it doesn't exist
-const uploadDir = 'public/uploads/';
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
-  }
-})
-
-const upload = multer({ storage: storage }); 
-
-/**
- * 
- */
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-
-export default async function handler(req: MulterRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+export default async function handler (req: MulterRequest, res: NextApiResponse){
+  await new Promise<void>((resolve, reject) => {
     upload.single('userImage')(req as any, res as any, async (err) => {
       if (err) {
-        return res.status(500).json({ error: err.message });
+        return reject(err);
       }
-
-      const formData = req.body;
-      const { firstName, lastName, email, password, secretPin, role } = formData;
-      const userImage = req.file;
-
-      // Validate input...
-
-      const client = await connectToDatabase();
-      const db = client.db("manage-users"); // your database name
-
-      const existingUser = await db.collection('users').findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const hashedSecretPin = await bcrypt.hash(secretPin, 10);
-
-      // Get the URL of the uploaded image
-      const protocol = req.headers['x-forwarded-proto'] || 'http';
-      const host = req.headers.host;
-      // const imageUrl = `${protocol}://${host}/${userImage.path}`;
-      const imageUrl = `${userImage.path}`;
-      const imageName = path.basename(imageUrl)
-
-
-      const result = await db.collection('users').insertOne({
-        firstName,
-        lastName,
-        email,
-        password: hashedPassword,
-        secretPin: hashedSecretPin,
-        role,
-        imageName,
-      });
-
-      res.status(201).json({ message: 'User registered successfully' });
+      resolve();
     });
-  } else {
-    res.status(400).json({ message: 'Only POST requests are allowed' });
+  });
+
+  if (!req.file) {
+    res.status(400).json({ message: 'No file uploaded' });
+    return;
+  }
+
+  try {
+    // Resize the image to 200x200 pixels
+    const resizedImageBuffer = await sharp(req.file.buffer)
+      .resize(200, 200)
+      .toBuffer();
+
+    // Save the resized image to the file system (for this example)
+    // In a real application, you might want to store the image in a database or upload it to a cloud storage service
+    const imageName = `${Date.now()}-${req.file.originalname}`;
+    const outputPath = path.join(process.cwd(), 'public', 'uploads', imageName);
+    await fs.writeFile(outputPath, resizedImageBuffer);
+
+    const formData = req.body;
+    const { firstName, lastName, email, password, secretPin, role } = formData;
+
+    // Validate input...
+
+    const client = await connectToDatabase();
+    const db = client.db("manage-users"); // your database name
+
+    const existingUser = await db.collection('users').findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedSecretPin = await bcrypt.hash(secretPin, 10);
+
+    const result = await db.collection('users').insertOne({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      secretPin: hashedSecretPin,
+      role,
+      imageName,
+    });
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err: any) {
+    res.status(500).json({ message: 'Error processing image', error: err.message });
   }
 };

@@ -4,12 +4,11 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { users } from "@/types/users";
 import React from "react";
+import Link from "next/link";
 
 const roles = ["ADMINISTRATOR", "TUTOR OR LECTURER", "STUDENT"];
 
 const RegisterPage = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [res, setRes] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
   const [secretPin, setSecretPin] = useState("");
@@ -146,6 +145,13 @@ const RegisterPage = () => {
         >
           Register
         </button>
+        <div className="mt-4 text-center">
+          {" "}
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-500 hover:text-blue-600">
+            Login
+          </Link>
+        </div>
       </form>
     </div>
   );

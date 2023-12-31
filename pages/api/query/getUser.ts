@@ -1,5 +1,3 @@
-// /api/get-user.ts
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import connectToDatabase from '@/lib/connectToDatabase';
 

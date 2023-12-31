@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connectToDatabase from '@/lib/connectToDatabase';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+  if(req.method === 'POST') {
     const { email, otp } = req.body;
     console.log("body: ", req.body);
 
