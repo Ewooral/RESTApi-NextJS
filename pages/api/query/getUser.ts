@@ -19,3 +19,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(400).json({ message: 'Only GET requests are allowed' });
   }
 };
+
+// import { NextApiRequest, NextApiResponse } from 'next';
+// import connectToDatabase from '@/lib/connectToDatabase';
+// import User from '@/models/User';
+
+// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+//   if (req.method === 'GET') {
+//     const { email } = req.query;
+
+//     await connectToDatabase();
+
+//     const user = await User.findOne({ email });
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     res.status(200).json(user);
+//   } else {
+//     res.status(400).json({ message: 'Only GET requests are allowed' });
+//   }
+// };

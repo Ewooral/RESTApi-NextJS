@@ -4,7 +4,7 @@ import Image from "next/image";
 import userStore from "@/store";
 import logout from "@/components/LogOut"; // Assuming you're using NextAuth for authentication
 import clsx from "clsx";
-import { Button } from "@/components/ui/button";
+;
 import {
   ChatBubbleLeftEllipsisIcon,
   ChevronDownIcon,
@@ -19,12 +19,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BellIcon } from "lucide-react";
+import { Avatar } from "@/components/ui/avatar";
+import axios from "axios";
 
 function AdminHeader() {
-  const { user, logOut } = userStore();
+  const { user, logOut, notificationCount } = userStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
+   
   function handleIt(event: { stopPropagation: () => void }) {
     event.stopPropagation();
     setIsOpen(!isOpen);
@@ -44,7 +46,8 @@ function AdminHeader() {
 
   return (
     <header
-      className={clsx`flex justify-between items-center bg-[gainsboro] drop-shadow-sm px-5 py-1 relative z-50`}
+      className={clsx`fixed w-full flex justify-between items-center bg-[gainsboro] 
+      drop-shadow-sm px-5 py-1 z-50 rounded-bl-[23px] border-[#1e1e1e]]`}
     >
       <div>
         {/* <Image src="/path/to/logo.png" alt="Logo" width={50} height={50} /> */}
@@ -61,9 +64,16 @@ function AdminHeader() {
           </button>
         </span>
       </div>
-      <div className="flex items-center justify-center relative mr-[2rem]">
-        <ChatBubbleLeftEllipsisIcon className="h-7 w-7 mr-2 text-[grey] transform transition-transform duration-200 ease-in-out active:scale-95" />
-        <BellIcon className="h-7 w-7 text-[grey] transform transition-transform duration-200 ease-in-out active:scale-95" />
+      <div className="flex items-center justify-center relative mr-[14rem]">
+        <Avatar />
+        <ChatBubbleLeftEllipsisIcon className="h-5 w-5 mr-2 text-[black] transform transition-transform duration-200 ease-in-out active:scale-95" />
+        <div className="relative">
+          <BellIcon className="h-5 w-5 text-black transform transition-transform duration-200 ease-in-out" />
+          <div className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px] 
+          font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+           {notificationCount}
+          </div>
+        </div>
         <Image
           className="profile-avatar mx-4"
           src={`/uploads/${user.imageName}`}

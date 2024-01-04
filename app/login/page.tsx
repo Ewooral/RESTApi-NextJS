@@ -35,6 +35,8 @@ const LoginPage = () => {
   const [showError, setShowError] = useState("");
   const [isError, setIsError] = useState(false);
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
 
   const [data, setData] = useState({
     email: "",
@@ -55,8 +57,10 @@ const LoginPage = () => {
   const { setToken } = useAuth();
   const router = useRouter();
 
+
   const login = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     try {
       setIsLoading(true);
@@ -70,17 +74,21 @@ const LoginPage = () => {
         params: { email: data.email },
       });
       const user = userResponse.data;
-      setUser(user);
+      setUser(userResponse.data);
       Cookies.set("token", response.data.token);
       if (response.data.isAdmin && response.data.loggedIn) {
-        if(!isError) {
-        toast({
+         toast({
             variant: "default",
           title: "Login successful",
           description: JSON.stringify(response.data.message),
           action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
+          className:"green-toast"
         });
-      }
+        setIsError(false);
+        setIsLoading(false);
+        setIsSubmitting(false);
+        console.error("ERR::", response.data.message);
+        setErrors(response.data.message);
         router.push("/admin");
         // setIsLoading(false);
       } else {
@@ -88,24 +96,23 @@ const LoginPage = () => {
         // setIsLoading(false);
       }
       console.log("USER:: ", user);
-    } catch (err: any) {
+    }  catch (err: any) {
       const serverError = err as errorType;
       if (serverError && serverError.response) {
         setIsError(true);
         setErrors(err.message);
-        if(isError) {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: JSON.stringify(errors),
+          description: JSON.stringify(serverError.response.data.message),
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
-      }
         setIsLoading(false);
+      }
         console.error("ERR::", serverError.response.data.message);
         setErrors(serverError.response.data.message);
       }
-    } finally {
+    finally {
       setIsLoading(false);
     }
   };
@@ -122,8 +129,17 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-200 text-black">
-      <form onSubmit={login} className="p-6 bg-white rounded shadow-md">
+      <form onSubmit={login} className="grid md:grid-cols-2  bg-white rounded shadow-md">
         {isLoading && <LoadingSpinner />}
+
+        {/* IMAGE */}
+        <div
+          className="flex flex-col justify-center items-center"
+          style={{ backgroundImage: "url(/nice1.jpg)", backgroundSize: "cover" }}
+        >
+        </div>
+        {/* FORM */}
+        <div className="p-6">
         <h2 className="text-2xl mb-4 text-center">Login</h2>
         {/* {isError && <p className="text-red-500 text-center">{errors}</p>} */}
         <input
@@ -169,18 +185,7 @@ const LoginPage = () => {
           type="submit"
           variant="outline"
           className="block w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-          // onClick={() => {
-          //   if (isError) {
-          //     toast({
-          //       variant: "destructive",
-          //       title: "Uh oh! Something went wrong.",
-          //       description: JSON.stringify(errors),
-          //       action: (
-          //         <ToastAction altText="Try again">Try again</ToastAction>
-          //       ),
-          //     });
-          //   }
-          // }}
+
         >
           Submit
         </Button>
@@ -204,6 +209,7 @@ const LoginPage = () => {
           >
             reset
           </Link>
+        </div>
         </div>
       </form>
     </div>

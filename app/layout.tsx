@@ -23,7 +23,8 @@ export default function RootLayout({
         <AuthProvider>
           {" "}
           {/* Wrap the children with AuthProvider */}
-            <Toaster />
+            <Toaster 
+            />
             {children}
         </AuthProvider>
       </body>

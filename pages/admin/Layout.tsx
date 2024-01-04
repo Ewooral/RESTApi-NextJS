@@ -2,21 +2,26 @@
 import withAuth from "@/components/HigherOrderComponent";
 import AdminLeftSidebar from "./AdminLeftSidebar";
 import AdminHeader from "./AdminHeader";
-import { Toaster } from "@/components/ui/toaster"
-
+import { Toaster } from "@/components/ui/toaster";
+import { useRouter } from 'next/router';
+import UsersHome from "./users/UsersHome";
 interface LayoutProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 const Layout:React.FC<LayoutProps> = ({ children }) =>{
-  return (
-    <div className="flex  h-screen bg-[#fafafa]">
-      <AdminLeftSidebar  />
 
-      <div className="flex-1 text-sm ">
+  return (
+    <div 
+    className="flex  h-screen bg-[#fafafa]">
+      <AdminLeftSidebar />
+
+      <div className="flex-1 text-sm pl-[180px]">
       <AdminHeader />
       <Toaster />
-        {children}
+       <div className="mt-[60px] p-6">
+       {children}
+       </div>
       </div>
     </div>
   );

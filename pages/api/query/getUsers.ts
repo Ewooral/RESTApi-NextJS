@@ -27,3 +27,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(400).json({ message: 'Only GET requests are allowed' });
   }
 }
+
+
+// USING MONGOOSE
+
+// import { NextApiRequest, NextApiResponse } from 'next';
+// import connectToDatabase from '@/lib/connectToDatabase';
+// import User from '@/models/User';
+
+// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+//   if (req.method === 'GET') {
+//     const page = Number(req.query.page) || 1;
+//     const limit = Number(req.query.limit) || 10;
+//     const sort = String(req.query.sort) || 'firstName';
+//     const search = req.query.search || '';
+//     const direction = req.query.direction === 'desc' ? -1 : 1;
+
+//     await connectToDatabase();
+
+//     const users = await User.find()
+//         .sort({ [sort]: direction })
+//         .skip((page - 1) * limit)
+//         .limit(limit);
+
+//     const totalUsers = await User.countDocuments();
+
+//     res.status(200).json({ users, totalPages: Math.ceil(totalUsers / limit) });
+//   } else {
+//     res.status(400).json({ message: 'Only GET requests are allowed' });
+//   }
+// };

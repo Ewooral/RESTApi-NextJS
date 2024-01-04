@@ -1,5 +1,6 @@
 // pages/_app.js
 import "@/styles/globals.css";
+import Layout from "./admin/Layout";
 
 function Pages({
   Component,
@@ -8,7 +9,11 @@ function Pages({
   Component: React.ComponentType;
   pageProps: any;
 }) {
-  return <Component {...pageProps} />;
+  return( 
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
 export default Pages;

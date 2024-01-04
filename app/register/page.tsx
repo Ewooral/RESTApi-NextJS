@@ -1,10 +1,17 @@
 "use client";
-import {useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { users } from "@/types/users";
 import React from "react";
 import Link from "next/link";
+import { LoadingSpinner } from "@/components/Loading";
+import userStore from "@/store";
+import clsx from "clsx";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { errorType } from "@/types/users";
 
 const roles = ["ADMINISTRATOR", "TUTOR OR LECTURER", "STUDENT"];
 
@@ -13,6 +20,9 @@ const RegisterPage = () => {
   const [selectedRole, setSelectedRole] = useState("");
   const [secretPin, setSecretPin] = useState("");
   const [userImage, setUserImage] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { toast } = useToast();
+  const [isError, setIsError] = useState(false);
 
   const [data, setData] = useState({
     firstName: "",
@@ -22,6 +32,8 @@ const RegisterPage = () => {
     role: "",
     secretPin: "",
   });
+
+  const { isLoading, setIsLoading, errors, setErrors } = userStore();
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -52,17 +64,47 @@ const RegisterPage = () => {
     if (userImage) {
       formData.append("userImage", userImage);
     }
-
+    setIsSubmitting(true);
+    setIsLoading(true);
     try {
       const response = await axios.post("/api/auth/register", formData);
       setRes(response.data.message);
+      if (response.data.message) {
+        toast({
+          variant: "default",
+          title: "Registration successful",
+          description: JSON.stringify(response.data.message),
+          action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
+          className: "green-toast",
+        });
+        setIsError(false);
+        setIsLoading(false);
+        setIsSubmitting(false);
+        console.error("ERR::", response.data.message);
+        setErrors(response.data.message);
+      }
       console.log("RESPONSE::", response);
       router.push("/login");
       console.log("SUCC RESPONSE::", res);
-    } catch (err) {
-      setRes((err as any).response.data.message);
-      console.log("ERR RESPONSE::", err);
-      console.error((err as any).response.data.message);
+      setIsSubmitting(false);
+    } catch (err: any) {
+      const serverError = err as errorType;
+      if (serverError && serverError.response) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: JSON.stringify(serverError.response.data.message),
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+        setIsError(true);
+        setIsLoading(false);
+        setIsSubmitting(false);
+        console.error("ERR::", serverError.response.data.message);
+        setErrors(serverError.response.data.message);
+      }
+    }
+    finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,84 +115,107 @@ const RegisterPage = () => {
           event.preventDefault();
           onRegister({ ...data });
         }}
-        className="p-6 bg-white rounded shadow-md"
+        className="grid md:grid-cols-2 gap-2  bg-white rounded shadow-md"
       >
-        <h2 className="text-2xl mb-4 text-center">Register</h2>
-        <p className="text-center text-red-500">{res}</p>
-        <input
-          type="text"
-          value={data.firstName}
-          onChange={(e) => setData({ ...data, firstName: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="first name"
-        />
-        <input
-          type="text"
-          value={data.lastName}
-          onChange={(e) => setData({ ...data, lastName: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="last name"
-        />
-        <input
-          type="email"
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="email"
-        />
-        <input
-          type="password"
-          value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="Password"
-        />
-        <select
-          className="block w-full p-2 mb-4 border rounded"
-          required
-          onChange={handleChange}
-          value={selectedRole}
-        >
-          <option value="">Select a role</option>
-          {roles.map((role, id) => (
-            <React.Fragment key={id}>
-              <option value={role}>{role}</option>
-            </React.Fragment>
-          ))}
-        </select>
-        {selectedRole === "ADMINISTRATOR" && (
+        {/* IMAGE */}
+        <div
+          className="flex flex-col col-span-1 justify-center items-cente"
+          style={{
+            backgroundImage: "url(/regi.avif)",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        ></div>
+
+        {/* DIVIDER
+        <div className="w-px bg-gray-300"></div> */}
+
+        {/* FORM */}
+        <div className="p-6 col-span-1">
+          {isLoading && <LoadingSpinner />}
+          <h2 className="text-2xl mb-4 text-center">Register</h2>
+          <p className="text-center text-red-500">{res}</p>
+          <input
+            type="text"
+            value={data.firstName}
+            onChange={(e) => setData({ ...data, firstName: e.target.value })}
+            required
+            className="block w-full p-2 mb-4 border rounded"
+            placeholder="first name"
+          />
+          <input
+            type="text"
+            value={data.lastName}
+            onChange={(e) => setData({ ...data, lastName: e.target.value })}
+            required
+            className="block w-full p-2 mb-4 border rounded"
+            placeholder="last name"
+          />
+          <input
+            type="email"
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+            required
+            className="block w-full p-2 mb-4 border rounded"
+            placeholder="email"
+          />
           <input
             type="password"
-            value={secretPin}
-            onChange={handleSecretPin}
-            maxLength={6}
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+            required
             className="block w-full p-2 mb-4 border rounded"
-            placeholder="Enter your secret pin"
+            placeholder="Password"
           />
-        )}
+          <select
+            className="block w-full p-2 mb-4 border rounded"
+            required
+            onChange={handleChange}
+            value={selectedRole}
+          >
+            <option value="">Select a role</option>
+            {roles.map((role, id) => (
+              <React.Fragment key={id}>
+                <option value={role}>{role}</option>
+              </React.Fragment>
+            ))}
+          </select>
+          {selectedRole === "ADMINISTRATOR" && (
+            <input
+              type="password"
+              value={secretPin}
+              onChange={handleSecretPin}
+              maxLength={6}
+              className="block w-full p-2 mb-4 border rounded"
+              placeholder="Enter your secret pin"
+            />
+          )}
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="block w-full p-2 mb-4 border rounded"
-        />
-        <button
-          type="submit"
-          className="block w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-        >
-          Register
-        </button>
-        <div className="mt-4 text-center">
-          {" "}
-          Already have an account?{" "}
-          <Link href="/login" className="text-blue-500 hover:text-blue-600">
-            Login
-          </Link>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="block w-full p-2 mb-4 border rounded"
+          />
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            variant={"outline"}
+            className={clsx`block w-full p-2 mt-5 text-white bg-blue-500 ${
+              isSubmitting && "bg-[gray]"
+            } rounded 
+            hover:bg-blue-600`}
+          >
+            {isSubmitting ? "Registering..." : "Register"}
+          </Button>
+          <div className="mt-4 text-center">
+            {" "}
+            Already have an account?{" "}
+            <Link href="/login" className="text-blue-500 hover:text-blue-600">
+              Login
+            </Link>
+          </div>
         </div>
       </form>
     </div>

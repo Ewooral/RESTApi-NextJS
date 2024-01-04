@@ -10,7 +10,6 @@ const my_secret_key = process.env.MY_SECRET_PIN;
 const encryptionKey = crypto.scryptSync("G@d!$g@@d", "salt", 32);
 const iv = crypto.randomBytes(16);
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -40,35 +39,22 @@ export default async function handler(
        * If either of these conditions is true, the function returns a response with a status code of 400 and a message of 'Invalid credentials'. This indicates that the provided email or password is invalid.
        */
 
-      if (
-        !user ||
-        !(await bcrypt.compare(password, user.password)) 
-      ) {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(400).json({ message: "Invalid Password!" });
-        1;
       }
 
-      // If the user's role in the database does not match the role provided in the request body, 
+      // If the user's role in the database does not match the role provided in the request body,
       // return an error
 
       if (role !== user.role) {
-        console.log(
-          "You registered as an " +
+        return res.status(400).json({
+          message:
+            " You registered as a " +
             user.role +
             " but you are trying to login as a " +
             role +
-            " user"
-        );
-        return res
-          .status(400)
-          .json({
-            message:
-              " You registered as a " +
-              user.role +
-              " but you are trying to login as a " +
-              role +
-              " user ",
-          });
+            " user ",
+        });
       }
 
       /**
@@ -105,24 +91,72 @@ export default async function handler(
 
       // Rest of your code...
 
-      if (role === "ADMINISTRATOR" && secretPin === my_secret_key) {
-        console.log("Admin logged in successfully");
-        return res.status(200).json({
-          finalToken,
-          message: "Admin logged in successfully",
-          isAdmin: true,
-          loggedIn: true
-        });
-      } else{
-        res.status(200).json({
-          finalToken,
-          message: "User logged in successfully",
-          isAdmin: false,
-          loggedIn: true
-        });
-      }
+      // if (role === "ADMINISTRATOR" && secretPin === my_secret_key) {
+      //   console.log("Admin logged in successfully");
+      //   return res.status(200).json({
+      //     finalToken,
+      //     message: "Admin logged in successfully",
+      //     isAdmin: true,
+      //     loggedIn: true
+      //   });
+      // } else if (role === "STUDENT") {
+      //   res.status(200).json({
+      //     finalToken,
+      //     message: "User logged in successfully as a Student",
+      //     isAdmin: false,
+      //     loggedIn: true
+      //   });
+      // }
 
-    
+      // else if(role === "TUTOR OR LECTURER"){
+      //   res.status(200).json({
+      //     finalToken,
+      //     message: "User logged in successfully as a Tutor or Lecturer",
+      //     isAdmin: false,
+      //     loggedIn: true
+      //   });
+      // }
+
+      // else{
+      //   res.status(500).json({
+      //     message: "There is an issue with your login details. Please try again",
+      //   });
+      // }
+
+      switch (role) {
+        case "ADMINISTRATOR":
+          if (secretPin === my_secret_key) {
+            console.log("Admin logged in successfully");
+            return res.status(200).json({
+              finalToken,
+              message: "Admin logged in successfully",
+              isAdmin: true,
+              loggedIn: true,
+            });
+          } else {
+            return res.status(403).json({
+              message: "Invalid secret pin",
+            });
+          }
+        case "STUDENT":
+          return res.status(200).json({
+            finalToken,
+            message: "User logged in successfully as a Student",
+            isAdmin: false,
+            loggedIn: true,
+          });
+        case "TUTOR OR LECTURER":
+          return res.status(200).json({
+            finalToken,
+            message: "User logged in successfully as a Tutor or Lecturer",
+            isAdmin: false,
+            loggedIn: true,
+          });
+        default:
+          return res.status(400).json({
+            message: "Invalid role provided",
+          });
+      }
     } catch (error: any) {
       res
         .status(500)

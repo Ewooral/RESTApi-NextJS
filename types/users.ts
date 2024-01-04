@@ -22,3 +22,33 @@ export type errorType = {
       statusText: string;
     };
   };
+
+  
+export type notification = {
+    _id: string,
+    userId: string,
+    message: string,
+    read: boolean,
+    createdAt?: string,
+    updatedAt?: string,
+    __v?: number
+}
+
+export type ToastState = {
+  message: string;
+  variant: string;
+  show: boolean;
+  setShow: (show: boolean) => void;
+  setMessage: (message: string) => void;
+  setVariant: (variant: string) => void;
+};
+
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  // password: string;
+  role: string;
+  imageName: string;
+  // secretPin: string;
+}

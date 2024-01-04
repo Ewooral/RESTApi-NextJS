@@ -158,3 +158,41 @@ body{
 .svg-color{
   color: grey
 }
+
+
+
+
+.refresh{
+  background: #ffffff;
+  color: black;
+  padding: .4rem;
+  border-radius: 2rem;
+  border: 3px solid rgb(242, 69, 69);
+  font-size: 11px;
+}
+
+
+
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.703); /* Adjust the color and opacity as needed */
+}
+
+.green-toast {
+  background-color: rgb(1, 88, 1) !important;
+  color: white !important;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

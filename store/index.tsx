@@ -1,17 +1,8 @@
 import {create} from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
-
-interface User {
-    firstName: string;
-    lastName: string;
-    email: string;
-    // password: string;
-    role: string;
-    imageName: string;
-    // secretPin: string;
-  }
-  
-  interface UserStore {
+import { ToastState } from '@/types/users';
+import { User } from '@/types/users';
+ interface UserStore {
     user: User;
     errors: string;
     serverResponse: {
@@ -21,18 +12,22 @@ interface User {
       loggedIn: boolean;
     };
     isLoading: boolean;
+    notificationCount: number;
 
+    setNotificationCount: (count: number) => void;
     logOut: () => void;
     setIsLoading: (loading: boolean) => void;
     setServerResponse: (response: Record<string, string>) => void;
     setEmail: (newUser: string) => void;
     setErrors: (error: string) => void;
     setUser: (user: User) => void;
+    toastState: ToastState;
+    setToastState: (toastState: ToastState) => void;
   }
   
 
 //@ts-ignore
-const userStore = create<UserStore>(devtools(persist((set) => ({
+const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
     user: {
         firstName: '',
         lastName: '',
@@ -49,6 +44,20 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
       },
       errors: "",
       isLoading: false,
+
+      toastState: {
+        message: '',
+        variant: 'default',
+        show: false,
+        setShow: (show: any) => set(() => ({ show })),
+        setMessage: (message: any) => set(() => ({ message })),
+        setVariant: (variant: any) => set(() => ({ variant })),
+      },
+
+      setToastState: (toastState: ToastState) => set(() => ({ toastState }), false, 'setToastState'),
+
+      notificationCount: 0,
+      setNotificationCount: (count: number) => set(state => ({ notificationCount: count }), false, 'setNotificationCount'),
 
 
       setUser: (user: User) => set(state => ({ user }), false, 'setUser'),

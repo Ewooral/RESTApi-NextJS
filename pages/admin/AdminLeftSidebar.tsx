@@ -6,11 +6,10 @@ import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
 import clsx from "clsx";
+import { ArrowLeftCircleIcon, ArrowLeftIcon, ArrowUpTrayIcon } from "@heroicons/react/24/outline";
+import { ArrowRightCircle, ArrowRightCircleIcon } from "lucide-react";
+import BellAlertIcon from "@mui/icons-material/NotificationsOutlined";
 export const AdminLeftSidebar = () => {
   const { logOut } = userStore();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -20,22 +19,27 @@ export const AdminLeftSidebar = () => {
     {
       name: "Home",
       icon: <AddHomeOutlinedIcon />,
-      href: "/home"
+      href: "/admin"
     },
     {
       name: "Users",
       icon: <AccountCircleOutlinedIcon />,
-      href: "/admin/users"
+      href: "/admin/table"
     },
     {
       name: "Settings",
       icon: <SettingsSuggestOutlinedIcon />,
-      href: "/settings"
+      href: ""
     },
     {
-      name: "Logout",
-      icon: <LogoutOutlinedIcon />,
-      href: "#"
+      name: "Notifications",
+      icon: <BellAlertIcon />,
+      href: "/notification"
+    },
+    {
+      name: "upload-csv",
+      icon: <ArrowUpTrayIcon />,
+      href: "/admin/upload-csv"
     },
   ];
   
@@ -47,17 +51,19 @@ export const AdminLeftSidebar = () => {
   }
 
   const sidebarWidth = isCollapsed ? "w-12" : "w-40";
-  const Logo = isCollapsed ? "" : "Logo";
+  const Logo = isCollapsed ? "cop" : "Pentecost University";
 
   return (
-    <div className="relative">
+    <div className="fixed top-0 left-0 h-screen z-50" 
+    >
       <aside
-        className={clsx` bg-[whitesmoke] rounded shadow-lg transition-all duration-500 
-        ease-in-out ${sidebarWidth} md:${sidebarWidth} h-full overflow-auto py-1 mr-1
+        className={clsx` bg-[#000000e6] text-[wheat] shadow-lg transition-all  duration-500  
+        ease-in-out ${sidebarWidth} md:${sidebarWidth} h-full overflow-auto py-1 mr-1 z-50 rounded-tr-[25px] border-[#1e1e1e]
         ${sidebarWidth === "w-40" ? "px-5" : "p-[0.45rem]"}
         `}
       >
-        <h2 className="text-xl font-semibold text-gray-800">{Logo}</h2>
+        <h2 className="text-xl font-semibold text-[wheat] mt-[1rem] w-full">{Logo}</h2>
+        <hr className="my-2" />
         <nav className="space-y-2  mt-[3.25rem] w-fit text-xs">
           {listObj.map((item, id) => (
             <Link
@@ -77,7 +83,10 @@ export const AdminLeftSidebar = () => {
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="absolute right-0 top-60 mt-4 mr-4"
       >
-        {isCollapsed ? <ArrowCircleRightOutlinedIcon /> : <ArrowCircleLeftOutlinedIcon />}
+        {isCollapsed ?  <ArrowLeftCircleIcon className="h-5 w-5 text-[grey]" aria-hidden="true" /> : 
+         <ArrowRightCircleIcon className="h-5 w-5 text-[grey]" aria-hidden="true" />}
+       
+       
       </button>
     </div>
   );

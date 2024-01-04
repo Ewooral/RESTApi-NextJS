@@ -12,7 +12,7 @@ import { Avatar } from "../ui/avatar";
 
 export function UserTableSkeleton() {
   return (
-    <Table className="mt-6">
+    <Table className="mt-12">
       <TableHeader className="text-[wheat]">
         <TableRow className="bg-[#2e2e2e]">
           <TableHead className="cursor-pointer border px-[20px] py-0">

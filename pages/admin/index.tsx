@@ -1,15 +1,10 @@
 import React from "react";
 import withAuth from "@/components/HigherOrderComponent";
-import Layout from "./Layout";
-import UsersHome from "./users/UsersHome";
+import Render from "./Render";
 
 const index = () => {
   return (
-    <Layout>
-      <div className="">
-        <UsersHome />
-      </div>
-    </Layout>
+    <Render />
   );
 };
 
