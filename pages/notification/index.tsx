@@ -4,7 +4,6 @@ import GetAllNotifications from './GetAllNotifications'
 const index = () => {
   return (
     <div>
-        <h1>Notification</h1>
         <GetAllNotifications />
     </div>
   )

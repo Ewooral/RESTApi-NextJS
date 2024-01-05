@@ -4,7 +4,6 @@ import Image from "next/image";
 import userStore from "@/store";
 import logout from "@/components/LogOut"; // Assuming you're using NextAuth for authentication
 import clsx from "clsx";
-;
 import {
   ChatBubbleLeftEllipsisIcon,
   ChevronDownIcon,
@@ -26,7 +25,7 @@ function AdminHeader() {
   const { user, logOut, notificationCount } = userStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
-   
+
   function handleIt(event: { stopPropagation: () => void }) {
     event.stopPropagation();
     setIsOpen(!isOpen);
@@ -65,13 +64,16 @@ function AdminHeader() {
         </span>
       </div>
       <div className="flex items-center justify-center relative mr-[14rem]">
-        <Avatar />
-        <ChatBubbleLeftEllipsisIcon className="h-5 w-5 mr-2 text-[black] transform transition-transform duration-200 ease-in-out active:scale-95" />
-        <div className="relative">
+        <div className="bg-[#c1bcbc] p-2 rounded-[50%] mr-4">
+          <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-[black]  transform transition-transform duration-200 ease-in-out active:scale-95" />
+        </div>
+        <div className="relative bg-[#c1bcbc] p-2 rounded-[50%]">
           <BellIcon className="h-5 w-5 text-black transform transition-transform duration-200 ease-in-out" />
-          <div className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px] 
-          font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-           {notificationCount}
+          <div
+            className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px] 
+          font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
+          >
+            {notificationCount}
           </div>
         </div>
         <Image

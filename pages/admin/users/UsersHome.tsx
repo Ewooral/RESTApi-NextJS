@@ -15,6 +15,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import EwooralCard from "@/components/cards/EwooralCard";
 
 interface myUsers extends users {
   _id: string;
@@ -83,8 +84,16 @@ function UsersHome() {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="overflow-x-auto relative flex items-center flex-col justify-center bg-[wheat]">
+      <div className="overflow-x-auto relative flex items-center flex-col justify-center bg-[thistle]">
+
+        {/* SEARCH INPUT AND BUTTON */}
         <div className="flex justify-center items-center relative top-[27px]">
+        {/* <EwooralCard
+              title="Ewooral"
+              description="Ewooral is a platform that allows students to find tutors and lecturers to teach them."
+              tags={["React", "TypeScript", "TailwindCSS"]}
+
+            /> */}
           <span className="flex justify-between p-1 bg-white rounded-md">
             <input
               type="search"
@@ -103,8 +112,10 @@ function UsersHome() {
             </button>
           </span>
         </div>
+
+        {/* REFRESH BUTTON */}
         <div
-          className="flex absolute top-[11px] right-0 m-4 z-50 cursor-pointer refresh py-[.2rem]"
+          className="flex absolute top-[11px] right-0 m-4 cursor-pointer refresh py-[.2rem]"
           onClick={refresh}
         >
           <ArrowPathRoundedSquareIcon
@@ -112,6 +123,8 @@ function UsersHome() {
           />
           <span className="mr-4"> Refresh</span>
         </div>
+
+        {/* DISPLAY ERROR MESSAGE WHEN TABE IS UNAVAILABLE */}
         {error ? (
           <div className="flex flex-col justify-center items-center mt-[2rem]">
             <p className="text-red-500 bg-[#ff000029] p-[1rem] mt-[19px]">
@@ -133,6 +146,9 @@ function UsersHome() {
               refresh={refresh}
               itemsPerPage={3}
             />
+           <div className="mt-5">
+            
+            {/* PAGINATION */}
             <Pagination>
               <PaginationContent>
                 {page !== 1 && (
@@ -164,6 +180,8 @@ function UsersHome() {
                 )}
               </PaginationContent>
             </Pagination>
+           </div>
+
           </>
         )}
       </div>

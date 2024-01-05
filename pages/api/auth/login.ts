@@ -89,40 +89,6 @@ export default async function handler(
         return res.status(500).json({ message: "Error generating token" });
       }
 
-      // Rest of your code...
-
-      // if (role === "ADMINISTRATOR" && secretPin === my_secret_key) {
-      //   console.log("Admin logged in successfully");
-      //   return res.status(200).json({
-      //     finalToken,
-      //     message: "Admin logged in successfully",
-      //     isAdmin: true,
-      //     loggedIn: true
-      //   });
-      // } else if (role === "STUDENT") {
-      //   res.status(200).json({
-      //     finalToken,
-      //     message: "User logged in successfully as a Student",
-      //     isAdmin: false,
-      //     loggedIn: true
-      //   });
-      // }
-
-      // else if(role === "TUTOR OR LECTURER"){
-      //   res.status(200).json({
-      //     finalToken,
-      //     message: "User logged in successfully as a Tutor or Lecturer",
-      //     isAdmin: false,
-      //     loggedIn: true
-      //   });
-      // }
-
-      // else{
-      //   res.status(500).json({
-      //     message: "There is an issue with your login details. Please try again",
-      //   });
-      // }
-
       switch (role) {
         case "ADMINISTRATOR":
           if (secretPin === my_secret_key) {

@@ -56,6 +56,9 @@ dependencies:
   '@types/express-session':
     specifier: ^1.17.10
     version: 1.17.10
+  ant-design-icons:
+    specifier: C:\Users\fspoo\Documents\ant-design-icons
+    version: link:../../../../ant-design-icons
   axios:
     specifier: ^1.6.2
     version: 1.6.2

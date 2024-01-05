@@ -1,9 +1,7 @@
 import React from "react";
 import withAuth from "@/components/HigherOrderComponent";
-import Layout from "./Layout";
 import UsersHome from "./users/UsersHome";
-import { useRouter } from "next/router";
-import { DataTableDemo } from "@/components/table/CustomData";
+
 
 const Render = () => {
     // const router = useRouter();

@@ -1,7 +1,7 @@
 import {create} from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
 import { ToastState } from '@/types/users';
-import { User } from '@/types/users';
+import { User, Notification } from '@/types/users';
  interface UserStore {
     user: User;
     errors: string;
@@ -14,6 +14,8 @@ import { User } from '@/types/users';
     isLoading: boolean;
     notificationCount: number;
 
+    notifications: Notification[];
+    addNotification: (notification: Notification[]) => void;
     setNotificationCount: (count: number) => void;
     logOut: () => void;
     setIsLoading: (loading: boolean) => void;
@@ -60,6 +62,9 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
       setNotificationCount: (count: number) => set(state => ({ notificationCount: count }), false, 'setNotificationCount'),
 
 
+      notifications: [],
+     
+      addNotifications: (notifications: Notification[]) => set(() => ({ notifications })),      
       setUser: (user: User) => set(state => ({ user }), false, 'setUser'),
       logOut: () => {
         set(state => ({ user: {

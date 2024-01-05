@@ -52,3 +52,18 @@ export interface User {
   imageName: string;
   // secretPin: string;
 }
+
+export interface Notification {
+  userId: string;
+  message: string;
+  read: boolean;
+  timestamp: number;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: string;
+    _id: string;
+    imageName: string;
+  };
+}

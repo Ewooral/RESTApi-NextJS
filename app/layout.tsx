@@ -4,6 +4,8 @@ import "@/styles/globals.css";
 import { AuthProvider } from "../contexts/authContext"; // import the AuthProvider
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +23,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          {" "}
+          <div className="flex justify-center items-center text-center">
+            <Avatar className="mr-2 w-10 h-10">
+              <AvatarImage src="/copLogo.jpg" alt="avatar" />
+              <AvatarFallback>PU</AvatarFallback>
+            </Avatar>
+            <span className="flex flex-col items-center justify-center">
+              <h1 className="font-bold">PENTECOST UNIVERSITY</h1>
+              <h1 className="text-xs">
+                Student Management<br /> <span className="text-[10px]">and Automation System</span>
+              </h1>
+            </span>
+          </div>{" "}
           {/* Wrap the children with AuthProvider */}
-            <Toaster 
-            />
-            {children}
+          <Toaster />
+          {children}
         </AuthProvider>
       </body>
     </html>

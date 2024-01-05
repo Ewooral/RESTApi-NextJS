@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Table,
   TableBody,
@@ -9,12 +10,16 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image"; // Import the Image component from the appropriate package
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { users } from "@/types/users";
 import { LucideArchiveX } from "lucide-react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { UpdateUserForm } from "@/pages/admin/forms/UpdateUser";
 import axios from "axios";
+import { errorType } from "@/types/users";
+import { toast } from "../ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
+import Sidebar, { Sidebar2 } from "../cards/sidebarCard";
 
 interface myUsers extends users {
   _id: string;
@@ -30,6 +35,7 @@ export interface UserTableProps {
   itemsPerPage: number;
 }
 
+// USERTABLE COMPONENT
 const UserTable: React.FC<UserTableProps> = ({
   users,
   handleSort,
@@ -38,6 +44,8 @@ const UserTable: React.FC<UserTableProps> = ({
   modalIsOpen,
   refresh,
 }) => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
   const openEditButton = (id: string, email: string) => {
     console.log("user id::", id);
     console.log("user email::", email);
@@ -51,10 +59,46 @@ const UserTable: React.FC<UserTableProps> = ({
       });
       console.log("response::", response.data.message);
       refresh();
+      
+
     } catch (error) {
       console.log(error);
     }
   }
+
+  /**
+   * hook is used to add event listeners for the online and offline events 
+   * when the component mounts. These event listeners update the isOnline state 
+   * whenever the internet connection status changes. Another useEffect hook 
+   * is used to call the refresh function whenever isOnline changes. If the internet 
+   * connection is restored (isOnline is true), the table is refreshed.
+   */
+  const wasOnline = useRef(navigator.onLine);
+
+  useEffect(() => {
+    const updateOnlineStatus = () => {
+      const isOnline = navigator.onLine;
+      if (isOnline) {
+        console.log("He's online");
+      } else {
+        console.log("You are currently offline. Some features may not be available.");
+        refresh();
+      }
+      if (!wasOnline.current && isOnline) {
+        // The status changed from offline to online
+        refresh();
+      }
+      wasOnline.current = isOnline;
+    };
+  
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+  
+    return () => {
+      window.removeEventListener('online', updateOnlineStatus);
+      window.removeEventListener('offline', updateOnlineStatus);
+    };
+  }, []);
 
   return (
     <>
@@ -112,7 +156,7 @@ const UserTable: React.FC<UserTableProps> = ({
               <TableCell className="text-xs border-black px-[20px] py-0 md:table-cell">
                 <div className="profile-avatar">
                   <Image
-                    src={`/uploads/${user.imageName}`}
+                    src={user.imageName && user.imageName.startsWith('https') ? user.imageName : `/uploads/${user.imageName}`}
                     alt="img"
                     width={200}
                     height={200}

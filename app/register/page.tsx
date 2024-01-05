@@ -65,8 +65,9 @@ const RegisterPage = () => {
       formData.append("userImage", userImage);
     }
     setIsSubmitting(true);
-    setIsLoading(true);
+   
     try {
+      setIsLoading(true);
       const response = await axios.post("/api/auth/register", formData);
       setRes(response.data.message);
       if (response.data.message) {
@@ -78,16 +79,10 @@ const RegisterPage = () => {
           className: "green-toast",
         });
         setIsError(false);
-        setIsLoading(false);
-        setIsSubmitting(false);
-        console.error("ERR::", response.data.message);
-        setErrors(response.data.message);
+        router.push("/login");
       }
       console.log("RESPONSE::", response);
-      router.push("/login");
-      console.log("SUCC RESPONSE::", res);
-      setIsSubmitting(false);
-    } catch (err: any) {
+    } catch (err) {
       const serverError = err as errorType;
       if (serverError && serverError.response) {
         toast({
@@ -97,14 +92,10 @@ const RegisterPage = () => {
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
         setIsError(true);
-        setIsLoading(false);
-        setIsSubmitting(false);
-        console.error("ERR::", serverError.response.data.message);
-        setErrors(serverError.response.data.message);
       }
-    }
-    finally {
+    } finally {
       setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -135,7 +126,7 @@ const RegisterPage = () => {
         <div className="p-6 col-span-1">
           {isLoading && <LoadingSpinner />}
           <h2 className="text-2xl mb-4 text-center">Register</h2>
-          <p className="text-center text-red-500">{res}</p>
+          {/* <p className="text-center text-red-500">{res}</p> */}
           <input
             type="text"
             value={data.firstName}
