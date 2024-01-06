@@ -8,7 +8,7 @@ export default async function handler(
   if (req.method === "GET") {
     const client = await connectToDatabase();
     const db = client.db("manage-users");
-
+  
     const notificationsCollection = db.collection("notifications");
     const usersCollection = db.collection("users");
 

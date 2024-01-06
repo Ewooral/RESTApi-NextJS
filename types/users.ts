@@ -49,7 +49,7 @@ export interface User {
   email: string;
   // password: string;
   role: string;
-  imageName: string;
+  imageName?: string;
   // secretPin: string;
 }
 
@@ -64,6 +64,6 @@ export interface Notification {
     email: string;
     role: string;
     _id: string;
-    imageName: string;
+    imageName?: string;
   };
 }

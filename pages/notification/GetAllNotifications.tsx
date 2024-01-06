@@ -1,12 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
-import axios from "axios";
-import io from "socket.io-client";
 import userStore from "@/store";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LayoutCard from "@/components/cards/LayoutCard";
 import EwooralCard from "@/components/cards/EwooralCard";
-import { Notification } from "@/types/users";
 import { useFetchNotifications } from "@/hooks/useFetchNotifications";
 
 

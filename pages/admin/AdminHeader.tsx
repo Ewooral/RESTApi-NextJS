@@ -25,6 +25,8 @@ function AdminHeader() {
   const { user, logOut, notificationCount } = userStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [chatBubbleHovered, setChatBubbleHovered] = useState(false);
+const [bellIconHovered, setBellIconHovered] = useState(false);
 
   function handleIt(event: { stopPropagation: () => void }) {
     event.stopPropagation();
@@ -64,21 +66,25 @@ function AdminHeader() {
         </span>
       </div>
       <div className="flex items-center justify-center relative mr-[14rem]">
-        <div className="bg-[#c1bcbc] p-2 rounded-[50%] mr-4">
-          <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-[black]  transform transition-transform duration-200 ease-in-out active:scale-95" />
-        </div>
-        <div className="relative bg-[#c1bcbc] p-2 rounded-[50%]">
-          <BellIcon className="h-5 w-5 text-black transform transition-transform duration-200 ease-in-out" />
-          <div
-            className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px] 
-          font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
-          >
-            {notificationCount}
-          </div>
-        </div>
+      <div 
+  className={`bg-[#c1bdbd] p-2 rounded-[50%] mr-4 hover:bg-[#454545] transition-colors duration-200`}
+>
+  <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-[black] hover:text-white transform transition-transform duration-200 ease-in-out active:scale-95" />
+</div>
+<div 
+  className={`relative bg-[#c1bdbd] p-2 rounded-[50%] hover:bg-[#454545] transition-colors duration-200`}
+>
+  <BellIcon className="h-5 w-5 text-black hover:text-white transform transition-transform duration-200 ease-in-out" />
+  <div
+    className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px] 
+    font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
+  >
+    {notificationCount}
+  </div>
+</div>
         <Image
           className="profile-avatar mx-4"
-          src={`/uploads/${user.imageName}`}
+          src={user.imageName && user.imageName.startsWith('https') ? user.imageName : `/uploads/${user.imageName}`}
           alt="img"
           width={200}
           height={200}

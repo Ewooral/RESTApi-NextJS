@@ -64,7 +64,7 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
 
       notifications: [],
      
-      addNotifications: (notifications: Notification[]) => set(() => ({ notifications })),      
+  addNotifications: (notifications: Notification[]) => set(state => ({ notifications }), false, 'addNotifications'),
       setUser: (user: User) => set(state => ({ user }), false, 'setUser'),
       logOut: () => {
         set(state => ({ user: {
@@ -72,7 +72,7 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
           lastName: '',
           email: '',
           role: '',
-          imageName: ''
+          // imageName: ''
     
         },
         serverResponse: {
@@ -82,7 +82,20 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
           loggedIn: false
         },
         errors: "",
-        isLoading: false,}), false, 'logOut')
+        isLoading: false,
+
+        toastState: {
+          message: '',
+          variant: 'default',
+          show: false,
+          setShow: (show: any) => set(() => ({ show })),
+          setMessage: (message: any) => set(() => ({ message })),
+          setVariant: (variant: any) => set(() => ({ variant })),
+        },
+
+        notificationCount: 0,
+        notifications: []
+      }), false, 'logOut')
       },
       setUserName: (name: string) => set(state => ({ user: { ...state.user, name } }), false, 'setUserName'),
       setIsLoading: (loading: boolean) => set(state => ({ isLoading: loading }), false, 'setIsLoading'),

@@ -23,17 +23,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          <div className="flex justify-center items-center text-center">
-            <Avatar className="mr-2 w-10 h-10">
-              <AvatarImage src="/copLogo.jpg" alt="avatar" />
-              <AvatarFallback>PU</AvatarFallback>
-            </Avatar>
-            <span className="flex flex-col items-center justify-center">
-              <h1 className="font-bold">PENTECOST UNIVERSITY</h1>
-              <h1 className="text-xs">
-                Student Management<br /> <span className="text-[10px]">and Automation System</span>
+          <div className="flex justify-around items-center text- py-1">
+            <section className="flex items-center">
+              <Avatar className="mr-2 w-7 h-7">
+                <AvatarImage src="/copLogo.jpg" alt="avatar" />
+                <AvatarFallback>PU</AvatarFallback>
+              </Avatar>
+              <h4 className="font-bold text-blue-500">PENTECOST UNIVERSITY</h4>
+            </section>
+            <section className="flex flex-col items-center justify-center">
+              <h1 className="font-bold text-blue-500">
+                Student Management and Automation System
               </h1>
-            </span>
+            </section>
           </div>{" "}
           {/* Wrap the children with AuthProvider */}
           <Toaster />

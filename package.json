@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
-    "server": "ts-node server.ts"
+    "server": "ts-node server.ts",
+    "migrate:make": "ts-node scripts/migrateMake.ts",
+    "create:migration": "knex migrate:make",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback"
   },
   "env": {},
   "dependencies": {
@@ -41,13 +45,16 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.300.0",
+    "moment": "^2.30.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "multer": "1.4.5-lts.1",
     "next": "14.0.4",
+    "next-auth": "5.0.0-beta.4",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.7",
     "papaparse": "^5.4.1",
+    "pg": "^8.11.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
@@ -57,8 +64,7 @@
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",
-    "zustand": "^4.4.7",
-    "ant-design-icons": "C:\\Users\\fspoo\\Documents\\ant-design-icons"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/cookie": "^0.6.0",
@@ -69,16 +75,17 @@
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
     "@types/papaparse": "^5.3.14",
+    "@types/pg": "^8.10.9",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "jest": "^29.7.0",
+    "knex": "^3.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5"
   }
-  
 }

@@ -37,7 +37,6 @@ const LoginPage = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -56,7 +55,6 @@ const LoginPage = () => {
   } = userStore();
   const { setToken } = useAuth();
   const router = useRouter();
-
 
   const login = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -77,12 +75,12 @@ const LoginPage = () => {
       setUser(userResponse.data);
       Cookies.set("token", response.data.token);
       if (response.data.isAdmin && response.data.loggedIn) {
-         toast({
-            variant: "default",
+        toast({
+          variant: "default",
           title: "Login successful",
           description: JSON.stringify(response.data.message),
           action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
-          className:"green-toast"
+          className: "green-toast",
         });
         setIsError(false);
         setIsLoading(false);
@@ -96,7 +94,7 @@ const LoginPage = () => {
         // setIsLoading(false);
       }
       console.log("USER:: ", user);
-    }  catch (err: any) {
+    } catch (err: any) {
       const serverError = err as errorType;
       if (serverError && serverError.response) {
         setIsError(true);
@@ -109,10 +107,9 @@ const LoginPage = () => {
         });
         setIsLoading(false);
       }
-        console.error("ERR::", serverError.response.data.message);
-        setErrors(serverError.response.data.message);
-      }
-    finally {
+      console.error("ERR::", serverError.response.data.message);
+      setErrors(serverError.response.data.message);
+    } finally {
       setIsLoading(false);
     }
   };
@@ -129,87 +126,94 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-200 text-black">
-      <form onSubmit={login} className="grid md:grid-cols-2  bg-white rounded shadow-md">
+      <form
+        onSubmit={login}
+        className="grid md:grid-cols-2  bg-white rounded shadow-md"
+      >
         {isLoading && <LoadingSpinner />}
 
         {/* IMAGE */}
         <div
           className="flex flex-col justify-center items-center"
-          style={{ backgroundImage: "url(/nice1.jpg)", backgroundSize: "cover" }}
-        >
-        </div>
+          style={{
+            backgroundImage: "url(/nice1.jpg)",
+            backgroundSize: "cover",
+          }}
+        ></div>
         {/* FORM */}
         <div className="p-6">
-        <h2 className="text-2xl mb-4 text-center">Login</h2>
-        {/* {isError && <p className="text-red-500 text-center">{errors}</p>} */}
-        <input
-          type="email"
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-          required
-          className="block w-full p-2 mb-4 border rounded"
-          placeholder="Password"
-        />
-        <select
-          className="block w-full p-2 mb-4 border rounded"
-          required
-          onChange={handleChange}
-          value={selectedRole}
-        >
-          <option value="">Select a role</option>
-          {roles.map((role, id) => (
-            <React.Fragment key={id}>
-              <option value={role}>{role}</option>
-            </React.Fragment>
-          ))}
-        </select>
-        {selectedRole === "ADMINISTRATOR" && (
+          <h2 className="text-2xl mb-4 text-center">Login</h2>
+          {/* {isError && <p className="text-red-500 text-center">{errors}</p>} */}
+          <input
+            type="email"
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+            required
+            className="block w-full p-2 mb-4 border rounded"
+            placeholder="Email"
+          />
           <input
             type="password"
-            value={secretPin}
-            onChange={handleSecretPin}
-            maxLength={6}
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+            required
             className="block w-full p-2 mb-4 border rounded"
-            placeholder="Enter your secret pin"
+            placeholder="Password"
           />
-        )}
-        <Button
-          type="submit"
-          variant="outline"
-          className="block w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-
-        >
-          Submit
-        </Button>
-        {/* <button
-          type="submit"
-          className="block w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-        >
-          Login
-        </button> */}
-
-        <div className="flex flex-col mt-4 text-center text-xs">
-          {" "}
-          Dont have an account?
-          <Link href="/register" className="text-blue-500 hover:text-blue-600">
-            Register
-          </Link>
-          Forgot Password?
-          <Link
-            href="/forgot-password"
-            className="text-blue-500 hover:text-blue-600"
+          <select
+            className="block w-full p-2 mb-4 border rounded"
+            required
+            onChange={handleChange}
+            value={selectedRole}
           >
-            reset
-          </Link>
-        </div>
+            <option value="">Select a role</option>
+            {roles.map((role, id) => (
+              <React.Fragment key={id}>
+                <option value={role}>{role}</option>
+              </React.Fragment>
+            ))}
+          </select>
+          {selectedRole === "ADMINISTRATOR" && (
+            <input
+              type="password"
+              value={secretPin}
+              onChange={handleSecretPin}
+              maxLength={6}
+              className="block w-full p-2 mb-4 border rounded"
+              placeholder="Enter your secret pin"
+            />
+          )}
+          <Button
+            type="submit"
+            variant="outline"
+            className={`block w-full p-2 text-white bg-blue-500 rounded ${
+              isSubmitting && "bg-[gray] text-white"
+            } hover:bg-blue-600`}
+          >
+            {isSubmitting && !isError
+              ? "Loading..."
+              : isSubmitting && isError
+              ? "An Error occured!"
+              : "Login"}
+          </Button>
+
+          <div className="flex flex-col mt-4 text-center text-xs">
+            {" "}
+            Dont have an account?
+            <Link
+              href="/register"
+              className="text-blue-500 hover:text-blue-600"
+            >
+              Register
+            </Link>
+            Forgot Password?
+            <Link
+              href="/forgot-password"
+              className="text-blue-500 hover:text-blue-600"
+            >
+              reset
+            </Link>
+          </div>
         </div>
       </form>
     </div>

@@ -1,0 +1,17 @@
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: Number(process.env.DB_PORT),
+});
+
+// export const query = async (text: string, params: any[], callback: (err: Error, res: any) => void) => {
+//   return pool.query(text, params, callback);
+// };
+
+export const query = async (text: string, params: any[]) => {
+    return pool.query(text, params);
+};
