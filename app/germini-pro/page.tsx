@@ -1,30 +1,29 @@
 'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 
 const GemGPTComponent: React.FC = () => {
   const [story, setStory] = useState('');
   const [input, setInput] = useState('');
 
+  console.log(process.env.GERMINI_API_KEY);
+  const data =  {
+    contents: [
+      {
+        parts: [
+          {
+            text: input,
+          },
+        ],
+      },
+    ],
+  }
   const generateStory = async () => {
     try {
-      const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyB5EkFBSGGR0vI02yfqTZgCxrU2W-LnQxQ`,
-        {
-          contents: [
-            {
-              parts: [
-                {
-                  text: input,
-                },
-              ],
-            },
-          ],
-        },
+       // @ts-ignore
+      const response = await axios.post('/api/auth/gemini', data,
+    
         {
           headers: {
             'Content-Type': 'application/json',
