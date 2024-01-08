@@ -8,9 +8,6 @@ const pool = new Pool({
   port: Number(process.env.DB_PORT),
 });
 
-// export const query = async (text: string, params: any[], callback: (err: Error, res: any) => void) => {
-//   return pool.query(text, params, callback);
-// };
 
 export const query = async (text: string, params: any[]) => {
     return pool.query(text, params);

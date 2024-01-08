@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          <div className="flex justify-around items-center text- py-1">
+          {/* <div className="flex justify-around items-center text- py-1">
             <section className="flex items-center">
               <Avatar className="mr-2 w-7 h-7">
                 <AvatarImage src="/copLogo.jpg" alt="avatar" />
@@ -36,7 +36,7 @@ export default function RootLayout({
                 Student Management and Automation System
               </h1>
             </section>
-          </div>{" "}
+          </div>{" "} */}
           {/* Wrap the children with AuthProvider */}
           <Toaster />
           {children}
