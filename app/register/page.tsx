@@ -110,7 +110,7 @@ const RegisterPage = () => {
       >
         {/* IMAGE */}
         <div
-          className="flex flex-col col-span-1 justify-center items-cente"
+          className="flex flex-col col-span-1 justify-center items-center"
           style={{
             backgroundImage: "url(/regi.avif)",
             backgroundSize: "cover",

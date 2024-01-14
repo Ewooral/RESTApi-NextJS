@@ -15,17 +15,18 @@ export const Modal = ({ isOpen, closeModal, children }: ModalTypes) => {
   
     return (
       <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#00000032]">
+      className="fixed shadow-md inset-0 z-50 flex items-center justify-center bg-[#00000032]">
         <div 
         // style={{borderRadius: "16% 84% 99% 1% / 30% 0% 100% 70%"}}
-        className="p-8 m-4 text-center shadow-lg bg-white rounded-md relative">
+        className="p-4 m-4 text-center shadow-lg bg-white rounded-md relative">
           {children}
           <button
           //@ts-ignore
-            className="px-[.5rem] mt-4 text-white bg-red-600 hover:bg-red-300 absolute top-[-8px] right-[5px] rounded-full"
+            className="flex items-center justify-center px-[4px] py-[2px] mt-4 text-white bg-red-600 hover:bg-red-300 
+            absolute top-[-8px] right-[5px] rounded-[50%] w-4 h-4"
             onClick={closeModal}
           >
-            X
+           <span className="text-[9px]">x</span>
           </button>
         </div>
       </div>

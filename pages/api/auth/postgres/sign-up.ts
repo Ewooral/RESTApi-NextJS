@@ -4,12 +4,9 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import { errorType } from '@/types/users';
 
-interface MulterRequest extends NextApiRequest {
-  file: any;
-}
 dotenv.config();
 
-export default async function handler(req: MulterRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 const { firstname, lastname, email, password, initials } = req.body;
 console.log("Data::", req.body);
 

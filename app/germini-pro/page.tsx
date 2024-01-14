@@ -7,7 +7,6 @@ const GemGPTComponent: React.FC = () => {
   const [story, setStory] = useState('');
   const [input, setInput] = useState('');
 
-  console.log(process.env.GERMINI_API_KEY);
   const data =  {
     contents: [
       {
@@ -49,6 +48,7 @@ const GemGPTComponent: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
     <div className="p-6 bg-white rounded shadow-md">
+      <h1 className="mb-4 text-3xl font-bold text-center">GemGPT</h1>
       <input
         type="text"
         value={input}
@@ -60,11 +60,12 @@ const GemGPTComponent: React.FC = () => {
         onClick={generateStory}
         className="w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
       >
-        Generate Story
+        Generate
       </button>
     </div>
     {story && (
-      <div className="mt-6 p-4 text-center bg-green-100 border border-green-200 rounded shadow-md">
+      <div className="mt-6 p-4 text-center bg-green-100 
+      border border-green-200 rounded shadow-md">
         <p className="text-green-700">{story}</p>
       </div>
     )}

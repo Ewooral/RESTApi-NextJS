@@ -17,6 +17,7 @@ export type errorType = {
     response: {
       data: {
         message: string;
+        error?: string;
       };
       status: number;
       statusText: string;
@@ -67,3 +68,18 @@ export interface Notification {
     imageName?: string;
   };
 }
+
+
+export type PostgresUser = 
+  {
+   created_at: string,
+   email: string,
+
+   firstname: string,
+   id: string,
+   initials: null,
+   lastname: string,
+   password: string,
+   updated_at: string
+  }
+ ;

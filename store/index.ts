@@ -1,7 +1,7 @@
 import {create} from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
 import { ToastState } from '@/types/users';
-import { User, Notification } from '@/types/users';
+import { User, Notification, PostgresUser } from '@/types/users';
  interface UserStore {
     user: User;
     errors: string;
@@ -13,8 +13,14 @@ import { User, Notification } from '@/types/users';
     };
     isLoading: boolean;
     notificationCount: number;
+    notifications: Notification[]
+    postgresUser: PostgresUser
+    postgresUsers: PostgresUser[];
+    isModalOpen: boolean;
 
-    notifications: Notification[];
+    setIsModalOpen: (value:boolean) => void
+    setPostgresUsers: (postgresUsers: PostgresUser[]) => void;
+    setPostgresUser: (postgresUser: any) => void;
     addNotification: (notification: Notification[]) => void;
     setNotificationCount: (count: number) => void;
     logOut: () => void;
@@ -64,9 +70,33 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
 
       notifications: [],
      
-  addNotifications: (notifications: Notification[]) => set(state => ({ notifications }), false, 'addNotifications'),
+      addNotifications: (notifications: Notification[]) => set(state => ({ notifications }), false, 'addNotifications'),
       setUser: (user: User) => set(state => ({ user }), false, 'setUser'),
-      logOut: () => {
+
+      postgresUser: 
+        {
+         created_at: '',
+         email: '',
+         firstname: '',
+         id: '',
+         initials: null,
+         lastname: '',
+         password: '',
+         updated_at: ''
+        }
+       ,
+
+       setPostgresUser: (postgresUser: any) => set(state => ({ postgresUser }), false, 'setPostgresUser'),
+      
+       postgresUsers:[],
+       setPostgresUsers: (postgresUsers: PostgresUser[]) => set(state => ({ postgresUsers }), false, 'setPostgresUsers'),
+        isModalOpen: false,
+        setIsModalOpen: (value:boolean) => set(state => ({ isModalOpen: value }), false, 'setIsModalOpen'),
+      
+      
+      
+      // ...................................................................
+        logOut: () => {
         set(state => ({ user: {
           firstName: '',
           lastName: '',

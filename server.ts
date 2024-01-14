@@ -1,6 +1,5 @@
 import { createServer } from "http";
 import { Server as IoServer } from "socket.io";
-import cors from "cors";
 
 const httpServer = createServer();
 const io = new IoServer(httpServer, {
