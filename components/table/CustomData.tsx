@@ -435,7 +435,7 @@ const confirmDelete = () => {
         </DropdownMenu>
       </div>
       <div className="rounded-md border">
-        <Table className="text-[11px]">
+        <Table className="text-sm">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

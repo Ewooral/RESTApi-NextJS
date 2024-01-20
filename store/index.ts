@@ -17,7 +17,9 @@ import { User, Notification, PostgresUser } from '@/types/users';
     postgresUser: PostgresUser
     postgresUsers: PostgresUser[];
     isModalOpen: boolean;
+    initials: string[];
 
+    setInitials: (title: string[]) => void;
     setIsModalOpen: (value:boolean) => void
     setPostgresUsers: (postgresUsers: PostgresUser[]) => void;
     setPostgresUser: (postgresUser: any) => void;
@@ -92,7 +94,8 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
        setPostgresUsers: (postgresUsers: PostgresUser[]) => set(state => ({ postgresUsers }), false, 'setPostgresUsers'),
         isModalOpen: false,
         setIsModalOpen: (value:boolean) => set(state => ({ isModalOpen: value }), false, 'setIsModalOpen'),
-      
+        initials: [],
+        setInitials: (initials: string[]) => set(state => ({ initials }), false, 'setTitle'),
       
       
       // ...................................................................

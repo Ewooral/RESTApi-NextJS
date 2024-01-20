@@ -23,7 +23,7 @@ interface myUsers extends users {
   _id: string;
 }
 
-export function UpdateUserForm({
+export default function UpdateUser({
   children,
   userId,
   email,

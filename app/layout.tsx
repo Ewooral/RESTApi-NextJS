@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Header from "./profile/content/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,21 +24,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <AuthProvider>
-          {/* <div className="flex justify-around items-center text- py-1">
-            <section className="flex items-center">
-              <Avatar className="mr-2 w-7 h-7">
-                <AvatarImage src="/copLogo.jpg" alt="avatar" />
-                <AvatarFallback>PU</AvatarFallback>
-              </Avatar>
-              <h4 className="font-bold text-blue-500">PENTECOST UNIVERSITY</h4>
-            </section>
-            <section className="flex flex-col items-center justify-center">
-              <h1 className="font-bold text-blue-500">
-                Student Management and Automation System
-              </h1>
-            </section>
-          </div>{" "} */}
+          
           {/* Wrap the children with AuthProvider */}
+          {/* <Header /> */}
           <Toaster />
           {children}
         </AuthProvider>

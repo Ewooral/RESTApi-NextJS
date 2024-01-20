@@ -1,28 +1,27 @@
-import { query } from '@/lib/connectToPostgres'; // replace with the actual path to your connectToPostgres.ts file
-import {NextApiRequest, NextApiResponse} from "next";
-
-type Field = {
-    field: any
-}
+import { NextApiRequest, NextApiResponse } from "next";
+import { query } from '@/lib/connectToPostgres'; // Replace with the actual path to your connectToPostgres.ts file
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { email, password, firstname, lastname, initials } = req.body;
+  if (req.method === 'PUT') {
+    const { email, firstname, lastname, initials } = req.body;
+    console.log("REQ BODY::", req.body)
 
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
     }
 
-    const fields = { password, firstname, lastname, initials };
+    const fields = {firstname, lastname, initials };
     const updates = [];
     const values = [];
+    const updatedFields = [];
 
     let i = 1;
     let field: keyof typeof fields;
-    for ( field in fields) {
+    for (field in fields) {
       if (fields[field] !== undefined) {
         updates.push(`${field} = $${i}`);
         values.push(fields[field]);
+        updatedFields.push(field);
         i++;
       }
     }
@@ -39,11 +38,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const id = result.rows[0].id;
       const shortId = id.substring(0, 3) + '...';
 
-      res.status(200).json({ message: 'User updated successfully', id: shortId });
+     
+      res.status(200).json({
+        message: 'Profile updated successfully',
+        id: shortId,
+        updatedFields,
+      });
     } catch (error) {
       res.status(500).json({ error: 'Database error' });
     }
-  } else {
+  } else { 
     res.status(405).json({ error: 'Method not allowed' });
   }
 }
+
+
+

@@ -14,12 +14,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { users } from "@/types/users";
 import { LucideArchiveX } from "lucide-react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { UpdateUserForm } from "@/pages/admin/forms/UpdateUser";
+import UpdateUser from "@/pages/admin/forms/UpdateUser";
 import axios from "axios";
 import { errorType } from "@/types/users";
 import { toast } from "../ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
-import Sidebar, { Sidebar2 } from "../cards/sidebarCard";
+import { Sidebar2 } from "../cards/sidebarCard";
 
 interface myUsers extends users {
   _id: string;
@@ -188,7 +188,7 @@ const UserTable: React.FC<UserTableProps> = ({
                 </span>
               </TableCell>
               <TableCell className="text-xs  border px-[20px] py-0">
-                <UpdateUserForm
+                <UpdateUser
                   userId={user._id}
                   email={user.email}
                   openModal={openModal}
@@ -203,7 +203,7 @@ const UserTable: React.FC<UserTableProps> = ({
                     className=" mr-2 h-5 w-5 cursor-pointer text-blue-500
                   transform transition-transform duration-200 ease-in-out active:scale-95"
                   />
-                </UpdateUserForm>
+                </UpdateUser>
               </TableCell>
               <TableCell className="text-xs  border px-[20px] py-0">
                 <LucideArchiveX

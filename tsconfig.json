@@ -52,6 +52,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.test.ts", "**/*.test.tsx", ".next/types/**/*.ts", "app/profile/content/tests/header.test.jsx"],
   "exclude": ["node_modules"]
 }

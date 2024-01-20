@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -25,6 +26,7 @@ const schema = z.object({
 
 export default function SignUp() {
   const [response, setResponse] = React.useState([]);
+  const [isClient, setIsClient] = useState(false);
   const {
     register,
     handleSubmit,
@@ -33,10 +35,9 @@ export default function SignUp() {
     resolver: zodResolver(schema),
   });
   const [initialsRes, setInitialsRes] = useState("");
-  const [initials, setInitials] = useState([]);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { toast } = useToast();
-  const { isLoading, setIsLoading, setErrors } = userStore();
+  const { isLoading, setIsLoading, initials, setInitials } = userStore();
 
   useEffect(() => {
     const fetchInitials = async () => {
@@ -96,6 +97,12 @@ export default function SignUp() {
     // setResponse(response);
   };
 
+  // PREVENT HYDRATION ERRORS
+  useEffect(() => {
+    setIsClient(true);
+  }
+  , []);
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-200">
       <form
@@ -106,12 +113,13 @@ export default function SignUp() {
         <div
           className="flex flex-col col-span-1 justify-center items-center"
           style={{
-            backgroundImage: "url(/regi.avif)",
-            backgroundSize: "cover",
+            backgroundImage: "url(https://cdn.dribbble.com/users/1917942/screenshots/7139971/media/d802dc4eadb049f5a9684759cfdfbffa.gif)",
+            backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             height: "100%",
             width: "100%",
+            backgroundColor:"#fedc6b"
           }}
         ></div>
 
@@ -133,7 +141,9 @@ export default function SignUp() {
             >
               Title
             </label>
-            <select
+            {
+              isClient && (
+                <select
               id="initials"
               {...register("initials")}
               className="block w-full bg-white border border-gray-300 focus:border-indigo-500 text-base leading-6 shadow-sm py-2 pl-3 pr-10 rounded-md focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -145,6 +155,8 @@ export default function SignUp() {
                 </option>
               ))}
             </select>
+              )
+            }
             {errors.initials && (
               <p className="text-red-500 text-xs italic">
                 {errors.initials.message?.toString()}
