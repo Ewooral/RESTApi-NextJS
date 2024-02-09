@@ -13,13 +13,28 @@ console.log("Data::", req.body);
 // Hash the password before storing it in the database
 const hashedPassword = await bcrypt.hash(password, 10);
 
+const createTableText = `
+CREATE TABLE IF NOT EXISTS users(
+  id SERIAL PRIMARY KEY,
+  firstname VARCHAR(100),
+  lastname VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(100),
+  initials VARCHAR(10)
+)
+`;
+
+
 const insertUserText = 'INSERT INTO users(firstname, lastname, email, password, initials) VALUES($1, $2, $3, $4, $5) RETURNING *';
 const values = [firstname, lastname, email, hashedPassword, initials];
 
 
+
 try {
+
+  await query(createTableText, []); // Create the table if it doesn't exist
   const dbResponse = await query(insertUserText, values);
-  console.log("dbResponse::", dbResponse);
+
   res.status(200).json({ message: 'Registration successful!', user: dbResponse.rows[0] });
 } catch (err: any) {
   console.error(err);

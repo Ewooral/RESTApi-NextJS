@@ -30,6 +30,7 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
@@ -93,6 +94,7 @@ export default function SignUp() {
       setIsLoading(false);
       setIsSubmitting(false);
     }
+    reset()
 
     // setResponse(response);
   };
@@ -113,7 +115,7 @@ export default function SignUp() {
         <div
           className="flex flex-col col-span-1 justify-center items-center"
           style={{
-            backgroundImage: "url(https://cdn.dribbble.com/users/1917942/screenshots/7139971/media/d802dc4eadb049f5a9684759cfdfbffa.gif)",
+            backgroundImage: "linear-gradient(to right, yellow, lightblue)",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",

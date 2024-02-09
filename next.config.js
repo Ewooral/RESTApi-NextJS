@@ -21,6 +21,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.pinimg.com",
+      },
+      {
+      protocol: "https",
+      hostname: "ewooral31.blob.core.windows.net"
       }
     ],
   },

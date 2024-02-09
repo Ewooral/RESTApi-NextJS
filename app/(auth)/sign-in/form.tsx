@@ -52,23 +52,21 @@ export default function SignIn({isFocused, setIsFocused, isLoading}: {isFocused:
   return (
     <div className="flex justify-center items-center h-screen bg-gray-200">
       <form
-        // onSubmit={(data) => { console.log('handleSubmit called'); onSubmit(data); }}
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={(data) => { console.log('handleSubmit called'); onSubmit(data); }}
+        // onSubmit={handleSubmit(onSubmit)}
         className=" justify-center items-center mb-4 grid md:grid-cols-2 gap-2  bg-white rounded shadow-md"
       >
         {/* IMAGE */}
         <div
           className="flex flex-col col-span-1 justify-center items-center border-r-2 border-gray-200"
           style={{
-            backgroundImage:
-              "url(https://i.pinimg.com/originals/e1/59/25/e15925c931a81678a3c2e0c0a40db781.gif)",
-            // "url(https://i.pinimg.com/originals/36/91/6f/36916f619c448fb8975f7730959e8562.gif)",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             height: "100%",
             width: "100%",
-            // backgroundColor:"#fedc6b"
+            backgroundColor:"#fedc6b",
+            backgroundImage: "linear-gradient(to right, rgba(254, 220, 107, 0.8), rgba(255, 255, 255, 0.8))",
           }}
         ></div>
 
@@ -92,7 +90,7 @@ export default function SignIn({isFocused, setIsFocused, isLoading}: {isFocused:
               {...register("email", { required: true })}
               onFocus={() => setIsFocused[0](true)}
               onBlur={() => setIsFocused[0](false)}
-              className="border-2 border-gray-300 rounded w-full py-2 px-4 "
+              className="border-2 border-gray-300 rounded w-full py-2 px-4"
             />
 
             {errors.email && (
@@ -155,8 +153,8 @@ export default function SignIn({isFocused, setIsFocused, isLoading}: {isFocused:
               {/* BUTTON */}
           <div className="flex items-center justify-between mt-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 text-xs px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 text-xs px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Sign In
             </button>

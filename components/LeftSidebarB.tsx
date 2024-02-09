@@ -114,11 +114,12 @@ const LeftSidebar: React.FC = () => {
           <li key={item.id} className="py-1">
             <div
               onClick={() => toggleItem(item.id)}
-              className="cursor-pointer flex items-center text-white hover:text-[#dadada] transition-all duration-300"
+              className="cursor-pointer flex items-center text-white hover:text-[#dadada]
+              transition-all duration-300"
             >
               {item.children && (
                 <span className="mr-1">
-                  {expandedItems.includes(item.id) ? '[-]' : '[+]'}
+                  {expandedItems.includes(item.id) ? '▼' : '►'}
                 </span>
               )}
               {item.label}
@@ -128,7 +129,10 @@ const LeftSidebar: React.FC = () => {
                 expandedItems.includes(item.id) ? 'max-h-screen' : 'max-h-0'
               }`}
             >
-              {item.children && renderMenuItems(item.children)}
+              <>                      
+              {item.children && renderMenuItems(item.children.map(child => ({...child, label: '|---◾' + child.label})))}
+              
+              </>
             </div>
           </li>
         ))}
