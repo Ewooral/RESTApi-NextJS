@@ -33,6 +33,7 @@ export type notification = {
     createdAt?: string,
     updatedAt?: string,
     __v?: number
+    
 }
 
 export type ToastState = {
