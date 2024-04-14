@@ -1,14 +1,37 @@
 const { Pool } = require('pg');
-const dotenv = require('dotenv');
-dotenv.config();
+
+
+console.log("host:: ", process.env.DB_HOST)
+
+// const pool = new Pool({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_NAME,
+//   password: process.env.DB_PASS,
+//   port: Number(process.env.DB_PORT),
+//   // ssl: {
+//   //   rejectUnauthorized: false // You may need to configure SSL options depending on your environment
+//   // }
+  
+// });
+
+// DB_USER=postgres
+// DB_HOST="localhost"
+// DB_NAME=generaldb
+// DB_PASS="password"
+// DB_PORT=5432
+
 
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  port: Number(process.env.DB_PORT),
+  user: 'jybygonk',
+  host: 'tyke.db.elephantsql.com',
+  database: 'jybygonk',
+  password: 'whWZaVd0LWEfCLJlcMGVq130_BD6A9cN',
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false // You may need to configure SSL options depending on your environment
+  }
 });
 const createTables = async () => {
   await pool.query('BEGIN');
@@ -16,13 +39,16 @@ const createTables = async () => {
   try {
     // Create Users table
     await pool.query(`
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
       CREATE TABLE IF NOT EXISTS users (
         id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        firstname VARCHAR(100) NOT NULL,
-        lastname VARCHAR(100) NOT NULL,
-        email VARCHAR(100) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        status VARCHAR(50) DEFAULT 'Guest'
+        firstname VARCHAR(100),
+        lastname VARCHAR(100),
+        email VARCHAR(100) UNIQUE,
+        password VARCHAR(100),
+        isStudent BOOLEAN,
+        title VARCHAR(10),
+        terms BOOLEAN
       );
     `);
 

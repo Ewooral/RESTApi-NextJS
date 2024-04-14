@@ -2724,22 +2724,22 @@ For example, you might have a structure like this:
 pages/
 ├─ api/
 ├─ user/
-│  ├─ index.tsx
+│  ├─ page.tsx
 │  ├─ [id].tsx
 ├─ blog/
-│  ├─ index.tsx
+│  ├─ page.tsx
 │  ├─ [slug].tsx
 ├─ about.tsx
-├─ index.tsx
+├─ page.tsx
 ```
 
 In this structure:
 
-- `pages/index.tsx` corresponds to the `/` route.
+- `pages/page.tsx` corresponds to the `/` route.
 - `pages/about.tsx` corresponds to the `/about` route.
-- `pages/user/index.tsx` corresponds to the `/user` route.
+- `pages/user/page.tsx` corresponds to the `/user` route.
 - `pages/user/[id].tsx` corresponds to the `/user/:id` route, where `:id` is a dynamic route parameter.
-- `pages/blog/index.tsx` corresponds to the `/blog` route.
+- `pages/blog/page.tsx` corresponds to the `/blog` route.
 - `pages/blog/[slug].tsx` corresponds to the `/blog/:slug` route, where `:slug` is a dynamic route parameter.
 
 You can create as many folders as you need to organize your pages and match your application's routing structure.
@@ -2880,13 +2880,13 @@ ApaaEmma: how to style elements in the pages folder in next js
 pages/
 ├─ api/
 ├─ user/
-│  ├─ index.tsx
+│  ├─ page.tsx
 │  ├─ [id].tsx
 ├─ blog/
-│  ├─ index.tsx
+│  ├─ page.tsx
 │  ├─ [slug].tsx
 ├─ about.tsx
-├─ index.tsx
+├─ page.tsx
 
 GitHub Copilot: In Next.js, you can style your components using either CSS-in-JS libraries (like styled-components or emotion), CSS Modules, or global CSS.
 
@@ -2894,7 +2894,7 @@ Here's how you can style elements in each of the pages in your folder structure:
 
 **1. CSS Modules:**
 
-Create a CSS file with the same name as your component file, but with a `.module.css` extension. For example, for `pages/user/index.tsx`, you would create `pages/user/index.module.css`.
+Create a CSS file with the same name as your component file, but with a `.module.css` extension. For example, for `pages/user/page.tsx`, you would create `pages/user/index.module.css`.
 
 ```css
 /* pages/user/index.module.css */
@@ -2906,7 +2906,7 @@ Create a CSS file with the same name as your component file, but with a `.module
 Then, import the CSS Module inside your component and use the styles as class names:
 
 ```jsx
-// pages/user/index.tsx
+// pages/user/page.tsx
 import styles from './index.module.css';
 
 function UserPage() {
@@ -2943,7 +2943,7 @@ export default MyApp;
 If you're using a CSS-in-JS library like styled-components, you can create styled components and use them in your components:
 
 ```jsx
-// pages/user/index.tsx
+// pages/user/page.tsx
 import styled from 'styled-components';
 
 const Container = styled.div`

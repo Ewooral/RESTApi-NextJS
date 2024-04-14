@@ -1,15 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {
-  BlobServiceClient,
-  StorageSharedKeyCredential,
-  generateBlobSASQueryParameters,
-  BlobSASPermissions,
-} from "@azure/storage-blob";
+// import {
+//   BlobServiceClient,
+//   StorageSharedKeyCredential,
+//   generateBlobSASQueryParameters,
+//   BlobSASPermissions,
+// } from "@azure/storage-blob";
 import multer from "multer";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import sharp from "sharp";
 import connectToDatabase from "@/lib/connectToDatabase";
+import {query} from "@/lib/connectToPostgres"
+
 dotenv.config();
 
 interface MulterRequest extends NextApiRequest {
@@ -30,8 +32,8 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     await registerUser(req, res);
-  } else if (req.method === "GET") {
-    await generateSasUrl(req, res);
+  // } else if (req.method === "GET") {
+  //   await generateSasUrl(req, res);
   } else {
     res.status(405).end(); // Method Not Allowed
   }
@@ -58,47 +60,47 @@ async function registerUser(req: MulterRequest, res: NextApiResponse) {
       .resize(200, 200)
       .toBuffer();
 
-    // Create a BlobServiceClient object which will be used to create a container client
-    const blobServiceClient = BlobServiceClient.fromConnectionString(
-      process.env.AZURE_STORAGE_CONNECTION_STRING!
-    );
+    // // Create a BlobServiceClient object which will be used to create a container client
+    // const blobServiceClient = BlobServiceClient.fromConnectionString(
+    //   process.env.AZURE_STORAGE_CONNECTION_STRING!
+    // );
 
-    // Get a reference to a container
-    const containerClient = blobServiceClient.getContainerClient(
-      process.env.AZURE_STORAGE_CONTAINER_NAME!
-    );
+    // // Get a reference to a container
+    // const containerClient = blobServiceClient.getContainerClient(
+    //   process.env.AZURE_STORAGE_CONTAINER_NAME!
+    // );
     
-    console.log("blobServiceClient::", blobServiceClient)
-    console.log("containerClient::", containerClient);
-    console.log("containerClient.exists()::", containerClient.exists());
+    // console.log("blobServiceClient::", blobServiceClient)
+    // console.log("containerClient::", containerClient);
+    // console.log("containerClient.exists()::", containerClient.exists());
 
 
-    // Create the container if it does not exist
-    if (!containerClient.exists()) {
-      console.log("container does not exist");
-      await containerClient.create();
-      console.log("container created");
-    }
+    // // Create the container if it does not exist
+    // if (!containerClient.exists()) {
+    //   console.log("container does not exist");
+    //   await containerClient.create();
+    //   console.log("container created");
+    // }
 
-    // Get a block blob client
-    const blockBlobClient = containerClient.getBlockBlobClient(
-      req.file.originalname
-    );
+    // // Get a block blob client
+    // const blockBlobClient = containerClient.getBlockBlobClient(
+    //   req.file.originalname
+    // );
 
-    // Upload data to the blob
-    const uploadBlobResponse = await blockBlobClient.upload(
-      resizedImageBuffer,
-      resizedImageBuffer.length
-    );
+    // // Upload data to the blob
+    // const uploadBlobResponse = await blockBlobClient.upload(
+    //   resizedImageBuffer,
+    //   resizedImageBuffer.length
+    // );
 
-    console.log(
-      `Upload block blob ${req.file.originalname} successfully`,
-      uploadBlobResponse.requestId
-    );
+    // console.log(
+    //   `Upload block blob ${req.file.originalname} successfully`,
+    //   uploadBlobResponse.requestId
+    // );
 
     // save user input data coming from the frontend into formData variable and destrusture it
     const formData = req.body;
-    const { firstName, lastName, email, password, secretPin, role } = formData;
+    const { firstName, lastName, email, password, secretPin, isStudent } = formData;
 
     // connect to the database and create a new database called manage-users if it doesn't exist yet and store it in a variable called client
     const client = await connectToDatabase();
@@ -121,9 +123,9 @@ async function registerUser(req: MulterRequest, res: NextApiResponse) {
       email,
       password: hashedPassword,
       secretPin: hashedSecretPin,
-      role,
-      // imageName: req.file.originalname,
-      imageName: blockBlobClient.url,
+      isStudent,
+      imageName: req.file.originalname,
+      // imageName: blockBlobClient.url,
     });
 
     console.log("what happens when user info is saved::", result);
@@ -137,33 +139,33 @@ async function registerUser(req: MulterRequest, res: NextApiResponse) {
 
 
 // 
-async function generateSasUrl(req: NextApiRequest, res: NextApiResponse) {
-  const blobName = req.query.blobName;
-  console.log("blobName::", blobName);
+// async function generateSasUrl(req: NextApiRequest, res: NextApiResponse) {
+//   const blobName = req.query.blobName;
+//   console.log("blobName::", blobName);
 
-  if (!blobName) {
-    return res
-      .status(400)
-      .json({ message: "Missing blobName query parameter" });
-  }
+//   if (!blobName) {
+//     return res
+//       .status(400)
+//       .json({ message: "Missing blobName query parameter" });
+//   }
 
-  const sharedKeyCredential = new StorageSharedKeyCredential(
-    process.env.AZURE_STORAGE_ACCOUNT_NAME!,
-    process.env.AZURE_STORAGE_ACCOUNT_KEY!
-  );
+//   const sharedKeyCredential = new StorageSharedKeyCredential(
+//     process.env.AZURE_STORAGE_ACCOUNT_NAME!,
+//     process.env.AZURE_STORAGE_ACCOUNT_KEY!
+//   );
 
-  const blobSAS = generateBlobSASQueryParameters(
-    {
-      containerName: process.env.AZURE_STORAGE_CONTAINER_NAME!,
-      blobName: blobName as string,
-      permissions: BlobSASPermissions.parse("r"), // "r" for read
-      startsOn: new Date(),
-      expiresOn: new Date(new Date().valueOf() + 86400), // 1 day later
-    },
-    sharedKeyCredential
-  ).toString();
+//   const blobSAS = generateBlobSASQueryParameters(
+//     {
+//       containerName: process.env.AZURE_STORAGE_CONTAINER_NAME!,
+//       blobName: blobName as string,
+//       permissions: BlobSASPermissions.parse("r"), // "r" for read
+//       startsOn: new Date(),
+//       expiresOn: new Date(new Date().valueOf() + 86400), // 1 day later
+//     },
+//     sharedKeyCredential
+//   ).toString();
 
-  const sasUrl = `https://${process.env.AZURE_STORAGE_ACCOUNT_NAME}.blob.core.windows.net/${process.env.AZURE_STORAGE_CONTAINER_NAME}/${blobName}?${blobSAS}`;
+//   const sasUrl = `https://${process.env.AZURE_STORAGE_ACCOUNT_NAME}.blob.core.windows.net/${process.env.AZURE_STORAGE_CONTAINER_NAME}/${blobName}?${blobSAS}`;
 
-  res.json({ sasUrl });
-}
+//   res.json({ sasUrl });
+// }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
+import useThemeStore from "@/store/themeStore";
 
 type errorType = {
   code: string;
@@ -36,7 +37,7 @@ const LoginPage = () => {
   const [isError, setIsError] = useState(false);
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-
+  
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -55,6 +56,14 @@ const LoginPage = () => {
   } = userStore();
   const { setToken } = useAuth();
   const router = useRouter();
+
+  const { theme } = useThemeStore();
+  // useEffect(() => {
+  //   // This effect will re-run whenever the theme changes
+  //   // It will trigger a re-render of the component
+  //   // You can perform any necessary actions here
+  //   console.log("Theme changed:", theme);
+  // }, [theme]); // Re-run the effect when the theme changes
 
   const login = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -142,7 +151,7 @@ const LoginPage = () => {
         ></div>
         {/* FORM */}
         <div className="p-6">
-          <h2 className="text-2xl mb-4 text-center">Login</h2>
+          <h2 style={{color:theme.primaryColor}} className="text-2xl mb-4 text-center">Login</h2>
           {/* {isError && <p className="text-red-500 text-center">{errors}</p>} */}
           <input
             type="email"
@@ -184,6 +193,7 @@ const LoginPage = () => {
             />
           )}
           <Button
+            style={{ background: `${theme.primaryColor}` }}
             type="submit"
             variant="outline"
             className={`block w-full p-2 text-white bg-blue-500 rounded ${
@@ -199,7 +209,7 @@ const LoginPage = () => {
 
           <div className="flex flex-col mt-4 text-center text-xs">
             {" "}
-            Dont have an account?
+            Don&apos;t have an account?
             <Link
               href="/register"
               className="text-blue-500 hover:text-blue-600"
@@ -219,8 +229,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage;
-function useEffect(arg0: () => void, arg1: (string | boolean)[]) {
-  throw new Error("Function not implemented.");
-}

@@ -4675,7 +4675,7 @@ ImageElement<@webpack-internal:///./node_modules/.pnpm/next@14.0.4_@babel+core@7
 Image<@webpack-internal:///./node_modules/.pnpm/next@14.0.4_@babel+core@7.23.6_react-dom@18.2.0_react@18.2.0/node_modules/next/dist/client/image-component.js:238:47
 div
 div
-DashboardPage@webpack-internal:///./pages/dashboard/index.tsx:17:72
+DashboardPage@webpack-internal:///./pages/dashboard/page.tsx:17:72
 withAuth/<@webpack-internal:///./components/HigherOrderComponent.tsx:16:78
 Pages@webpack-internal:///./pages/_app.tsx:9:36
 PathnameContextProviderAdapter@webpack-internal:///./node_modules/.pnpm/next@14.0.4_@babel+core@7.23.6_react-dom@18.2.0_react@18.2.0/node_modules/next/dist/shared/lib/router/adapters.js:79:42
@@ -5209,7 +5209,7 @@ export default DashboardLayout;
 2. **Use the layout component in your pages**: In the pages of your `dashboard` directory, import `DashboardLayout` and use it to wrap your page content:
 
 ```jsx
-// pages/dashboard/index.tsx
+// pages/dashboard/page.tsx
 import DashboardLayout from '../../components/DashboardLayout';
 
 function DashboardPage() {
@@ -5337,7 +5337,7 @@ export default DashboardLayout;
 Then, in your dashboard pages, you can import `DashboardLayout` and use it to wrap your page content:
 
 ```jsx
-// pages/dashboard/index.tsx
+// pages/dashboard/page.tsx
 import DashboardLayout from '../components/DashboardLayout';
 
 function DashboardPage() {
@@ -5457,7 +5457,7 @@ In this code, `DashboardLayout` is a layout component that wraps the content of 
 2. **Use the layout in your pages**: In the pages of your `dashboard` directory, you don't need to import `DashboardLayout`. It will be automatically applied to the pages:
 
 ```jsx
-// pages/dashboard/index.tsx
+// pages/dashboard/page.tsx
 function DashboardPage() {
   return (
     <div>
@@ -7401,7 +7401,7 @@ If none of these suggestions solve your issue, please provide more details about
 
 ApaaEmma: when i query the database for a user with the entered email, it goes through and i get the below response but when i hit the sendOtp route, i get user not found
 
-email:: fspoon22@gmail.com index.tsx:49:14
+email:: fspoon22@gmail.com page.tsx:49:14
 RESPONSE:: 
 Object { data: {…}, status: 200, statusText: "OK", headers: {…}, config: {…}, request: XMLHttpRequest }
 ​
@@ -7436,7 +7436,7 @@ status: 200
 statusText: "OK"
 ​
 <prototype>: Object { … }
-index.tsx:53:16
+page.tsx:53:16
 XHRPOST
 http://localhost:3000/api/auth/sendOtp
 [HTTP/1.1 400 Bad Request 2764ms]
@@ -16516,7 +16516,7 @@ Your project structure would look something like this:
 |-- pages
 |   |-- api
 |   |   |-- socket.ts
-|   |-- index.tsx
+|   |-- page.tsx
 |-- server.ts
 |-- package.json
 |-- tsconfig.json

@@ -8,6 +8,16 @@ export type users = {
     imageName?: string,
 }
 
+export type sessionType ={
+  userId: string;
+  email: string;
+  isAdmin: boolean;
+  isLoggedIn: boolean;
+  role: string;
+  firstname: string;
+  lastname: string
+}
+
 export type errorType = {
     code: string;
     config: any;

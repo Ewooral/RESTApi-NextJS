@@ -7,6 +7,12 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Header from "./profile/content/header";
+import AdminHeader from "@/pages/admin/AdminHeader";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
+import "ag-grid-community/styles/ag-theme-balham.css";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +33,7 @@ export default function RootLayout({
           
           {/* Wrap the children with AuthProvider */}
           {/* <Header /> */}
+          <AdminHeader />
           <Toaster />
           {children}
         </AuthProvider>

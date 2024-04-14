@@ -1,103 +1,102 @@
 import {create} from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
-import { ToastState } from '@/types/users';
-import { User, Notification, PostgresUser } from '@/types/users';
- interface UserStore {
-    user: User;
-    errors: string;
-    serverResponse: {
-      finalToken: string;
-      message: string;
-      isAdmin: boolean;
-      loggedIn: boolean;
-    };
-    isLoading: boolean;
-    notificationCount: number;
-    notifications: Notification[]
-    postgresUser: PostgresUser
-    postgresUsers: PostgresUser[];
-    isModalOpen: boolean;
-    initials: string[];
+import { User, Notification, PostgresUser, sessionType } from '@/types/users';
 
-    setInitials: (title: string[]) => void;
-    setIsModalOpen: (value:boolean) => void
-    setPostgresUsers: (postgresUsers: PostgresUser[]) => void;
-    setPostgresUser: (postgresUser: any) => void;
-    addNotification: (notification: Notification[]) => void;
-    setNotificationCount: (count: number) => void;
-    logOut: () => void;
-    setIsLoading: (loading: boolean) => void;
-    setServerResponse: (response: Record<string, string>) => void;
-    setEmail: (newUser: string) => void;
-    setErrors: (error: string) => void;
-    setUser: (user: User) => void;
-    toastState: ToastState;
-    setToastState: (toastState: ToastState) => void;
+
+interface UserStore {
+  user: User;
+  errors: string;
+  serverResponse: {
+    finalToken: string;
+    message: string;
+    isAdmin: boolean;
+    loggedIn: boolean;
+  };
+  isLoading: boolean;
+  notificationCount: number;
+  notifications: Notification[]
+  postgresUser: PostgresUser
+  postgresUsers: PostgresUser[];
+  isModalOpen: boolean;
+  title: string[];
+  session: sessionType
+  setSession: (newSession: sessionType) => void;
+  setTitle: (title: string[]) => void;
+  setIsModalOpen: (value:boolean) => void
+  setPostgresUsers: (postgresUsers: PostgresUser[]) => void;
+  setPostgresUser: (postgresUser: any) => void;
+  addNotification: (notification: Notification[]) => void;
+  setNotificationCount: (count: number) => void;
+  logOut: () => void;
+  setIsLoading: (loading: boolean) => void;
+  setServerResponse: (response: Record<string, string>) => void;
+  setEmail: (newUser: string) => void;
+  setErrors: (error: string) => void;
+  setUser: (user: User) => void;
   }
   
 
 //@ts-ignore
-const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
-    user: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        role: '',
-        imageName: ''
+const userStore = create<UserStore>(devtools(persist((set) => ({
+  user: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: '',
+    imageName: ''
+    },
+    serverResponse: {
+    finalToken: '',
+    message: '',
+    isAdmin: false,
+    loggedIn: false
+    },
+    errors: "",
+    isLoading: false,
 
-      },
-      serverResponse: {
-        finalToken: '',
-        message: '',
-        isAdmin: false,
-        loggedIn: false
-      },
-      errors: "",
-      isLoading: false,
+    notificationCount: 0,
+    setNotificationCount: (count: number) => set(state => ({ notificationCount: count }), false, 'setNotificationCount'),
 
-      toastState: {
-        message: '',
-        variant: 'default',
-        show: false,
-        setShow: (show: any) => set(() => ({ show })),
-        setMessage: (message: any) => set(() => ({ message })),
-        setVariant: (variant: any) => set(() => ({ variant })),
-      },
+    notifications: [],
+   
+    addNotifications: (notifications: Notification[]) => set(state => ({ notifications }), false, 'addNotifications'),
+    setUser: (user: User) => set(state => ({ user }), false, 'setUser'),
 
-      setToastState: (toastState: ToastState) => set(() => ({ toastState }), false, 'setToastState'),
+    postgresUser: 
+    {
+     created_at: '',
+     email: '',
+     firstname: '',
+     id: '',
+     initials: null,
+     lastname: '',
+     password: '',
+     updated_at: ''
+    }
+     ,
 
-      notificationCount: 0,
-      setNotificationCount: (count: number) => set(state => ({ notificationCount: count }), false, 'setNotificationCount'),
-
-
-      notifications: [],
-     
-      addNotifications: (notifications: Notification[]) => set(state => ({ notifications }), false, 'addNotifications'),
-      setUser: (user: User) => set(state => ({ user }), false, 'setUser'),
-
-      postgresUser: 
-        {
-         created_at: '',
-         email: '',
-         firstname: '',
-         id: '',
-         initials: null,
-         lastname: '',
-         password: '',
-         updated_at: ''
-        }
-       ,
-
-       setPostgresUser: (postgresUser: any) => set(state => ({ postgresUser }), false, 'setPostgresUser'),
-      
-       postgresUsers:[],
-       setPostgresUsers: (postgresUsers: PostgresUser[]) => set(state => ({ postgresUsers }), false, 'setPostgresUsers'),
-        isModalOpen: false,
-        setIsModalOpen: (value:boolean) => set(state => ({ isModalOpen: value }), false, 'setIsModalOpen'),
-        initials: [],
-        setInitials: (initials: string[]) => set(state => ({ initials }), false, 'setTitle'),
-      
-      
+     setPostgresUser: (postgresUser: any) => set(state => ({ postgresUser }), false, 'setPostgresUser'),
+    
+     postgresUsers:[],
+     setPostgresUsers: (postgresUsers: PostgresUser[]) => set(state => ({ postgresUsers }), false, 'setPostgresUsers'),
+    isModalOpen: false,
+    setIsModalOpen: (value:boolean) => set(state => ({ isModalOpen: value }), false, 'setIsModalOpen'),
+    title: [],
+    setTitle: (title: string[]) => set(state => ({ title }), false, 'setTitle'),
+    session:
+      {
+      userId: '',
+      email: '',
+      isAdmin: false,
+      firstname: '',
+      lastname: '',
+      isLoggedIn: false,
+      role: '',
+    },
+    setSession: (newSession: sessionType) => set((state) => {
+      return {session: newSession}
+    }),
+              
       // ...................................................................
         logOut: () => {
         set(state => ({ user: {
@@ -117,17 +116,21 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
         errors: "",
         isLoading: false,
 
-        toastState: {
-          message: '',
-          variant: 'default',
-          show: false,
-          setShow: (show: any) => set(() => ({ show })),
-          setMessage: (message: any) => set(() => ({ message })),
-          setVariant: (variant: any) => set(() => ({ variant })),
-        },
+        
 
         notificationCount: 0,
-        notifications: []
+        notifications: [],
+        session: 
+          {
+            userId: '',
+            email: '',
+            isAdmin: false,
+            firstname: '',
+            lastname: '',
+            isLoggedIn: false,
+            role: '',
+          },
+        
       }), false, 'logOut')
       },
       setUserName: (name: string) => set(state => ({ user: { ...state.user, name } }), false, 'setUserName'),
@@ -140,8 +143,6 @@ const userStore = create<UserStore&ToastState>(devtools(persist((set) => ({
       // takes the previous state as a parameter and returns a new state.
       setEmail: (newEmail: string) => set((state) => ({ user: { ...state.user, email: newEmail } })),
 
-    
-   
 }), {
     name: 'users-store',
     })));

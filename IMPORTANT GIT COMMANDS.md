@@ -1,4 +1,3 @@
-
 ApaaEmma: so how do i write a git commit message for the utility function created and also moving all local types to the parent global type folder, following the right git message conventional standards?
 
 GitHub Copilot: Writing good commit messages is crucial for maintaining a readable history. The Conventional Commits specification is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history.
@@ -46,8 +45,7 @@ git commit -m "Title of your commit" -m "Body of your commit"
 
 ApaaEmma: I create a branch and renamed it but when i do git branch -a, i see the old branch and the renamed branch but when i go on my github, i see only the renamed branch, how do i delete the old branch
 
-
-* bug/correct-typescript
+- bug/correct-typescript
   main
   remotes/origin/HEAD -> origin/main
   remotes/origin/bug/correct-typescript
@@ -56,8 +54,7 @@ ApaaEmma: I create a branch and renamed it but when i do git branch -a, i see th
   remotes/origin/main
   remotes/origin/production
   remotes/origin/uat
-(END)
-
+  (END)
 
 GitHub Copilot: The command `git branch -a` lists all local and remote branches. The branches prefixed with `remotes/origin/` are remote branches, while the others are local.
 
@@ -98,9 +95,9 @@ The `git fetch origin` command updates your local copy of the remote repository.
 
 If the branch does not exist on the remote repository, you don't need to do anything else. The branch has already been deleted from the remote repository.
 
-ApaaEmma: so why do i see the branc when i do git branch -a . check below for   remotes/origin/feature/correct-typescript-bugs
+ApaaEmma: so why do i see the branc when i do git branch -a . check below for remotes/origin/feature/correct-typescript-bugs
 
-* bug/correct-typescript
+- bug/correct-typescript
   main
   remotes/origin/HEAD -> origin/main
   remotes/origin/bug/correct-typescript
@@ -109,7 +106,7 @@ ApaaEmma: so why do i see the branc when i do git branch -a . check below for   
   remotes/origin/main
   remotes/origin/production
   remotes/origin/uat
-(END)
+  (END)
 
 GitHub Copilot: The `git branch -a` command shows all local and remote branches that your local Git repository knows about. When you delete a branch on the remote repository, your local repository doesn't automatically know about this change. The deleted remote branch will still appear in the list until you update your local repository.
 
@@ -125,7 +122,7 @@ After running this command, `git branch -a` should no longer show the deleted br
 
 ApaaEmma: so for the utility function you've created above, how will you name its branch on github?
 
-GitHub Copilot: When naming a branch for a specific task or feature, it's a good practice to make the branch name descriptive and concise. It should give an idea about the work that's being done in that branch. 
+GitHub Copilot: When naming a branch for a specific task or feature, it's a good practice to make the branch name descriptive and concise. It should give an idea about the work that's being done in that branch.
 
 For the utility function `getInitialsForAvatar` that we created, a good branch name could be `feature/add-avatar-initials-utility`.
 
@@ -196,3 +193,60 @@ git checkout -b refactor/move-local-types-to-global
 This command creates a new branch named `refactor/move-local-types-to-global` and switches to it.
 
 The `refactor/` prefix is used to indicate that this branch is used for refactoring code. This is a common practice and helps in identifying the purpose of the branch.
+
+## Can pull requests be created using the terminal
+
+Yes, you can create pull requests from the terminal using Git and GitHub's command line tool, `gh`. Here are the steps:
+
+1. **Install the GitHub CLI**: If you haven't already, you'll need to install the GitHub CLI. You can find instructions on the [official GitHub CLI page](https://cli.github.com/).
+
+2. **Create a new branch**: Use Git to create a new branch for your changes:
+
+```bash
+  git checkout -b feature/getInitials
+```
+
+3. **Make your changes**: Add the `getInitialsForAvatar_util` function to `utils.ts`, or make whatever other changes you need.
+
+4. **Commit your changes**: Use Git to stage and commit your changes:
+
+```bash
+   git add .
+   git commit -m "Add getInitialsForAvatar_util function"
+```
+
+5. **Push your branch**: Push your new branch to GitHub:
+
+```bash
+git push origin feature/getInitials
+```
+
+6. **Create the pull request**: Use the `gh` tool to create a new pull request:
+
+```bash
+gh pr create --title "Add getInitialsForAvatar_util function" --body "This PR adds a new utility function for getting initials for avatars."
+```
+
+The `gh pr create` command will prompt you to choose the base repository and branch (typically the `main` or `master` branch of the original repository), and the head repository and branch (typically the branch you just pushed). After you've made these selections, it will create the pull request.
+
+Remember to replace the placeholders in these commands with the actual details of your changes.
+
+## Can I switch or checkout a remote branch from my terminal?
+
+Yes, you can checkout the `remotes/origin/dev` branch from your local repository. Here's how you can do it:
+
+1. **Fetch all branches from the remote repository**:
+
+```bash
+git fetch origin
+```
+
+2. **Checkout the specific branch**: This will switch to the `dev` branch.
+
+```bash
+git checkout dev
+```
+
+If the `dev` branch does not exist locally, Git will create it and set it up to track the remote `dev` branch.
+
+Please note that you don't need to clone the repository again if you already have it locally. The `git fetch` command updates your local repository with all branches and commits from the remote repository. The `git checkout` command then switches to the specific branch you want to work on.

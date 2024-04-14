@@ -7,31 +7,33 @@ import { errorType } from '@/types/users';
 dotenv.config();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-const { firstname, lastname, email, password, initials } = req.body;
+const { firstname, lastname, email, password, isStudent, title, terms } = req.body;
 console.log("Data::", req.body);
 
 // Hash the password before storing it in the database
 const hashedPassword = await bcrypt.hash(password, 10);
 
 const createTableText = `
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS users(
-  id SERIAL PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   firstname VARCHAR(100),
   lastname VARCHAR(100),
   email VARCHAR(100) UNIQUE,
   password VARCHAR(100),
-  initials VARCHAR(10)
+  isStudent BOOLEAN,
+  title VARCHAR(10),
+  terms BOOLEAN
 )
 `;
 
 
-const insertUserText = 'INSERT INTO users(firstname, lastname, email, password, initials) VALUES($1, $2, $3, $4, $5) RETURNING *';
-const values = [firstname, lastname, email, hashedPassword, initials];
+const insertUserText = 'INSERT INTO users(firstname, lastname, email, password, isStudent, title, terms) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+const values = [firstname, lastname, email, hashedPassword, isStudent, title, terms];
 
 
 
 try {
-
   await query(createTableText, []); // Create the table if it doesn't exist
   const dbResponse = await query(insertUserText, values);
 

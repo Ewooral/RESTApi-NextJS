@@ -3687,7 +3687,7 @@ Make sure that your path alias is correctly configured and that the file 'src/mo
 Also, the error message indicates a timeout when trying to access 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'. This could be due to network issues during the build process. If this URL is not necessary for your application to build, you might want to remove it or handle it in a way that doesn't cause the build process to fail if the URL can't be accessed.
 
 ApaaEmma:  
-28.23 ./pages/admin/table/index.tsx
+28.23 ./pages/admin/table/page.tsx
 28.23 Attempted import error: 'DataTableDemo' is not exported from '@/components/table/CustomData' (imported as 'DataTableDemo').
 28.23 
 28.23 ./app/New folder/page.tsx
@@ -3696,11 +3696,11 @@ ApaaEmma:
 28.23 Import trace for requested module:
 28.23 ./app/New folder/page.tsx
 28.23 
-28.23 ./pages/admin/table/index.tsx
+28.23 ./pages/admin/table/page.tsx
 28.23 Attempted import error: 'DataTableDemo' is not exported from '@/components/table/CustomData' (imported as 'DataTableDemo').
 28.23 
 28.23 Import trace for requested module:
-28.23 ./pages/admin/table/index.tsx
+28.23 ./pages/admin/table/page.tsx
 28.23 
 28.23 ./app/New folder/page.tsx
 28.23 Attempted import error: 'DataTableDemo' is not exported from '@/components/table/CustomData' (imported as 'DataTableDemo').

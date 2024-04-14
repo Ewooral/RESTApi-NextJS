@@ -12,10 +12,10 @@ export default async function handler(req: MulterRequest, res: NextApiResponse) 
     if (req.method === 'GET') {
       try {
         const dbResponse = await query('SELECT * FROM users', []);
-        console.log("dbResponse::", dbResponse);
+        // console.log("dbResponse::", dbResponse);
         res.status(200).json({ message: 'Users fetched successfully!', users: dbResponse.rows });
       } catch (err: any) {
-        console.error(err);
+        console.error("Error has occured: ", err);
         const serverError = err as errorType;
         const errorMessage = serverError.response?.data?.message || serverError.message || 'An error occurred while fetching users.';
         res.status(500).json({ error: errorMessage });

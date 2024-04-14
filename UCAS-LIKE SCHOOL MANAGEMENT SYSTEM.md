@@ -6176,7 +6176,7 @@ In this code, `alert('Data uploaded successfully');` is replaced with `console.l
 ApaaEmma: TypeError: e is null
 Source
 
-pages\admin\upload-csv\index.tsx (15:4) @ Papa
+pages\admin\upload-csv\page.tsx (15:4) @ Papa
 
   13 |   e.preventDefault();
   14 | 

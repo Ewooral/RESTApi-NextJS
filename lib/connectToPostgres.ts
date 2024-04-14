@@ -17,9 +17,11 @@ client.connect().then(() => console.log('Database connected successfully')).catc
 export const query = async (text: string, params: any[]) => {
   try {
     const res = await client.query(text, params);
+    // console.log("DB CRED:: ", client.host, client.database)
     return res;
   } catch (err) {
     console.error('Error occurred during database operation:', err);
     throw err; // re-throw the error so it can be caught and handled by the calling function
   }
 };
+
