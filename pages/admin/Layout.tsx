@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
             <div className="flex-1 text-sm ml=auto mr-auto">
                 <AdminHeader/>
                 <Toaster/>
-                <div className="mt-[4.5rem] p-6">
+                <div className="mt-[47px] p-6">
                     {childrenWithProps}
                 </div>
             </div>

@@ -125,7 +125,7 @@ function AdminHeader() {
                             {session.isLoggedIn && (
                                 <section
                                     className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline">
-                                    <Link href="/premium">Premium</Link>
+                                    <Link href="/premium">Settings</Link>
                                 </section>
                             )}
 

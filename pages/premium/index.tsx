@@ -43,7 +43,7 @@ function ProtectedPage({ firstname, isLoggedIn }: sessionData) {
 
   return (
       <>
-        <div className={"flex justify-center items-center"}>
+        <div className={"flex flex-col justify-center items-center"}>
           <h1>Welcome {firstname}!</h1>
           <p>This is a protected page.</p>
           <p className="text-xs mt-4">
