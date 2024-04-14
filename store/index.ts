@@ -20,6 +20,8 @@ interface UserStore {
   isModalOpen: boolean;
   title: string[];
   session: sessionType
+    imageId: string | null;
+  setImageId:(id: string | null) => void;
   setSession: (newSession: sessionType) => void;
   setTitle: (title: string[]) => void;
   setIsModalOpen: (value:boolean) => void
@@ -95,6 +97,11 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     },
     setSession: (newSession: sessionType) => set((state) => {
       return {session: newSession}
+    }),
+
+    imageId: null,
+    setImageId:(id: string | null) => set((state) => {
+        return {imageId: id}
     }),
               
       // ...................................................................

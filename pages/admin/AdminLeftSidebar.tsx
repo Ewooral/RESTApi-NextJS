@@ -1,12 +1,12 @@
 'use client'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
 import userStore from "@/store";
 import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-
+import {useRouter} from 'next/router';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 import clsx from "clsx";
@@ -26,40 +26,47 @@ type CollapsedProps = {
 }
 export const AdminLeftSidebar = ({isCollapsed, setIsCollapsed}: CollapsedProps) => {
     const {logOut, notificationCount, session} = userStore();
-    const [activeLink, setActiveLink] = useState(0);
-const isClient = useIsClient()
+    const [activeLink, setActiveLink] = useState('dashboard');
+    const isClient = useIsClient()
+    const router = useRouter();
 
     const listObj = [
         {
+            id: 'dashboard',
             name: "Dashboard",
             icon: <AddHomeOutlinedIcon/>,
             href: "/admin/dashb",
         },
         {
+            id: 'users',
             name: "Users",
             icon: <AccountCircleOutlinedIcon/>,
             href: "/admin/table",
         },
         {
+            id: 'settings',
             name: "Settings",
             icon: <SettingsSuggestOutlinedIcon/>,
-            href: "",
+            href: "/settings",
         },
         {
+            id: 'notifications',
             name: "Notifications",
             icon: <BellAlertIcon/>,
             href: "/notification",
         },
         {
+            id: 'upload-csv',
             name: "upload-csv",
             icon: <ArrowUpTrayIcon/>,
             href: "/admin/upload-csv",
         },
     ];
 
-    const handleLinkClick = async (event: React.MouseEvent<HTMLAnchorElement>, id: number, href: string) => {
-        event.preventDefault();
+    const handleLinkClick = async (event: React.MouseEvent<HTMLAnchorElement>, id: string, href: string) => {
+        // event.preventDefault();
         setActiveLink(id);
+        console.log("active link:: ", activeLink)
         // const actionDetail = `clicked on ${href} link`;
         const actionDetail = {
             action: `clicked `,
@@ -68,10 +75,14 @@ const isClient = useIsClient()
         };
         try {
             await logUserAction('info', actionDetail, session.firstname);
+            router.push(href);
         } catch (error) {
             console.error('Error logging user action:', error);
         }
     };
+    useEffect(() => {
+        console.log("active link:: ", activeLink);
+    }, [activeLink]);
 
 
     const sidebarWidth = isCollapsed ? "w-20" : "w-50";
@@ -80,7 +91,7 @@ const isClient = useIsClient()
     return (
         <>
             {
-                session.isAdmin &&  isClient && (
+                session.isAdmin && isClient && (
                     <div className="fixed top-0 left-0 h-screen z-50 mt-[4.5rem]">
                         <aside
                             className={clsx` bg-[#fff] text-[black] shadow-lg transition-all  duration-300  
@@ -95,11 +106,11 @@ const isClient = useIsClient()
                             <nav className="space-y-2  mt-[3.25rem] w-fit text-xs">
                                 {listObj.map((item, id) => (
                                     <Link
-                                        key={id}
+                                        key={item.id}
                                         href={item.href}
-                                        onClick={(event) => handleLinkClick(event, id, item.href)}
+                                        onClick={(event) => handleLinkClick(event, item.id, item.href)}
                                         className={clsx`relative block py-1 px-1 rounded transition duration-200 hover:bg-blue-500 hover:text-white
-                ${activeLink === id && "bg-blue-500 text-white"}
+                ${activeLink ===item.id && "bg-blue-500 text-white"}
               `}
                                     >
                                         {isCollapsed ? item.icon : item.name}

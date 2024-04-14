@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { query } from '@/lib/connectToPostgres'; // replace with the actual path to your connectToPostgres.ts file
-import logUserActions from "@/lib/logger";
+import {logUserActions, logError} from "@/lib/logger";
 
 
 // Continue with your database operations...
@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await query('BEGIN', []);
         await query(createTableText, []); // Create the table if it doesn't exist
         // Add a delay to give the database time to create the table
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // await new Promise(resolve => setTimeout(resolve, 1000));
         const dbResponse = await query(insertActionText, values);
         await query('COMMIT', []);
 

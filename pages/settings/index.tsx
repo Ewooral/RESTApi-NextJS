@@ -7,6 +7,7 @@ import {sessionData} from "@/lib/sessionManager";
 import React from "react";
 import {useTimeAgo__util} from "@/utils/utils";
 import {useIsClient} from "@/hooks/useIsClient";
+import UploadImage from '@/components/uploads/images/UploadImagesToCloudinary';
 export async function getServerSideProps({ req }: { req: NextApiRequest & { session?: any } }) {
   const session = await getIronSession<sessionData>(req, {} as NextApiResponse, sessionOptions);
   console.log("session data:: ", session)
@@ -50,6 +51,9 @@ function ProtectedPage({ firstname, isLoggedIn }: sessionData) {
             Time since component mounted:{" "}
             <i className="font-medium text-green-800 font-bolder">{timeAgo}</i>
           </p>
+          <div className={"mt-4"}>
+            <UploadImage />
+          </div>
         </div>
       </>
   );

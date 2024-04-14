@@ -121,11 +121,11 @@ function AdminHeader() {
                             )}
 
 
-                            {/*PREMIUM*/}
+                            {/*SETTINGS*/}
                             {session.isLoggedIn && (
                                 <section
                                     className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline">
-                                    <Link href="/premium">Settings</Link>
+                                    <Link href="/settings">Settings</Link>
                                 </section>
                             )}
 

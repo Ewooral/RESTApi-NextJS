@@ -14,4 +14,9 @@ const logUserActions = winston.createLogger({
     ]
 });
 
-export default logUserActions;
+// New function to log errors
+function logError(message: string, user?: string) {
+    logUserActions.log('error', message, { user });
+}
+
+export { logUserActions, logError };
