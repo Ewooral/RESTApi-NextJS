@@ -47,10 +47,10 @@ function ProtectedPage({ firstname, isLoggedIn }: sessionData) {
         <div className={"flex flex-col justify-center items-center"}>
           <h1>Welcome {firstname}!</h1>
           <p>This is a protected page.</p>
-          <p className="text-xs mt-4">
-            Time since component mounted:{" "}
-            <i className="font-medium text-green-800 font-bolder">{timeAgo}</i>
-          </p>
+          {/*<p className="text-xs mt-4">*/}
+          {/*  Time since component mounted:{" "}*/}
+          {/*  <i className="font-medium text-green-800 font-bolder">{timeAgo}</i>*/}
+          {/*</p>*/}
           <div className={"mt-4"}>
             <UploadImage />
           </div>

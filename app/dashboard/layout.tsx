@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import withAuth from "@/components/HigherOrderComponent";
 import logout from "@/components/LogOut";
-import { LeftSidebar } from "@/components/LeftSidebar";
+import { LeftSidebar } from "@/components/sidebars/LeftSidebar";
 
 interface LayoutProps {
   children?: React.ReactNode;

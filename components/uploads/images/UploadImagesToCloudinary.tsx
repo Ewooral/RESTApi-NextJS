@@ -28,7 +28,7 @@ const UploadImage: React.FC = () => {
     console.log("Data:: ", data?.imageUrl)
     console.log("Message:: ", data?.message)
     const queryClient = useQueryClient();
-    const {imageId, setImageId} = userStore();
+    const {imageId, setImageId, setImageUrl} = userStore();
 
     const uploadImageMutation = useMutation({
         mutationFn: async (file: File) => {
@@ -41,13 +41,15 @@ const UploadImage: React.FC = () => {
                     },
                 });
                 setImageId(res.data.imageId);
+                setImageUrl(res.data.imageUrl);
                 return res.data;
             } catch (error) {
                 throw new Error('Failed to upload image');
             }
         },
 
-        onSuccess: () => {
+        onSuccess: (data) => {
+            setImageUrl(data.imageUrl);
             //@ts-ignore
             queryClient.invalidateQueries('uploadedImage');
         },

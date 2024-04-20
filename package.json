@@ -54,6 +54,7 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.3.1",
     "express-session": "^1.17.3",
+    "gsap": "^3.12.5",
     "http": "0.0.1-security",
     "iron-session": "^8.0.1",
     "js-cookie": "^3.0.5",

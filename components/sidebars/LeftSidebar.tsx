@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import logout from "./LogOut";
+import logout from "../LogOut";
 import userStore from "@/store";
 import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";

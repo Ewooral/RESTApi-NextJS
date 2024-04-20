@@ -21,6 +21,8 @@ interface UserStore {
   title: string[];
   session: sessionType
     imageId: string | null;
+  imageUrl: string | null;
+    setImageUrl: (url: string | null) => void;
   setImageId:(id: string | null) => void;
   setSession: (newSession: sessionType) => void;
   setTitle: (title: string[]) => void;
@@ -94,6 +96,8 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
       lastname: '',
       isLoggedIn: false,
       role: '',
+      imageUrl: '',
+      imageId: ''
     },
     setSession: (newSession: sessionType) => set((state) => {
       return {session: newSession}
@@ -102,6 +106,11 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     imageId: null,
     setImageId:(id: string | null) => set((state) => {
         return {imageId: id}
+    }),
+
+    imageUrl: null,
+    setImageUrl:(url: string | null) => set((state) => {
+        return {imageUrl: url}
     }),
               
       // ...................................................................
@@ -114,6 +123,8 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
           // imageName: ''
     
         },
+        imageId: null,
+        imageUrl: null,
         serverResponse: {
           finalToken: '',
           message: '',
@@ -136,6 +147,7 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
             lastname: '',
             isLoggedIn: false,
             role: '',
+            imageUrl: ''
           },
         
       }), false, 'logOut')

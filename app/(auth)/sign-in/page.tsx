@@ -47,7 +47,7 @@ const LogIn: React.FC= () => {
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { toast } = useToast();
-  const { isLoading, setIsLoading, session, setSession } = userStore();
+  const { isLoading, setIsLoading, session, setSession, setImageUrl } = userStore();
   const [isFocusedOnEmail, setIsFocusedOnEmail] = useState(false);
   const [isFocusedOnPassword, setIsFocusedOnPassword] = useState(false);
   const router = useRouter();
@@ -74,6 +74,7 @@ const LogIn: React.FC= () => {
   }
 
   type UserResponseKey = keyof UserResponseProps;
+  
 
 
   const onSubmit = async (
@@ -92,11 +93,14 @@ const LogIn: React.FC= () => {
       // const response = await login(data);
       const response: UserResponseProps = await axios.post("/api/auth/postgres/sign-in", data);
       setSession(response.data.session)
+      // WORK ON THE TYPES
+      // @ts-ignore
+      setImageUrl(response.data.session.imageUrl)
       console.log("Res::", response.data);
       if (response?.data.session.isLoggedIn) {
         toast({
           variant: "default",
-          title: "Registration successful",
+          title: "Login successful",
           description: JSON.stringify(response?.data.message),
           action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
           className: "green-toast",
@@ -132,12 +136,13 @@ const LogIn: React.FC= () => {
   useEffect(() => {
     setAreYouLoading(true)
     if (session.isLoggedIn) {
-     router.back()
+     router.push("/admin/dashb")
     }
     else{
       setAreYouLoading(false)
     }
-  }, [router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 if(areYouLoading){
   return <div><RerouteLoader /></div>
@@ -187,10 +192,10 @@ if(areYouLoading){
                 Already applied to a university? Sign in now to access exclusive
                 application <br /> resources and community forums!
               </p>
-              <p className="text-xs mt-4">
-                Time since component mounted:{" "}
-                <i className="font-medium text-green-800 font-bolder">{timeAgo}</i>
-              </p>
+              {/*<p className="text-xs mt-4">*/}
+              {/*  Time since component mounted:{" "}*/}
+              {/*  <i className="font-medium text-green-800 font-bolder">{timeAgo}</i>*/}
+              {/*</p>*/}
             </div>
             <div className="grid grid-cols-2 gap-2 justify-evenly mb-4">
               <div
@@ -342,31 +347,5 @@ if(areYouLoading){
 
   );
 };
-
-// export async function getServerSideProps() {
-//   // Fetch data from the server or perform any necessary operations
-//   // For example:
-//   // const data = await fetchData();
-
-//   // You can pass initial values or fetched data as props to the component
-//   return {
-//     schema,
-//     isLoading: false,
-//     setIsLoading: () => {},
-//     setTitle: () => {},
-//     setIsClient: () => {},
-//     isClient: false,
-//     toast: () => {},
-//     handleSubmit: () => {},
-//     errors: {},
-//     register: () => {},
-//     setIsFocusedOnPassword: () => {},
-//     setIsFocusedOnEmail: () => {},
-//     isFocusedOnEmail: false,
-//     isFocusedOnPassword: false,
-//     emailValue: "",
-//     passwordValue: "",
-//   };
-// }
 
 export default LogIn;

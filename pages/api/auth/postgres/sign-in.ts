@@ -20,6 +20,11 @@ export default async function handler(
     // Query the database for the user
     const result = await query("SELECT * FROM users WHERE email = $1", [email]);
 
+    // Get user's image id and url
+    const imageResult = await query("SELECT image_id, image_url FROM images WHERE user_id = $1", [result.rows[0]?.id]);
+    const imageUrl = imageResult.rows[0]?.image_url;
+    const imageId = imageResult.rows[0]?.image_id;
+
     if (result.rows.length === 0) {
       return res.status(401).json({
         error: "Wrong Credentials",
@@ -50,6 +55,9 @@ export default async function handler(
     session.lastname = user?.lastname;
     session.isAdmin = isAdmin;
     session.isLoggedIn = true;
+    session.imageId = imageId;
+    session.imageUrl = imageUrl;
+    
     await updateSession(req, res, session);
     console.log("Session:: ", session)
 

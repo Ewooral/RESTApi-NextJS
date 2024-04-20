@@ -8,9 +8,11 @@ export interface sessionData{
     firstname?:string;
     lastname?:string;
     role?:string;
-    image?: string;
+    imageUrl?: string;
+    imageId?: string;
     isAdmin?: boolean;
     isLoggedIn: boolean;
+    
 }
 export interface CustomApiRequest extends NextApiRequest {
   get: (name: string) => string | undefined;

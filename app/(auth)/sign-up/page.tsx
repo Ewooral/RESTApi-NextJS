@@ -111,7 +111,7 @@ const router = useRouter();
   useEffect(() => {
     setAreYouLoading(true)
     if (session.isLoggedIn) {
-      router.back()
+      router.push("/admin/dashb")
     }
     else{
       setAreYouLoading(false)

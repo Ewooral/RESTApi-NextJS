@@ -29,7 +29,7 @@ const LogoutForm = () => {
     }
   };
 
-  return <button className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline" onClick={logoutHandler}>Logout</button>;
+  return <p className="text-sm font-medium text-gray-800" onClick={logoutHandler}>Logout</p>;
 };
 
 export default LogoutForm;

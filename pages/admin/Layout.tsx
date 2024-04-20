@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
         // Checking isValidElement is the safe way and avoids a typescript error too.
         if (React.isValidElement(child)) {
             // @ts-ignore
-            return React.cloneElement(child, {isCollapsed: isCollapsed});
+            return React.cloneElement(child, {isCollapsed: isCollapsed, setIsCollapsed: setIsCollapsed});
         }
         return child;
     });
@@ -42,19 +42,24 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
 
 
     return (
-        <div
-            className="flex  h-screen bg-[#ffd4e8]">
-            {/*@ts-ignore*/}
-            <AdminLeftSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
+            <div className="flex relative z-10"
+                 style={{
+                    // backgroundImage: 'linear-gradient(rgba(163, 163, 163), rgba(163, 163, 163, 0.5)), url(https://res.cloudinary.com/dn1lqngds/image/upload/v1713192842/uploads/backgroundimageA.jpg.jpg)',
+                    //  backgroundSize: 'cover',
+                    //  backgroundPosition: 'center center',
+                     background:'#eaeaea'
+                 }}>
+                {/*@ts-ignore*/}
+                <AdminLeftSidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
 
-            <div className="flex-1 text-sm ml=auto mr-auto">
-                <AdminHeader/>
-                <Toaster/>
-                <div className="mt-[47px] p-6">
-                    {childrenWithProps}
+                <div className="flex-1 text-sm ml=auto mr-auto">
+                    <AdminHeader/>
+                    <Toaster/>
+                    <div className="mt-[36px] p-6">
+                        {childrenWithProps}
+                    </div>
                 </div>
             </div>
-        </div>
     );
 }
 

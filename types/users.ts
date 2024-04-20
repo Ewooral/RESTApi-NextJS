@@ -13,6 +13,8 @@ export type sessionType ={
   email: string;
   isAdmin: boolean;
   isLoggedIn: boolean;
+  imageUrl?: string;
+  imageId?: string;
   role: string;
   firstname: string;
   lastname: string
