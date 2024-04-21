@@ -21,6 +21,7 @@ import { useIsOnline } from "@/hooks/useIsOnline";
 function AdminHeader() {
   const isClient = useIsClient();
   const { session, imageUrl } = userStore();
+  const [imageLoaded, setImageLoaded] = useState(false)
   const isOnline = useIsOnline();
   const user = {
     imageName:

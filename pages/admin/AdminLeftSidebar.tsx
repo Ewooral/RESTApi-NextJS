@@ -26,35 +26,38 @@ export const AdminLeftSidebar = ({
   setIsCollapsed,
 }: CollapsedProps) => {
   const sidebarRef = useRef(null);
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      let sidebarWidth;
-      if (isCollapsed) {
-        sidebarWidth = "65px"; // Set collapsed width
+  const [sidebarWidth, setSidebarWidth] = useState("300px"); // default value
+
+useEffect(() => {
+  const handleResize = () => {
+    const screenWidth = window.innerWidth;
+    let newSidebarWidth;
+    if (isCollapsed) {
+      newSidebarWidth = "65px"; // Set collapsed width
+    } else {
+      // Set width based on screen breakpoints
+      if (screenWidth < 640) {
+        newSidebarWidth = "65px";
+      } else if (screenWidth < 768) {
+        newSidebarWidth = "65px";
+      } else if (screenWidth < 1024) {
+        newSidebarWidth = "280px";
       } else {
-        // Set width based on screen breakpoints
-        if (screenWidth < 640) {
-          sidebarWidth = "200px";
-        } else if (screenWidth < 768) {
-          sidebarWidth = "300px";
-        } else if (screenWidth < 1024) {
-          sidebarWidth = "75px";
-        } else {
-          sidebarWidth = "220px";
-        }
+        newSidebarWidth = "300px";
       }
+    }
 
-      gsap.to(sidebarRef.current, { width: sidebarWidth, duration: 0.3 });
-    };
+    setSidebarWidth(newSidebarWidth);
+    gsap.to(sidebarRef.current, { width: newSidebarWidth, duration: 0.3 });
+  };
 
-    handleResize(); // Initial call
-    window.addEventListener("resize", handleResize);
+  handleResize(); // Initial call
+  window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isCollapsed]); // Listen for changes in isCollapsed prop
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, [isCollapsed]); // Listen for changes in isCollapsed prop
 
   const { logOut, notificationCount, session } = userStore();
   const [activeLink, setActiveLink] = useState("dashboard");
@@ -100,9 +103,11 @@ export const AdminLeftSidebar = ({
           <div 
           // style={{borderRight:'6px solid #3b82f6'}}
           className={`flex flex-col border-r-[6px] border-[#3b82f6] flex-grow-0 ${isCollapsed ? "items-center" : "items-start"} bg-[#bbb]  w-full`}>
-          {!imageLoaded && <Skeleton className="w-[35px] h-[35px] p-2 bg-black rounded-full" />}
-              <Image
-                className="profile-avatar h-[60px] w-[60px] p-2"
+          {!imageLoaded ? (
+            <Skeleton className="w-[35px] h-[35px] p-2 bg-white ml-[1rem] rounded-full  sticky top-0" />
+          ) : (
+            <Image
+                className="profile-avatar h-[60px] w-[60px] p-2 sticky top-0"
                 src={Logo}
                 alt="image"
                 width={200}
@@ -111,8 +116,11 @@ export const AdminLeftSidebar = ({
                 style={{ display: imageLoaded ? 'block' : 'none' }}
  
               />
+          )
+              
+          }
 
-            <div className="border-b-2 border-[#d1d1d1] w-full"></div>
+            {/* <div className="border-b-4 border-[#ff0000] w-full"></div> */}
           </div>
           {/* <nav className={`flex flex-col flex-grow ${isCollapsed ? "items-center" : "items-start"} gap-2 space-y-2  w-full text-xs p-2 `}>
             {listObj.map((item) => (
@@ -128,7 +136,9 @@ export const AdminLeftSidebar = ({
               />
             ))}
           </nav> */}
-           <DynamicSidebar />
+          <div className={`flex flex-col flex-grow ${isCollapsed ? "items-center" : "items-start"}`}>
+          <DynamicSidebar sidebarWidth={sidebarWidth} />
+          </div>
          
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}

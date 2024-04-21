@@ -66,14 +66,14 @@ const AdminDashboard = ({ isCollapsed, setIsCollapsed }: CollapsedProps) => {
   const mainContentWidth = clsx({
     "w-[87%] sm:w-[95%] md:w-[94%] lg:w-[93%] xl:w-[92%] 2xl:w-[97%]":
       isCollapsed,
-    "w-[77%] sm:w-[54%] md:w-[221%] lg:w-[85%] xl:w-[85%] 2xl:w-[85%]":
+    "w-[77%] sm:w-[54%] md:w-[221%] lg:w-[85%] xl:w-[85%] 2xl:w-[107%]":
       !isCollapsed,
   });
 
   const leftContentWidth = clsx({
     "w-[15%] sm:w-[11%] md:w-[5%] lg:w-[4%] xl:w-[2.2%] 2xl:w-[4%]":
       isCollapsed,
-    "w-[64%] sm:w-[39%] md:w-[35%] lg:w-[27%] xl:w-[17rem] 2xl:w-[13rem]":
+    "w-[64%] sm:w-[39%] md:w-[35%] lg:w-[27%] xl:w-[17rem] 2xl:w-[23rem]":
       !isCollapsed,
   })
   
