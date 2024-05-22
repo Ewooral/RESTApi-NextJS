@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import userStore from '@/store';
 import { PostgresUser } from '@/types/users';
+import { userService_POSTGRES } from '@/services/userService';
 
 
 export const useFetchAllUsers = () => {
@@ -11,14 +12,15 @@ export const useFetchAllUsers = () => {
   const { setPostgresUsers } = userStore();
 
   const getUsers = async () => {
-    try {
-      const res = await axios.get('/api/auth/postgres/getAllUsers');
-      setUsers(res.data.users);
-      setPostgresUsers(res.data.users);
-    } catch (error) {
+    userService_POSTGRES.getUsers()
+    .then((res) => {
+      setUsers(res.users);
+      setPostgresUsers(res.users);
+    })
+    .catch((error) => {
       setError('Error fetching users');
       console.log(error);
-    }
+    });
   }
 
   useEffect(() => {

@@ -16,7 +16,7 @@ const cloudinaryLoader = ({ src, width, quality }: { src: string; width: number;
     return `https://res.cloudinary.com/dn1lqngds/image/upload/w_${width},q_${quality || 75}/${cleanPath}`
 }
 const fetchImage = async (imageId: string) => {
-    const res = await axios.get(`/api/uploads/get-uploaded-image?imageId=${imageId}`);
+    const res = await axios.get(`/api/v1/uploads/get-uploaded-image?imageId=${imageId}`);
     return res.data as Data;
 }
 const UploadImage: React.FC = () => {
@@ -25,8 +25,7 @@ const UploadImage: React.FC = () => {
         {queryKey:['uploadedImage'],
             queryFn:  () => imageId ? fetchImage(imageId) : Promise.reject('No imageId')
         })
-    console.log("Data:: ", data?.imageUrl)
-    console.log("Message:: ", data?.message)
+
     const queryClient = useQueryClient();
     const {imageId, setImageId, setImageUrl} = userStore();
 
@@ -35,13 +34,13 @@ const UploadImage: React.FC = () => {
             try {
                 const formData = new FormData();
                 formData.append('userImage', file);
-                const res = await axios.post('/api/uploads/upload-image-to-cloudinary', formData, {
+                const res = await axios.post('/api/v1/uploads/upload-image-to-cloudinary', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
                 });
+                setImageUrl(res.data.imageUrl)
                 setImageId(res.data.imageId);
-                setImageUrl(res.data.imageUrl);
                 return res.data;
             } catch (error) {
                 throw new Error('Failed to upload image');
@@ -49,7 +48,6 @@ const UploadImage: React.FC = () => {
         },
 
         onSuccess: (data) => {
-            setImageUrl(data.imageUrl);
             //@ts-ignore
             queryClient.invalidateQueries('uploadedImage');
         },
@@ -78,6 +76,7 @@ const UploadImage: React.FC = () => {
             setImageId(storedImageId);
         }
         refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uploadImageMutation.isSuccess]);
 
     useEffect(() => {
@@ -104,10 +103,7 @@ const UploadImage: React.FC = () => {
             </div>
             {data ? (
                 <div className="mt-5 bg-white">
-                    {/*<Image loader={cloudinaryLoader} src={decodeURIComponent(data?.imageUrl)} alt="Uploaded" width={500} height={500} />*/}
                     <Image loader={cloudinaryLoader} src={data?.imageUrl} alt="Uploaded" width={500} height={500} priority />
-                    {/*<Image src={data.imageUrl} alt="Uploaded" width={500} height={500} />*/}
-                    {/*<img src={data.imageUrl} alt="Uploaded" width={500} height={500} />*/}
                 </div>
             ) : (
                 <div className="mt-5 bg-white" style={{width: '500px', height: '500px'}}>

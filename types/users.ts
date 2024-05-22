@@ -8,6 +8,18 @@ export type users = {
     imageName?: string,
 }
 
+export type UsersInfo = {
+    id?: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string,
+    isStudent: boolean,
+    title: string,
+    terms: boolean
+
+}
+
 export type sessionType ={
   userId: string;
   email: string;
@@ -87,7 +99,6 @@ export type PostgresUser =
   {
    created_at: string,
    email: string,
-
    firstname: string,
    id: string,
    initials: null,
@@ -96,3 +107,28 @@ export type PostgresUser =
    updated_at: string
   }
  ;
+
+
+
+ export type UserResponseProps = {
+  data: {
+    message: string;
+    session: {
+      userId: string;
+      email: string;
+      isstudent: boolean;
+      isLoggedIn: boolean;
+      firstname: string;
+      lastname: string;
+      isAdmin: boolean;
+      role: string;
+    };
+  };
+};
+
+
+export  type UserImageProps = {
+  message: string
+  isSucess: boolean
+  imageUrl: string
+}

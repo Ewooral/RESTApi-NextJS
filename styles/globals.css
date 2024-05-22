@@ -188,6 +188,13 @@ body{
   color: white !important;
 }
 
+.black-toast {
+  background-color: rgb(8, 8, 8) !important;
+  border:1px solid gray;
+  color: white !important;
+}
+
+
 .spin {
   animation: spin 1s linear infinite;
 }
@@ -340,4 +347,32 @@ body{
   height: auto;
   background-color: rgba(255, 255, 255, 0.836); /* Change the color and opacity as needed */
   backdrop-filter: blur(5px); /* Apply blur effect */
+}
+
+.custom-header-color{
+font-size: 12px;
+}
+
+.custom-header-color .ag-header-row {
+  background-color: #e6e6e6;
+  font-size:13px;
+}
+
+.custom-header-color .ag-cell {
+  font-size: 13px; /* Replace with your desired font size */
+}
+.custom-header-color  .ag-header-row-column-filter{
+  background: #f8f8f8;
+}
+
+.custom-header-color .ag-paging-panel {
+  background-color: #e6e6e6;
+}
+
+.admintab .MuiTabs-scroller{
+  overflow: auto;
+  margin-bottom: 0px;
+  position: fixed;
+  background: white;
+  z-index: 1000;
 }

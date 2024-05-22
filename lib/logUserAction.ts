@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function logUserAction(level: string, message: { }, user: string) {
     try {
-        const response = await axios.post('/api/user-actions/log', {
+        const response = await axios.post('/api/v1/user-actions/log', {
             level,
             message,
             user

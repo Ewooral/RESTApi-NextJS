@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 import React from 'react';
 import { Fragment } from 'react';
 
@@ -14,8 +15,8 @@ const Header = (props: HeaderProps) => {
               <a href="/" className="text-xl font-bold">My Profile</a>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="/settings" className="text-gray-500">Settings</a>
-              <a href="/logout" className="text-gray-500">Logout</a>
+              <Link href="/settings" className="text-gray-500">Settings</Link>
+              <Link href="/logout" className="text-gray-500">Logout</Link>
             </div>
           </div>
         </div>

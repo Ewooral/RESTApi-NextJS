@@ -7,18 +7,18 @@
 //   };
 
 // export default logout
-
 "use client";
 import userStore from "@/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const LogoutForm = () => {
-  const {logOut} = userStore()
+  const {logOut, setIsLoggedIn} = userStore()
   const router = useRouter();
   const logoutHandler = async () => {
     try {
-      const response = await axios.post("/api/auth/postgres/logout");
+      const response = await axios.post("/api/v1/auth/postgres/logout");
+      setIsLoggedIn(false)
       logOut();
       // Redirect the user to the login page or home page
       router.push("/sign-in");

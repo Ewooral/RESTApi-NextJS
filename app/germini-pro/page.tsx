@@ -21,7 +21,7 @@ const GemGPTComponent: React.FC = () => {
   const generateStory = async () => {
     try {
        // @ts-ignore
-      const response = await axios.post('/api/auth/gemini', data,
+      const response = await axios.post('/api/v1/auth/gemini', data,
     
         {
           headers: {

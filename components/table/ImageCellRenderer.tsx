@@ -1,26 +1,26 @@
 import Image from 'next/image';
-import { FC } from 'react';
-
+import React from 'react';
 type ImageCellRendererProps = {
   value: string;
-  setImageUrl: (url: string) => void;
 };
 
-const ImageCellRenderer: FC<ImageCellRendererProps> = ({ value, setImageUrl }) => {
-  const handleClick = () => {
-    setImageUrl(value);
-  };
+const ImageCellRenderer: React.FC<ImageCellRendererProps> = ({ value }) => {
 
-  return value ? (
-    <Image
-      src={value}
-      alt="User"
-      width={100}
-      height={100}
-      style={{ width: '40px', height: '40px', borderRadius: '50%', border: '4px solid #9b9797', objectFit:'cover' }}
-      onClick={handleClick}
-    />
-  ) : null;
+  if (!value) {
+    // Render placeholder image or nothing
+    return null;
+  }
+
+  // Provide the width and height properties to the Image component
+  return (
+      <Image
+          src={value}
+          alt="Cell"
+          width={30}
+          height={30}
+          style={{ borderRadius: '50%', objectFit: 'cover', display: "inline-block", width:"30px", height:"30px"}}
+      />
+  );
 };
 
 export default ImageCellRenderer;

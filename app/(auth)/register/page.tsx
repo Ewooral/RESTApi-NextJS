@@ -68,7 +68,7 @@ const RegisterPage = () => {
    
     try {
       setIsLoading(true);
-      const response = await axios.post("/api/auth/register", formData);
+      const response = await axios.post("/api/v1/auth/register", formData);
       setRes(response.data.message);
       if (response.data.message) {
         toast({

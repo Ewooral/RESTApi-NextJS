@@ -71,13 +71,13 @@ const LoginPage = () => {
 
     try {
       setIsLoading(true);
-      const response = await axios.post("/api/auth/login", data);
+      const response = await axios.post("/api/v1/auth/login", data);
       setToken(response.data.token);
       console.log("RESPONSE::", response.data);
       setServerResponse(response.data);
 
       // get the user data
-      const userResponse = await axios.get("/api/query/getUser", {
+      const userResponse = await axios.get("/api/v1/query/getUser", {
         params: { email: data.email },
       });
       const user = userResponse.data;

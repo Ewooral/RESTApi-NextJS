@@ -38,11 +38,11 @@ const SendOtp = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.get("/api/query/getUser", {
+      const res = await axios.get("/api/v1/query/getUser", {
         params: { email: email },
       });
       console.log("RESPONSE::", res);
-      const response = await axios.post("/api/auth/sendOtp", { email: email });
+      const response = await axios.post("/api/v1/auth/sendOtp", { email: email });
       setEmail(email);
       if (res.data.message) {
         toast({

@@ -55,7 +55,7 @@ const router = useRouter();
 
   useEffect(() => {
     const fetchInitials = async () => {
-      const response = await axios.get("/api/auth/postgres/fetch-initials");
+      const response = await axios.get("/api/v1/auth/postgres/fetch-initials");
       console.log("Title: ", response.data.title)
       setTitle(response.data.titles);
       setInitialsRes(response.data.message);
@@ -75,7 +75,7 @@ const router = useRouter();
     setIsSubmitting(true);
     try {
       setIsLoading(true);
-      const response = await axios.post("/api/auth/postgres/sign-up", data);
+      const response = await axios.post("/api/v1/auth/postgres/sign-up", data);
       console.log("Res::", response);
       if (response.data.message) {
         toast({
@@ -96,7 +96,7 @@ const router = useRouter();
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: JSON.stringify(serverError.response.data.error),
+          description: JSON.stringify(serverError.response),
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       }
@@ -111,7 +111,7 @@ const router = useRouter();
   useEffect(() => {
     setAreYouLoading(true)
     if (session.isLoggedIn) {
-      router.push("/admin/dashb")
+      router.push("/myadmin/dashboard")
     }
     else{
       setAreYouLoading(false)
@@ -134,12 +134,12 @@ const router = useRouter();
        isClient && (
              <div
                  style={{
-                   backgroundImage: "url('/login.jpg')",
+                   backgroundImage: "url('/bg_B.jpg')",
                    backgroundSize: "contain",
                    backgroundPosition: "right",
                    backgroundRepeat: "no-repeat",
                  }}
-                 className="flex justify-start items-center h-screen bg-[#ffd4e8]"
+                 className="flex justify-start items-center h-screen bg-[#dcdfe6]"
              >
                <form
                    onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}

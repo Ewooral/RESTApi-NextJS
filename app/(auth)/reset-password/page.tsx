@@ -53,7 +53,7 @@ const ForgotPassword = () => {
       }
       console.log("password::", password);
 
-      const response = await axios.post("/api/auth/resetPassword", {
+      const response = await axios.post("/api/v1/auth/resetPassword", {
         email: user.email,
         password: confirmPassword,
       });

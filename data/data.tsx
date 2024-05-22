@@ -3,9 +3,6 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
-import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight"
-
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DescriptionIcon from '@mui/icons-material/Description';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -24,6 +21,9 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import EventIcon from '@mui/icons-material/Event';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import React from "react";
+import {AcademicCapIcon, UserGroupIcon, WindowIcon, UserMinusIcon, GiftIcon} from "@heroicons/react/24/outline";
+import SimpleRadarChart from "@/components/charts/SimpleRadarChart";
 
 
 export const serviceObjectList = [
@@ -108,7 +108,6 @@ export interface SidebarItem {
 
 }
 
-// export const sidebarData: SidebarItem[] = [
 //   {
 //     label: 'Dashboard Home',
 //     icon: <DashboardIcon />,
@@ -347,12 +346,12 @@ export interface SidebarItem {
 // ];
 
 
-
+// ADMIN LEFT SIDEBAR MENU DATA
 export const sidebarData: SidebarItem[] = [
   {
-    label: 'Dashboard Home',
+    label: 'Dashboard',
     icon: <DashboardIcon />,
-    url: '/admin/dashboard',
+    url: '/myadmin/dashboard',
     children: [],
   },
   {
@@ -363,37 +362,37 @@ export const sidebarData: SidebarItem[] = [
         label: 'View Users',
         icon: <VisibilityIcon />,
         children: [],
-        url: '/user-management/view-users',
+        url: '/myadmin/user-management/view-users',
       },
       {
         label: 'Student Details',
         icon: <VisibilityIcon />,
         children: [],
-        url: '/user-management/student-details',
+        url: '/myadmin/user-management/student-details',
       },
       {
         label: 'Add User',
         icon: <PersonAddIcon />,
         children: [],
-        url: '/user-management/add-user',
+        url: '/myadmin/user-management/add-user',
       },
       {
         label: 'Edit User',
         icon: <PersonIcon />,
         children: [],
-        url: '/user-management/edit-user',
+        url: '/myadmin/user-management/edit-user',
       },
       {
         label: 'Reset Password',
         icon: <LockIcon />,
         children: [],
-        url: '/user-management/reset-password',
+        url: '/myadmin/user-management/reset-password',
       },
       {
         label: 'Manage Roles',
         icon: <SupervisorAccountIcon />,
         children: [],
-        url: '/user-management/manage-roles',
+        url: '/myadmin/user-management/manage-roles',
       },
     ],
   },
@@ -405,31 +404,31 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'Browse Programs',
         icon: <AccountBalanceIcon />,
-        url: '/applications/browse',
+        url: '/myadmin/applications/browse',
         children: [],
       },
       {
         label: 'Apply to Programs',
         icon: <DescriptionIcon />,
-        url: '/applications/apply',
+        url: '/myadmin/applications/apply',
         children: [],
       },
       {
         label: 'Track Application Status',
         icon: <ReceiptIcon />,
-        url: '/applications/status',
+        url: '/myadmin/applications/status',
         children: [],
       },
       {
         label: 'Submit Documents',
         icon: <DescriptionIcon />,
-        url: '/applications/submit-documents',
+        url: '/myadmin/applications/submit-documents',
         children: [],
       },
       {
         label: 'Pay Application Fee',
         icon: <ReceiptIcon />,
-        url: '/applications/pay-fee',
+        url: '/myadmin/applications/pay-fee',
         children: [],
       },
       {
@@ -447,25 +446,25 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'View All Programs',
         icon: <LibraryBooksIcon />,
-        url: '/programs/view-all',
+        url: '/myadmin/programs/view-all',
         children: [],
       },
       {
         label: 'Add New Program',
         icon: <DescriptionIcon />,
-        url: '/programs/add',
+        url: '/myadmin/programs/add',
         children: [],
       },
       {
         label: 'Manage Programs',
         icon: <LocalLibraryIcon />,
-        url: '/programs/manage',
+        url: '/myadmin/programs/manage',
         children: [],
       },
       {
         label: 'Program Analytics',
         icon: <ReceiptIcon />,
-        url: '/programs/analytics',
+        url: '/myadmin/programs/analytics',
         children: [],
       },
     ],
@@ -477,19 +476,19 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'View All Documents',
         icon: <LibraryBooksIcon />,
-        url: '/documents/view-all',
+        url: '/myadmin/documents/view-all',
         children: [],
       },
       {
         label: 'Upload New Document',
         icon: <DescriptionIcon />,
-        url: '/documents/upload',
+        url: '/myadmin/documents/upload',
         children: [],
       },
       {
         label: 'Manage Document Templates',
         icon: <DescriptionIcon />,
-        url: '/documents/manage-templates',
+        url: '/myadmin/documents/manage-templates',
         children: [],
       },
     ],
@@ -501,25 +500,25 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'Generate Reports',
         icon: <ReceiptIcon />,
-        url: '/reports/generate',
+        url: '/myadmin/reports/generate',
         children: [],
       },
       {
         label: 'Application Trends',
         icon: <ReceiptIcon />,
-        url: '/reports/trends',
+        url: '/myadmin/reports/trends',
         children: [],
       },
       {
         label: 'Processing Times',
         icon: <ReceiptIcon />,
-        url: '/reports/processing-times',
+        url: '/myadmin/reports/processing-times',
         children: [],
       },
       {
         label: 'Export Data',
         icon: <ReceiptIcon />,
-        url: '/reports/export',
+        url: '/myadmin/reports/export',
         children: [],
       },
     ],
@@ -531,25 +530,25 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'System Settings',
         icon: <SettingsIcon />,
-        url: '/settings/system',
+        url: '/myadmin/settings/system',
         children: [],
       },
       {
         label: 'User Management',
         icon: <SettingsIcon />,
-        url: '/settings/user-management',
+        url: '/myadmin/settings/user-management',
         children: [],
       },
       {
         label: 'Access Control',
         icon: <SettingsIcon />,
-        url: '/settings/access-control',
+        url: '/myadmin/settings/access-control',
         children: [],
       },
       {
         label: 'Application Form Customization',
         icon: <SettingsIcon />,
-        url: '/settings/form-customization',
+        url: '/myadmin/settings/form-customization',
         children: [],
       },
     ],
@@ -561,25 +560,25 @@ export const sidebarData: SidebarItem[] = [
       {
         label: 'User Guides',
         icon: <MenuBookIcon />,
-        url: '/help/user-guides',
+        url: '/myadmin/help/user-guides',
         children: [],
       },
       {
         label: 'Contact Support',
         icon: <SupervisorAccountIcon />,
-        url: '/help/contact',
+        url: '/myadmin/help/contact',
         children: [],
       },
       {
         label: 'FAQs',
         icon: <HelpIcon />,
-        url: '/help/faqs',
+        url: '/myadmin/help/faqs',
         children: [],
       },
       {
         label: 'System Updates',
         icon: <HelpIcon />,
-        url: '/help/updates',
+        url: '/myadmin/help/updates',
         children: [],
       },
     ],
@@ -591,3 +590,81 @@ export const sidebarData: SidebarItem[] = [
     url: '/logout',
   },
 ];
+
+
+
+// INFO CARD OBJECT
+export interface InfoCardProps {
+  Icon?: JSX.Element;
+  iconColor?: string;
+  title?: string;
+  value?: string;
+  bgColor?: string;
+  Component?: React.FC<{}>;
+  colSpan?: string; // Add this line
+}
+export const data: InfoCardProps[] = [
+  {
+    Icon: <UserGroupIcon />,
+    iconColor: "#000",
+    title: "Total Users",
+    value: "7, 000",
+    bgColor: "white",
+    colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
+  },
+  {
+    Icon: <AcademicCapIcon />,
+    iconColor: "#000",
+    title: "Applications Received",
+    value: "2, 000",
+    bgColor: "white",
+    colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
+  },
+  // {
+  //   // @ts-ignore
+  //   Component: SimpleRadarChart,
+  //   colSpan: "col-span-10 md:col-span-5 lg:col-span-2",
+  //   bgColor: "white",
+  // },
+  {
+    Icon: <GiftIcon />,
+    iconColor: "#000",
+    title: "Students Awarded",
+    value: "300",
+    bgColor: "white",
+    colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
+  },
+  {
+    Icon: <UserMinusIcon />,
+    iconColor: "#000",
+    title: "Students Dismissed",
+    value: "300",
+    bgColor: "white",
+    colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
+  },
+  {
+    Icon: <WindowIcon />,
+    iconColor: "#000",
+    title: "Career Opportunities",
+    value: "90",
+    bgColor: "white",
+    colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
+  },
+
+];
+
+
+
+
+
+// LINE CHARTS DATA
+export const lineChartData = [12, 19, 3, 5, 2, 3];
+export const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+
+
+// IMAGES
+export const UserImagePlaceholder = {
+  imageName:
+    "https://res.cloudinary.com/dn1lqngds/image/upload/v1713170322/uploads/profilepicplaceholder.png.png",
+  };
+

@@ -45,7 +45,7 @@ const UpdateUser = () => {
   const [image, setImage] = useState(null);
   const [fileName, setFileName] = useState("");
 
-  const { isLoading, setIsLoading, initials, setInitials, postgresUser } =
+  const { isLoading, setIsLoading, postgresUser } =
     userStore();
   const [isClient, setIsClient] = useState(false);
 

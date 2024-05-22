@@ -11,7 +11,7 @@ import SearchBar from "./content/searchBar";
 import userStore from "@/store";
 import { metadata } from "@/metadata";
 import React from "react";
-import LeftSidebarB from "@/components/LeftSidebarB";
+import LeftSidebarB from "@/components/sidebars/LeftSidebarB";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -22,6 +22,7 @@ import PusmasCard from "@/components/cards/PusmasCard";
 import userStore from "@/store";
 import { useIsClient } from "@/hooks/useIsClient";
 import { content, serviceObjectList } from "@/data/data";
+import {SidebarTabs, TabsDemo} from "@/components/tabs/TryTab";
 
 export async function getServerSideProps({
   req,
@@ -82,7 +83,7 @@ const AdminDashboard = ({ isCollapsed, setIsCollapsed }: CollapsedProps) => {
         {
             isClient && session.isLoggedIn && (
                 <QueryClientProvider client={queryClient}>
-      <div className="flex h-screen justify-center items-start">
+      <div className="flex h-[100%] justify-center items-start">
         {/* LEFT SIDEBAR */}
         <section className={clsx`${leftContentWidth}`}>
           {/* <AdminLeftSidebar
@@ -90,14 +91,24 @@ const AdminDashboard = ({ isCollapsed, setIsCollapsed }: CollapsedProps) => {
             setIsCollapsed={setIsCollapsed}
           /> */}
         </section>
+
+
         {/* MAIN CONTENT */}
         <section className={clsx`${mainContentWidth}`}>
           <div className="grid grid-cols-10 gap-3 justify-between items-center">
+            {/*AG GRID  USER TABLE*/}
             <div className="col-span-10  md:col-span-10 lg:col-span-7">
             <AgReactUsersTable />
             </div>
-            <div className="col-span-10  md:col-span-5 lg:col-span-3 bg-[#ffffff] h-[350px] p-4">
+            {/*RIGHT SIDE CONTENT*/}
+            <div className="col-span-10  md:col-span-10 lg:col-span-3 bg-[#ffffff] h-[350px] p-4">
                 {content}
+            </div>
+            <div className="col-span-10  md:col-span-10 lg:col-span-10">
+              <TabsDemo />
+            </div>
+            <div className="col-span-10">
+              <SidebarTabs />
             </div>
           </div>
         </section>

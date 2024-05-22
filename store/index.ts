@@ -22,7 +22,19 @@ interface UserStore {
   session: sessionType
     imageId: string | null;
   imageUrl: string | null;
-    setImageUrl: (url: string | null) => void;
+  isLoggedIn:boolean;
+  data: any;
+  lastSeenTimes: { [key: string]: Date };
+  open: boolean[];
+  activeLink: string | null;
+
+  setActiveLink: (newActiveLink: string | null) => void;
+  setOpen: (newOpen: boolean[]) => void;
+  setLastSeenTime: (userId: string, time: Date) => void;
+  setData: (data: any) => void;
+  setIsLoggedIn: (loggedIn: boolean) => void
+
+  setImageUrl: (url: string | null) => void;
   setImageId:(id: string | null) => void;
   setSession: (newSession: sessionType) => void;
   setTitle: (title: string[]) => void;
@@ -101,7 +113,7 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     },
     setSession: (newSession: sessionType) => set((state) => {
       return {session: newSession}
-    }),
+    }, false, 'setSession'),
 
     imageId: null,
     setImageId:(id: string | null) => set((state) => {
@@ -111,8 +123,28 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     imageUrl: null,
     setImageUrl:(url: string | null) => set((state) => {
         return {imageUrl: url}
-    }),
-              
+    }, false, 'setImageUrl'),
+
+    isLoggedIn: false,
+    setIsLoggedIn: (loggedIn) => set({isLoggedIn: loggedIn}),
+
+    data: null,
+    setData: (data: any) => set(state => ({data: data}), false, 'setData'),
+
+    lastSeenTimes: {},
+    setLastSeenTime: (userId, time) => set(state => ({
+      lastSeenTimes: {
+        ...state.lastSeenTimes,
+        [userId]: time
+      }
+    }), false, 'setLastSeenTime'),
+
+    open: [],
+    setOpen: (newOpen) => set(() => ({ open: newOpen }), false, 'setOpen'),
+
+    activeLink: 'Dashboard',
+    setActiveLink: (newActiveLink) => set(() => ({ activeLink: newActiveLink }), false, 'setActiveLink'),
+  
       // ...................................................................
         logOut: () => {
         set(state => ({ user: {
@@ -149,13 +181,18 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
             role: '',
             imageUrl: ''
           },
+
+          isLoggedIn: false,
+
+          open: [],
+          activeLink: 'Dashboard',
         
       }), false, 'logOut')
       },
       setUserName: (name: string) => set(state => ({ user: { ...state.user, name } }), false, 'setUserName'),
       setIsLoading: (loading: boolean) => set(state => ({ isLoading: loading }), false, 'setIsLoading'),
       setServerResponse: (response: any) => set(state => ({ serverResponse: response }), false, 'setServerResponse'),  
-      setErrors: (error: string) => set(state => ({ errors: error }), false, 'setErrors'),
+      setErrors: (error: string) => set(state => ({ errors: error }), false, 'setErrors'), 
       
       // The below code is a function that updates the user object in the state. 
       // It takes a new email as a parameter and returns a function that 

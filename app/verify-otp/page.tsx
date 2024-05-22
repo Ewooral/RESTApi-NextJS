@@ -40,7 +40,7 @@ const ForgotPassword = () => {
 
       try {
         setIsLoading(true);
-        const response = await axios.post("/api/auth/verifyOtp", {
+        const response = await axios.post("/api/v1/auth/verifyOtp", {
           otp: otp,
           email: user.email,
         });

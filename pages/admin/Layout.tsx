@@ -4,14 +4,12 @@ import AdminLeftSidebar from "./AdminLeftSidebar";
 import AdminHeader from "./AdminHeader";
 import {Toaster} from "@/components/ui/toaster";
 import {useRouter} from 'next/router';
-import UsersHome from "./users/UsersHome";
 import {useState} from "react";
 import React from "react";
 
 interface LayoutProps {
     children?: React.ReactNode
 }
-
 type HasItCollapsed = boolean;
 type SetIsCollapsed = React.Dispatch<React.SetStateAction<boolean>>;
 
