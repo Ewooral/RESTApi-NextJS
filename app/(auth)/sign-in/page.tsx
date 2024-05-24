@@ -42,13 +42,13 @@ const LogIn: React.FC = () => {
       setIsLoading(true);
       // @ts-ignore
       const response: UserResponseProps = await userService_POSTGRES.signIn(data);
+      router.push("/myadmin/dashboard");
       const userId = response?.data.session.userId;
       const GetUserImageResponse: UserImageProps = await userService_POSTGRES.fetchUserImage(userId);
       console.log("User Image Object::", GetUserImageResponse);
       setImageUrl(GetUserImageResponse.imageUrl);
       setSession(response?.data.session);
       setIsLoggedIn(true);
-      router.push("/myadmin/dashboard");
       showSuccessToast(response?.data.message, `Welcome ${response?.data.session.firstname}!`);
     } catch (err: any) {
       showErrorToast(err.response?.data, 'Login Failed');

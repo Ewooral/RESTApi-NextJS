@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             SELECT
                 users.*,
                 images.image_url,
-                user_statuses.status
+                user_statuses.type AS status
             FROM
                 users
                     LEFT JOIN

@@ -28,6 +28,30 @@ export async function getUsersInfoByEmail(email: string): Promise<any> {
     );
 }
 
+
+export const createStatuses_POSTGRES = async () => {
+  const status_query = `
+    CREATE TABLE IF NOT EXISTS user_statuses (
+      id SERIAL PRIMARY KEY,
+      type VARCHAR(50) UNIQUE
+    );
+
+    INSERT INTO user_statuses(type)
+    VALUES ('Pending'), ('Active'), ('Inactive'), ('Limited'), ('Temporary'), 
+           ('Suspended'), ('Archived'), ('Graduated'), ('Withdrawn')
+    ON CONFLICT (type) DO NOTHING;
+  `;
+
+  try {
+    await query(status_query, []);
+    console.log('Statuses created successfully');
+  } catch (error) {
+    console.error('Error creating statuses:', error);
+    throw error;
+  }
+};
+
+
 /**
  * Updates the role and status of a user in the database.
  * @param userId - The ID of the user to update.
@@ -36,7 +60,7 @@ export async function getUsersInfoByEmail(email: string): Promise<any> {
  * @returns A Promise that resolves to the updated user object.
  */
 export async function updateUserRoleAndStatus_POSTGRES(userId: string, updatedRole: string, updatedStatus: string): Promise<any> {
-    const statusIdResult = await query("SELECT id FROM user_statuses WHERE status = $1", [updatedStatus]);
+    const statusIdResult = await query("SELECT id FROM user_statuses WHERE type = $1", [updatedStatus]);
     const statusId = statusIdResult.rows[0].id;
 
     return await query("UPDATE users SET role = $1, status_id = $2 WHERE id = $3", [updatedRole, statusId, userId]);
@@ -57,18 +81,23 @@ export async function updateUserRoleAndStatus_POSTGRES(userId: string, updatedRo
  * @returns {Promise<object>} - A promise that resolves to the newly created user object.
  */
 export async function createUser_POSTGRES(firstname: string, lastname: string, email: string, hashedPassword: string, isStudent: boolean, title: string, terms: boolean): Promise<object> {
-    const createTableText = `
-      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      CREATE TABLE IF NOT EXISTS users(
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        firstname VARCHAR(100),
-        lastname VARCHAR(100),
-        email VARCHAR(100) UNIQUE,
-        password VARCHAR(100),
-        isStudent BOOLEAN,
-        title VARCHAR(10),
-        terms BOOLEAN
-      );
+  const createTableText = `
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      firstname VARCHAR(100),
+      lastname VARCHAR(100),
+      email VARCHAR(100) UNIQUE,
+      password VARCHAR(100),
+      isStudent BOOLEAN,
+      title VARCHAR(10),
+      terms BOOLEAN,
+      role VARCHAR(10),
+      image_id INTEGER,
+      status_id INTEGER,
+      FOREIGN KEY (image_id) REFERENCES images (id),
+      FOREIGN KEY (status_id) REFERENCES user_statuses (id)
+    );
     `;
   
     const insertUserText = 'INSERT INTO users(firstname, lastname, email, password, isStudent, title, terms) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';

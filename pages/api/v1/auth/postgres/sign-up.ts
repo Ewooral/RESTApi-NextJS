@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 
-import { createUser_POSTGRES, createUser_NEO4J } from '@/repositories/users/userRepository';
+import { createUser_POSTGRES, createUser_NEO4J, createStatuses_POSTGRES } from '@/repositories/users/userRepository';
 
 
 dotenv.config();
@@ -28,7 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       title,
       terms
     }
-
+    // create user_statuses table if not exists
+    await createStatuses_POSTGRES();
     // Create the user
     const user = await createUser_POSTGRES(firstname, lastname, email, hashedPassword, isStudent, title, terms);
     res.status(200).json({ message: 'Registration successful!', user });

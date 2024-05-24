@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { getSession, updateSession } from "@/lib/sessionManager";
 import { assignUserRole } from "@/lib/userRoleAssigner";
 import { userStatusAssigner } from "@/lib/userStatusAssigner";
-import { getUsersInfoByEmail, updateUserRoleAndStatus_POSTGRES } from "@/repositories/users/userRepository";
+import { createStatuses_POSTGRES, getUsersInfoByEmail, updateUserRoleAndStatus_POSTGRES } from "@/repositories/users/userRepository";
 
 const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
 
@@ -46,6 +46,8 @@ export default async function handler(
     // Assign user status
     const updatedStatus = userStatusAssigner(user, updatedRole);
 
+    // CREATE USER_STATUSES TABLE IF NOT EXIST
+    await createStatuses_POSTGRES();
     // Update the user's role and status in the database
     await updateUserRoleAndStatus_POSTGRES(user.id, updatedRole, updatedStatus);
 

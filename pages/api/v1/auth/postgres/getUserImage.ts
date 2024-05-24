@@ -1,6 +1,7 @@
 // Import necessary modules
 import { NextApiRequest, NextApiResponse } from "next";
 import { query } from "@/lib/connectToPostgres";
+import { createImageTable_POSTGRES } from "@/repositories/users/imageRepository";
 
 // Define the API endpoint handler function
 
@@ -18,6 +19,7 @@ export default async function handler(
   
     try {
       // Define SQL query to fetch user's image URL based on their ID
+      await createImageTable_POSTGRES()
       const getUserImageUrlQuery = `
         SELECT images.image_url 
         FROM users 

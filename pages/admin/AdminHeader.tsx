@@ -65,9 +65,9 @@ function AdminHeader() {
   useEffect(() => {
     if (prevUserIsOnlineRef.current !== userIsOnline) {
       if (userIsOnline) {
-        showSuccessToast('Online', `${session.firstname} is online.`);
+        showSuccessToast('', 'Connection is On!');
       } else {
-        showErrorToast('Offline', `${session.firstname} is offline.`);
+        showErrorToast('', 'Connection is Off!');
       }
     }
     // Update the ref to the current value
@@ -133,7 +133,7 @@ function AdminHeader() {
             <div className="relative">
               <Image
                 className="profile-avatar h-[40px] w-[40px] mx-4 cursor-pointer"
-                src={session.imageUrl ? session.imageUrl : '/placeholder.png'}
+                src={session.imageUrl ? session.imageUrl : imageUrl ? imageUrl  : '/placeholder.png'}
                 alt="image"
                 width={200}
                 height={200}

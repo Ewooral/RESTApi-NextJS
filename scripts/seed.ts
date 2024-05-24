@@ -39,17 +39,21 @@ const createTables = async () => {
   try {
     // Create Users table
     await pool.query(`
-      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-      CREATE TABLE IF NOT EXISTS users (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        firstname VARCHAR(100),
-        lastname VARCHAR(100),
-        email VARCHAR(100) UNIQUE,
-        password VARCHAR(100),
-        isStudent BOOLEAN,
-        title VARCHAR(10),
-        terms BOOLEAN
-      );
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+      firstname VARCHAR(100),
+      lastname VARCHAR(100),
+      email VARCHAR(100) UNIQUE,
+      password VARCHAR(100),
+      isStudent BOOLEAN,
+      title VARCHAR(10),
+      terms BOOLEAN,
+      image_id UUID,
+      status_id UUID,
+      FOREIGN KEY (image_id) REFERENCES images (id),
+      FOREIGN KEY (status_id) REFERENCES users_statuses (id)
+    );
     `);
 
     // Create PersonalInformation table
