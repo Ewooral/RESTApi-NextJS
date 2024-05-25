@@ -41,7 +41,7 @@ export const userService_POSTGRES = {
           return response;
          }
          catch(error){
-            console.error('Error:', error);
+            throw new Error(String(error));
          }
      },
 
