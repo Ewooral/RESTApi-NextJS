@@ -20,14 +20,14 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { UserImagePlaceholder } from "@/data/data";
 import { formatDistanceToNow } from "date-fns";
-import useInternetConnectivity from "@/hooks/useInternetConnectivity";
+// import useInternetConnectivity from "@/hooks/useInternetConnectivity";
 import { useCustomToast } from '@/hooks/useToast';
 
 
 
 function AdminHeader() {
-  const userIsOnline = useInternetConnectivity()
-  const prevUserIsOnlineRef = useRef(userIsOnline);
+  // const userIsOnline = useInternetConnectivity()
+  // const prevUserIsOnlineRef = useRef(userIsOnline);
   const isClient = useIsClient();
   const { session, imageUrl, setImageUrl, lastSeenTimes } = userStore();
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -62,17 +62,17 @@ function AdminHeader() {
   }, [imageUrl]);
 
 
-  useEffect(() => {
-    if (prevUserIsOnlineRef.current !== userIsOnline) {
-      if (userIsOnline) {
-        showSuccessToast('', 'Connection is On!');
-      } else {
-        showErrorToast('', 'Connection is Off!');
-      }
-    }
-    // Update the ref to the current value
-    prevUserIsOnlineRef.current = userIsOnline;
-  }, [userIsOnline, showSuccessToast, showErrorToast, session.firstname]);
+  // useEffect(() => {
+  //   if (prevUserIsOnlineRef.current !== userIsOnline) {
+  //     if (userIsOnline) {
+  //       showSuccessToast('', 'Connection is On!');
+  //     } else {
+  //       showErrorToast('', 'Connection is Off!');
+  //     }
+  //   }
+  //   // Update the ref to the current value
+  //   prevUserIsOnlineRef.current = userIsOnline;
+  // }, [userIsOnline, showSuccessToast, showErrorToast, session.firstname]);
 
   // ...
 
@@ -167,8 +167,9 @@ function AdminHeader() {
                     session.isAdmin && "text-[#4daa57]"
                   } relative text-[10px]  text-gray-800 `}
                 >
-                  {userIsOnline ? 'Online' : 'Offline'}
-                  {userIsOnline ? (
+                  {/* {userIsOnline ? 'Online' : 'Offline'} */}
+                  {session.role}
+                  {/* {userIsOnline ? (
                     <>
                       <span className="animate-ping absolute inline-flex h-[9px] w-[9px] rounded-full bg-[#4daa57] opacity-100"></span>
                       <span className="absolute inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -178,7 +179,7 @@ function AdminHeader() {
                       <span className="animate-ping absolute inline-flex h-[9px] w-[9px] rounded-full bg-red-400 opacity-100"></span>
                       <span className="absolute inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </>
-                  )}
+                  )} */}
                 </span>
               </div>
             </section>
