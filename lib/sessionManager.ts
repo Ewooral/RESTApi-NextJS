@@ -31,7 +31,7 @@ export const sessionOptions: SessionOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         // sameSite: "strict",
-        // maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+        maxAge: 1000 * 60 * 30, // 30 minutes
     }
 }
 
@@ -54,7 +54,7 @@ export const getSession = async (req: NextApiRequest, res: NextApiResponse) => {
       session.isLoggedIn = false;
       session.expiryTime = undefined;
       // Log user out from database
-      await deleteSession(session.userId as string);
+      // await deleteSession(session.userId as string);
   }
     return session;
   };

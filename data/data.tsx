@@ -615,7 +615,7 @@ export const data: InfoCardProps[] = [
   {
     Icon: <AcademicCapIcon />,
     iconColor: "#000",
-    title: "Applications Received",
+    title: "Administrators",
     value: "2, 000",
     bgColor: "white",
     colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
@@ -629,7 +629,7 @@ export const data: InfoCardProps[] = [
   {
     Icon: <GiftIcon />,
     iconColor: "#000",
-    title: "Students Awarded",
+    title: "Guests",
     value: "300",
     bgColor: "white",
     colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
@@ -637,7 +637,7 @@ export const data: InfoCardProps[] = [
   {
     Icon: <UserMinusIcon />,
     iconColor: "#000",
-    title: "Students Dismissed",
+    title: "Total Number of Applicants",
     value: "300",
     bgColor: "white",
     colSpan: "col-span-10 md:col-span-5 lg:col-span-2"
