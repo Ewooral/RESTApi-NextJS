@@ -14,7 +14,7 @@ import { Pool } from 'pg';
 // });
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_DB_STRING,
+  connectionString: process.env.POSTGRES_DB_STRING, 
   ssl: {
     rejectUnauthorized: false,
   },
@@ -22,6 +22,7 @@ const pool = new Pool({
 
 // Connect the pool when the application starts
 pool.connect().then(() => console.log('Database connected successfully')).catch(console.error);
+
 
 export const query = async (text: string, params: any[]) => {
   const client = await pool.connect();
@@ -36,3 +37,4 @@ export const query = async (text: string, params: any[]) => {
     client.release();
   }
 };
+

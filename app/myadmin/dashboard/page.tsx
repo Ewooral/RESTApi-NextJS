@@ -12,20 +12,36 @@ import axios from "axios";
 import { data } from "@/data/data";
 
 
+/**
+ * Dashboard component.
+ * This component is responsible for rendering the dashboard page.
+ * It fetches data from various APIs and displays it in a grid layout.
+ * It also handles user authentication and redirects to the sign-in page if the user is not logged in.
+ */
 
 const Dashboard = () => {
+  // Get the current user session
   const { session } = userStore();
+  // Get the router instance
   const router = useRouter();
+  // State for loading status
   const [isLoading, setIsLoading] = useState(true); // Set isLoading to true initially
+  // State for storing the response data
   const [ress, setRess] = useState(0)
 
+
+
+  /**
+   * Use the useQueries hook from react-query to fetch data from multiple APIs.
+   * The data fetched includes total number of users, admins, guests, and applicants.
+   */
   const results = useQueries({
     queries: [
       {
         queryKey: ['total-users'],
         queryFn: async () => {
           const res = await axios.get("/api/users-total");
-          console.log("RESA:: ", res.data)
+          // console.log("RESA:: ", res.data)
           return res.data;
         },
       },
@@ -33,7 +49,7 @@ const Dashboard = () => {
         queryKey: ['total-admins'],
         queryFn: async () => {
           const res = await axios.get("/api/admin-total");
-          console.log("RESB:: ", res.data)
+          // console.log("RESB:: ", res.data)
           return res.data;
         },
       },
@@ -41,7 +57,7 @@ const Dashboard = () => {
         queryKey: ['total-guest'],
         queryFn: async () => {
           const res = await axios.get("/api/guest-total");
-          console.log("RESC:: ", res.data)
+          // console.log("RESC:: ", res.data)
           return res.data;
         },
       },
@@ -49,7 +65,7 @@ const Dashboard = () => {
         queryKey: ['total-applicant'],
         queryFn: async () => {
           const res = await axios.get("/api/applicant-total");
-          console.log("RESD:: ", res.data)
+          // console.log("RESD:: ", res.data)
           return res.data;
         },
         // refetchInterval: 5000
@@ -58,13 +74,17 @@ const Dashboard = () => {
         queryKey: ['total-users'],
         queryFn: async () => {
           const res = await axios.get("/api/users-total");
-          console.log("RESE:: ", res.data.res)
+          // console.log("RESE:: ", res.data.res)
           return res.data;
         },
       },
     ],
   });
 
+  /**
+   * useEffect hook to refetch the data whenever the results change.
+   * It also sets the response data to the ress state.
+   */
   useEffect(() => {
     results.map((item, index) => {
       item.refetch()
@@ -75,6 +95,12 @@ const Dashboard = () => {
 
 
 
+
+  /**
+   * useEffect hook to check if the user is logged in.
+   * If the user is not logged in, it sets the loading status to false and redirects to the sign-in page.
+   * If the user is logged in, it sets the loading status to false.
+   */
   useEffect(() => {
     if (!session.isLoggedIn) {
       setIsLoading(false); // Set isLoading to false if user is not logged in
@@ -84,7 +110,7 @@ const Dashboard = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.isLoggedIn, results[0].data]); // Run this effect whenever session.isLoggedIn changes
-
+  // If the data is still loading, return a loading message
   if (isLoading) {
     return "Checking to see if you're signed in...";
   }
