@@ -81,7 +81,7 @@ export const AgReactUsersViewTable = () => {
         </div>
       ) : (
         <>
-          <div className="ag-theme-quartz h-[100vh] custom-header-color">
+          <div className="ag-theme-quartz h-[94vh] custom-header-color">
             <AgGridReact
               columnDefs={columnDefs}
               rowData={data.users}

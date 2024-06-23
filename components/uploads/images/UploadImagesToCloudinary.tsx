@@ -16,8 +16,13 @@ const cloudinaryLoader = ({ src, width, quality }: { src: string; width: number;
     return `https://res.cloudinary.com/dn1lqngds/image/upload/w_${width},q_${quality || 75}/${cleanPath}`
 }
 const fetchImage = async (imageId: string) => {
+   try{
     const res = await axios.get(`/api/v1/uploads/get-uploaded-image?imageId=${imageId}`);
     return res.data as Data;
+   }
+   catch(error){
+    throw new Error("Fetching failed miserably")
+   }
 }
 const UploadImage: React.FC = () => {
     const [file, setFile] = useState<File | null>(null)
