@@ -22,6 +22,10 @@ import { UserImagePlaceholder } from "@/data/data";
 import { formatDistanceToNow } from "date-fns";
 // import useInternetConnectivity from "@/hooks/useInternetConnectivity";
 import { useCustomToast } from "@/hooks/useToast";
+import { FaCircleArrowDown } from "react-icons/fa6";
+import { FaArrowCircleUp } from "react-icons/fa";
+import { RiMenuFold2Fill } from "react-icons/ri";
+import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
 
 function AdminHeader() {
   // const userIsOnline = useInternetConnectivity()
@@ -34,6 +38,7 @@ function AdminHeader() {
   const remainingTime = useInactivityTimer(logoutTime);
   const { showSuccessToast, showErrorToast } = useCustomToast();
   const [showProfile, setShowProfile] = useState(false);
+ const {showAfterMedium, hideAfterMedium, hideAfterLargerScreens} = useCssMediaQueries();
 
   const [lastSeenTime, setLastSeenTime] = useState<Date | null>(null); // Time when user went offline
 
@@ -77,8 +82,10 @@ function AdminHeader() {
     <>
       {isClient && (
         <nav
-          className={clsx`fixed w-full flex justify-between items-center bg-[white] 
-    drop-shadow-sm px-5 py-1 z-50  border-[#1e1e1e]]`}
+          className={clsx("fixed w-full flex justify-between items-center bg-[white]", 
+    "drop-shadow-sm px-5 py-1 z-50  border-[#1e1e1e]]",
+    hideAfterLargerScreens && ""
+  )}
         >
           {/*LEFT SECTION - LOGO */}
           <section>
@@ -103,48 +110,51 @@ function AdminHeader() {
 
           {/* RIGHT SECTION */}
           <section className="flex items-center justify-center relative">
-            {/* MESSAGE ICON */}
-            {session.isLoggedIn && (
-              <div
-                className={`bg-[#c1bdbd] p-2 rounded-[50%] mr-4 hover:bg-[#454545] transition-colors duration-200`}
-              >
-                <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-[black] hover:text-white transform transition-transform duration-200 ease-in-out active:scale-95" />
-              </div>
-            )}
+            {hideAfterMedium && (
+              <>
+                {/* MESSAGE ICON */}
+                {session.isLoggedIn && (
+                  <div
+                    className={`bg-[#c1bdbd] p-2 rounded-[50%] mr-4 hover:bg-[#454545] transition-colors duration-200`}
+                  >
+                    <ChatBubbleLeftEllipsisIcon className="h-5 w-5 text-[black] hover:text-white transform transition-transform duration-200 ease-in-out active:scale-95" />
+                  </div>
+                )}
 
-            {/* NOTIFICATION ICON */}
-            {session.isLoggedIn && (
-              <div
-                className={`relative bg-[#c1bdbd] p-2 rounded-[50%] hover:bg-[#454545] transition-colors duration-200`}
-              >
-                <BellIcon className="h-5 w-5 text-black hover:text-white transform transition-transform duration-200 ease-in-out" />
-                <div
-                  className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px]
+                {/* NOTIFICATION ICON */}
+                {session.isLoggedIn && (
+                  <div
+                    className={`relative bg-[#c1bdbd] p-2 rounded-[50%] hover:bg-[#454545] transition-colors duration-200`}
+                  >
+                    <BellIcon className="h-5 w-5 text-black hover:text-white transform transition-transform duration-200 ease-in-out" />
+                    <div
+                      className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px]
                   font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
-                >
-                  {/* {notificationCount} */}0
-                </div>
-              </div>
+                    >
+                      {/* {notificationCount} */}0
+                    </div>
+                  </div>
+                )}
+                {/* PROFILE ICON */}
+                {session.isLoggedIn && (
+                  <div className="relative">
+                    <Image
+                      className="profile-avatar h-[40px] w-[40px] mx-4 cursor-pointer"
+                      src={
+                        session.imageUrl
+                          ? session.imageUrl
+                          : imageUrl
+                          ? imageUrl
+                          : "/placeholder.png"
+                      }
+                      alt="image"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                )}
+              </>
             )}
-            {/* PROFILE ICON */}
-            {session.isLoggedIn && (
-              <div className="relative">
-                <Image
-                  className="profile-avatar h-[40px] w-[40px] mx-4 cursor-pointer"
-                  src={
-                    session.imageUrl
-                      ? session.imageUrl
-                      : imageUrl
-                      ? imageUrl
-                      : "/placeholder.png"
-                  }
-                  alt="image"
-                  width={200}
-                  height={200}
-                />
-              </div>
-            )}
-
             {/* LOGIN */}
             {!session.isLoggedIn && (
               <section className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline">
@@ -160,20 +170,22 @@ function AdminHeader() {
             )}
 
             {/* USER NAMES */}
-            {session.isLoggedIn && (
-              <section className="flex">
-                <div className="flex flex-col justify-center items-start">
-                  <span className="text-xs text-gray-800 font-extrabold">
-                    {session.firstname} {session.lastname}
-                  </span>
-                  <span
-                    className={clsx`${
-                      session.isAdmin && "text-[#4daa57]"
-                    } relative text-[10px]  text-gray-800 `}
-                  >
-                    {/* {userIsOnline ? 'Online' : 'Offline'} */}
-                    {session.role}
-                    {/* {userIsOnline ? (
+            {hideAfterMedium && (
+              <>
+                {session.isLoggedIn && (
+                  <section className="flex">
+                    <div className="flex flex-col justify-center items-start">
+                      <span className="text-xs text-gray-800 font-extrabold">
+                        {session.firstname} {session.lastname}
+                      </span>
+                      <span
+                        className={clsx`${
+                          session.isAdmin && "text-[#4daa57]"
+                        } relative text-[10px]  text-gray-800 `}
+                      >
+                        {/* {userIsOnline ? 'Online' : 'Offline'} */}
+                        {session.role}
+                        {/* {userIsOnline ? (
                     <>
                       <span className="animate-ping absolute inline-flex h-[9px] w-[9px] rounded-full bg-[#4daa57] opacity-100"></span>
                       <span className="absolute inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -184,57 +196,66 @@ function AdminHeader() {
                       <span className="absolute inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </>
                   )} */}
-                  </span>
-                </div>
-              </section>
+                      </span>
+                    </div>
+                  </section>
+                )}
+              </>
             )}
 
             {/* DROP DOWN ARROW */}
-            {session.isLoggedIn && (
-              <div
-                className="cursor-pointer mx-4"
-                onClick={toggleProfileDropdown}
-              >
-                {showProfile ? (
-                  <ChevronUpIcon className="h-5 w-5 text-black" />
-                ) : (
-                  <ChevronDownIcon className="h-5 w-5 text-black" />
-                )}
+            <>
+              {session.isLoggedIn && (
+                <div
+                  className="cursor-pointer mx-4"
+                  onClick={toggleProfileDropdown}
+                >
+                  {showProfile ? (
+                    <FaCircleArrowDown className="size-5 text-black" />
+                  ) : (
+                    <FaArrowCircleUp className="size-5 text-black" />
+                  )}
 
-                {showProfile && (
-                  <div className="absolute right-0 top-full bg-white border border-gray-300 rounded-md shadow-lg mt-1 z-10">
-                    {/* Header */}
-                    <div className="bg-gray-200 px-4 py-2 rounded-t-md">
-                      <Link
-                        href="/myadmin/user-management/student-details"
-                        className="text-sm font-medium text-gray-800"
-                      >
-                        Profile
-                      </Link>
+                  {showProfile && (
+                    <div className="absolute right-0 top-full bg-white text-xs border border-gray-300 rounded-md shadow-lg mt-1 z-10">
+                      {/* Header */}
+                      <div className="bg-gray-200 px-4 py-2 rounded-t-md">
+                        <Link
+                          href="/myadmin/user-management/student-details"
+                          className="text-sm font-medium text-gray-800"
+                        >
+                          Profile
+                        </Link>
+                      </div>
+                      {/* dashboard */}
+                      <div className="bg-gray-200 px-4 py-2 rounded-t-md">
+                        <Link
+                          href="/myadmin/dashboard"
+                          className="text-sm font-medium text-gray-800"
+                        >
+                          Dashboard
+                        </Link>
+                      </div>
+                      {/* Body */}
+                      <div className="py-1">
+                        <Link href="/settings">
+                          <span className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 transition duration-200">
+                            Settings
+                          </span>
+                        </Link>
+                      </div>
+                      {/* Footer */}
+                      <div className="bg-gray-200 px-4 py-2 rounded-b-md">
+                        <LogoutForm />
+                      </div>
                     </div>
-                    {/* dashboard */}
-                    <div className="bg-gray-200 px-4 py-2 rounded-t-md">
-                      <Link
-                        href="/myadmin/dashboard"
-                        className="text-sm font-medium text-gray-800"
-                      >
-                        Dashboard
-                      </Link>
-                    </div>
-                    {/* Body */}
-                    <div className="py-1">
-                      <Link href="/settings">
-                        <span className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 transition duration-200">
-                          Settings
-                        </span>
-                      </Link>
-                    </div>
-                    {/* Footer */}
-                    <div className="bg-gray-200 px-4 py-2 rounded-b-md">
-                      <LogoutForm />
-                    </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              )}
+            </>
+            {!hideAfterMedium && (
+              <div className="mx-4">
+                <RiMenuFold2Fill className="size-7 text-black" />
               </div>
             )}
           </section>

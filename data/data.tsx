@@ -105,6 +105,7 @@ export interface SidebarItem {
   icon: JSX.Element;
   url?: string;
   children: SidebarItem[];
+  disabled?: boolean;
 
 }
 
@@ -353,6 +354,7 @@ export const sidebarData: SidebarItem[] = [
     icon: <DashboardIcon />,
     url: '/myadmin/dashboard',
     children: [],
+    disabled: false
   },
   {
     label: 'User Management',
@@ -375,6 +377,7 @@ export const sidebarData: SidebarItem[] = [
         icon: <PersonAddIcon />,
         children: [],
         url: '/myadmin/user-management/add-user',
+        
       },
       {
         label: 'Edit User',

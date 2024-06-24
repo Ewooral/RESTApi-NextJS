@@ -109,7 +109,9 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
       isLoggedIn: false,
       role: '',
       imageUrl: '',
-      imageId: ''
+      imageId: '',
+      status: '',
+      expiryTime:''
     },
     setSession: (newSession: sessionType) => set((state) => {
       return {session: newSession}
@@ -142,7 +144,7 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     open: [],
     setOpen: (newOpen) => set(() => ({ open: newOpen }), false, 'setOpen'),
 
-    activeLink: 'Dashboard',
+    activeLink: 'Student Details',
     setActiveLink: (newActiveLink) => set(() => ({ activeLink: newActiveLink }), false, 'setActiveLink'),
   
       // ...................................................................
@@ -152,6 +154,7 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
           lastName: '',
           email: '',
           role: '',
+         
           // imageName: ''
     
         },
@@ -179,13 +182,15 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
             lastname: '',
             isLoggedIn: false,
             role: '',
-            imageUrl: ''
+            imageUrl: '',
+            status: '',
+            expiryTime:''
           },
 
           isLoggedIn: false,
 
           open: [],
-          activeLink: 'Dashboard',
+          activeLink: 'Student Details',
         
       }), false, 'logOut')
       },

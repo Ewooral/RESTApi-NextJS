@@ -1,8 +1,12 @@
+'use client';
 import LandingPage from '@/components/LandingPage'
+import { useCssMediaQueries } from '@/hooks/useCssMediaQueries'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
+  const {hideAfterLargerScreens} = useCssMediaQueries()
   return (
     <main 
     style={{
@@ -10,7 +14,9 @@ export default function Home() {
       backgroundSize: "cover",
       backgroundPosition: "center"
     }}
-    className='bg-gradient-to-tr'
+    className={clsx('bg-gradient-to-tr',
+
+    )}
     // className="flex h-screen flex-col bg-gradient-to-tr items-center graden font-extrabold text-4xl justify-between p-24"
     >
       {/* <h1 className='text-center'>PENTECOST UNIVERSITY <br /> 

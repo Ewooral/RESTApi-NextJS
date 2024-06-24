@@ -415,3 +415,249 @@
 2024-06-22T23:06:49.154Z [info] Elijah Owusu Ewooral clicked 
 2024-06-22T23:10:02.795Z [info] Elijah Owusu Ewooral clicked 
 2024-06-22T23:10:04.637Z [info] Elijah Owusu Ewooral clicked 
+2024-06-23T00:54:02.862Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:07:13.486Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:09:50.870Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:12:38.087Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:18:27.200Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:23:08.255Z [error] undefined undefined Error Signing in: Max client connections reached
+2024-06-23T01:29:52.441Z [error] Error Signing in: Max client connections reached
+2024-06-23T01:32:35.612Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:34:12.755Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:34:15.081Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:34:16.196Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:34:46.919Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:37:30.563Z [error] Error Signing in: connect ECONNREFUSED 127.0.0.1:5432
+2024-06-23T01:51:42.427Z [error] Error Signing in: The server does not support SSL connections
+2024-06-23T01:51:47.607Z [error] Error Signing in: The server does not support SSL connections
+2024-06-23T01:52:23.508Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T01:52:25.192Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T01:56:10.499Z [info] Marvin clicked 
+2024-06-23T01:56:13.377Z [info] Marvin clicked 
+2024-06-23T02:02:09.274Z [info] Marvin clicked 
+2024-06-23T02:09:31.498Z [info] Phillip clicked 
+2024-06-23T02:09:33.668Z [info] Phillip clicked 
+2024-06-23T02:13:32.325Z [info] Phillip clicked 
+2024-06-23T02:13:38.965Z [info] Phillip clicked 
+2024-06-23T02:14:48.463Z [info] Phillip clicked 
+2024-06-23T02:30:46.707Z [info] Phillip clicked 
+2024-06-23T02:31:48.358Z [info] Phillip clicked 
+2024-06-23T03:23:57.090Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T03:25:26.795Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T03:26:50.404Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T03:33:28.751Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T03:40:03.821Z [info] Phillip clicked 
+2024-06-23T03:40:05.633Z [info] Phillip clicked 
+2024-06-23T03:44:08.226Z [error] Error Signing in: Max client connections reached
+2024-06-23T03:45:31.338Z [error] Error Signing in: relation "users" does not exist
+2024-06-23T03:59:22.183Z [info] Phillip clicked 
+2024-06-23T03:59:23.095Z [info] Phillip clicked 
+2024-06-23T04:03:31.840Z [info] Elijah Owusu Ewooral clicked 
+2024-06-23T04:03:31.844Z [info] Elijah Owusu Ewooral clicked 
+2024-06-23T10:56:39.523Z [info] Phillip clicked 
+2024-06-23T10:56:40.555Z [info] Phillip clicked 
+2024-06-23T10:56:41.139Z [info] Phillip clicked 
+2024-06-23T10:56:48.418Z [info] Phillip clicked 
+2024-06-23T10:57:04.835Z [info] Phillip clicked 
+2024-06-23T12:20:39.282Z [info] Phillip clicked 
+2024-06-23T12:20:39.685Z [info] Phillip clicked 
+2024-06-23T12:33:46.858Z [info] Phillip clicked 
+2024-06-23T12:33:46.862Z [info] Phillip clicked 
+2024-06-23T12:41:32.051Z [info] Phillip clicked 
+2024-06-23T12:41:32.057Z [info] Phillip clicked 
+2024-06-23T12:41:32.060Z [info] Phillip clicked 
+2024-06-23T12:48:29.885Z [info] Phillip clicked 
+2024-06-23T12:48:32.208Z [info] Phillip clicked 
+2024-06-23T12:48:33.051Z [info] Phillip clicked 
+2024-06-23T12:52:33.794Z [info] Phillip clicked 
+2024-06-23T12:52:33.796Z [info] Phillip clicked 
+2024-06-23T12:52:34.410Z [info] Phillip clicked 
+2024-06-23T12:52:35.006Z [info] Phillip clicked 
+2024-06-23T12:57:03.709Z [info] Phillip clicked 
+2024-06-23T12:57:03.714Z [info] Phillip clicked 
+2024-06-23T12:57:05.439Z [info] Phillip clicked 
+2024-06-23T12:57:08.524Z [info] Phillip clicked 
+2024-06-23T12:57:10.781Z [info] Phillip clicked 
+2024-06-23T12:57:14.319Z [info] Phillip clicked 
+2024-06-23T12:57:14.321Z [info] Phillip clicked 
+2024-06-23T12:57:14.706Z [info] Phillip clicked 
+2024-06-23T13:04:37.866Z [info] Phillip clicked 
+2024-06-23T13:12:32.843Z [info] Phillip clicked 
+2024-06-23T13:12:39.192Z [info] Phillip clicked 
+2024-06-23T13:13:08.410Z [info] Phillip clicked 
+2024-06-23T13:13:12.717Z [info] Phillip clicked 
+2024-06-23T13:13:16.118Z [info] Phillip clicked 
+2024-06-23T13:13:22.131Z [info] Phillip clicked 
+2024-06-23T13:13:26.345Z [info] Phillip clicked 
+2024-06-23T13:13:40.040Z [info] Phillip clicked 
+2024-06-23T13:13:46.251Z [info] Phillip clicked 
+2024-06-23T13:13:50.314Z [info] Phillip clicked 
+2024-06-23T13:16:54.859Z [info] Phillip clicked 
+2024-06-23T13:16:59.752Z [info] Phillip clicked 
+2024-06-23T13:17:00.616Z [info] Phillip clicked 
+2024-06-23T13:17:02.749Z [info] Phillip clicked 
+2024-06-23T13:17:09.895Z [info] Phillip clicked 
+2024-06-23T13:21:34.912Z [info] Phillip clicked 
+2024-06-23T13:58:51.624Z [info] Phillip clicked 
+2024-06-23T13:59:12.258Z [info] Phillip clicked 
+2024-06-23T14:01:05.093Z [info] Phillip clicked 
+2024-06-23T14:40:29.217Z [info] Phillip clicked 
+2024-06-23T14:40:36.307Z [info] Phillip clicked 
+2024-06-23T14:40:54.463Z [info] Phillip clicked 
+2024-06-23T14:40:56.548Z [info] Phillip clicked 
+2024-06-23T14:42:16.217Z [info] Phillip clicked 
+2024-06-23T14:42:22.384Z [info] Phillip clicked 
+2024-06-23T14:47:59.161Z [info] Phillip clicked 
+2024-06-23T14:48:11.467Z [info] Phillip clicked 
+2024-06-23T14:48:28.948Z [info] Phillip clicked 
+2024-06-23T14:49:26.142Z [info] Phillip clicked 
+2024-06-23T14:49:31.339Z [info] Phillip clicked 
+2024-06-23T14:49:51.661Z [info] Phillip clicked 
+2024-06-23T14:51:53.464Z [info] Phillip clicked 
+2024-06-23T14:52:14.774Z [info] Phillip clicked 
+2024-06-23T14:53:04.005Z [info] Phillip clicked 
+2024-06-23T14:55:39.573Z [info] Phillip clicked 
+2024-06-23T14:55:41.384Z [info] Phillip clicked 
+2024-06-23T14:58:30.010Z [info] Phillip clicked 
+2024-06-23T14:58:30.012Z [info] Phillip clicked 
+2024-06-23T14:58:30.013Z [info] Phillip clicked 
+2024-06-23T14:58:41.345Z [info] Phillip clicked 
+2024-06-23T14:59:00.258Z [info] Phillip clicked 
+2024-06-23T15:00:05.466Z [info] Phillip clicked 
+2024-06-23T15:00:07.526Z [info] Phillip clicked 
+2024-06-23T15:00:08.803Z [info] Phillip clicked 
+2024-06-23T15:00:10.323Z [info] Phillip clicked 
+2024-06-23T15:00:12.196Z [info] Phillip clicked 
+2024-06-23T15:00:15.742Z [info] Phillip clicked 
+2024-06-23T15:00:22.920Z [info] Phillip clicked 
+2024-06-23T15:01:51.004Z [info] Phillip clicked 
+2024-06-23T15:02:01.531Z [info] Phillip clicked 
+2024-06-23T15:02:05.724Z [info] Phillip clicked 
+2024-06-23T15:16:39.741Z [info] Phillip clicked 
+2024-06-23T15:16:48.479Z [info] Phillip clicked 
+2024-06-23T15:16:53.660Z [info] Phillip clicked 
+2024-06-23T15:17:03.943Z [info] Phillip clicked 
+2024-06-23T15:18:08.296Z [info] Phillip clicked 
+2024-06-23T15:18:30.308Z [info] Phillip clicked 
+2024-06-23T15:18:39.902Z [info] Phillip clicked 
+2024-06-23T15:18:41.790Z [info] Phillip clicked 
+2024-06-23T15:18:49.473Z [info] Phillip clicked 
+2024-06-23T15:19:32.033Z [info] Phillip clicked 
+2024-06-23T15:20:04.057Z [info] Phillip clicked 
+2024-06-23T15:33:16.840Z [info] Phillip clicked 
+2024-06-23T15:33:20.865Z [info] Phillip clicked 
+2024-06-23T15:33:26.012Z [info] Phillip clicked 
+2024-06-23T15:33:30.628Z [info] Phillip clicked 
+2024-06-23T15:33:38.815Z [info] Phillip clicked 
+2024-06-23T15:34:02.898Z [info] Phillip clicked 
+2024-06-23T15:34:45.609Z [info] Phillip clicked 
+2024-06-23T15:34:50.212Z [info] Phillip clicked 
+2024-06-23T15:35:39.003Z [info] Phillip clicked 
+2024-06-23T15:35:41.295Z [info] Phillip clicked 
+2024-06-23T15:35:46.834Z [info] Phillip clicked 
+2024-06-23T15:37:03.564Z [info] Phillip clicked 
+2024-06-23T15:37:05.780Z [info] Phillip clicked 
+2024-06-23T15:37:33.922Z [info] Phillip clicked 
+2024-06-23T15:37:38.418Z [info] Phillip clicked 
+2024-06-23T15:38:17.578Z [info] Phillip clicked 
+2024-06-23T15:38:19.189Z [info] Phillip clicked 
+2024-06-23T15:38:20.926Z [info] Phillip clicked 
+2024-06-23T15:51:54.368Z [info] Phillip clicked 
+2024-06-23T15:51:55.369Z [info] Phillip clicked 
+2024-06-23T20:31:15.233Z [info] Kwabena clicked 
+2024-06-23T20:39:07.176Z [info] Kwabena clicked 
+2024-06-23T20:39:16.617Z [info] Kwabena clicked 
+2024-06-23T20:39:31.974Z [info] Kwabena clicked 
+2024-06-24T03:30:19.946Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:30:29.791Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:35:54.829Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:36:00.919Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:41:10.276Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:41:13.206Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T03:45:27.981Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:13:26.233Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:13:33.896Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:38.531Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:39.839Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:42.948Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:46.725Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:49.582Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:52.004Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:55.802Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:15:58.573Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:01.829Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:06.656Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:07.780Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:41.764Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:44.931Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:16:46.461Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:23:18.055Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:31:32.402Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:31:46.770Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:31:53.820Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:34:00.545Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:40:28.055Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:46:10.884Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T04:46:15.406Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T07:59:43.374Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:02:02.577Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:03:43.364Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:15:02.612Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:15:07.613Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:17:11.811Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:17:13.642Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:18:16.315Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:28:19.992Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:29:36.906Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:29:42.233Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:31:10.207Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:31:12.115Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T08:31:15.167Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:01:33.954Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:27:32.224Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:11.205Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:12.846Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:13.661Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:17.003Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:18.094Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:34:21.661Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:39:47.164Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:39:49.574Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T09:39:50.715Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:01:48.617Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:01:55.984Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:18:32.398Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:33:38.765Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:35:02.664Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:36:36.975Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:36:38.390Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:36:39.416Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:36:42.014Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:39:25.404Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:39:27.106Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:40:38.920Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:40:40.525Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:40:47.770Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:40:50.182Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:40:51.622Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T11:54:19.579Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:20.059Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:20.398Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:21.514Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:36.275Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:38.219Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:43.834Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:00:58.439Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:29.814Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:30.697Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:32.162Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:33.265Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:35.187Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:05:37.036Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:10:21.485Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:10:22.516Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:10:24.715Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:24:40.527Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:29:27.371Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:33:58.506Z [info] Elijah Owusu Ewooral clicked 
+2024-06-24T12:59:16.775Z [info] Elijah Owusu Ewooral clicked 

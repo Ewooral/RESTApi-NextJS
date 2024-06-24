@@ -19,7 +19,7 @@ export async function getUserImageNeo4j(userId: string): Promise<string> {
 
 
 // Postgres SQL queries
-export async function createImageTable_POSTGRES() {
+export async function createImageTable_POSTGRES() {  
     const createTableText = `
       CREATE TABLE IF NOT EXISTS images (
         id SERIAL PRIMARY KEY,

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 
 import { createUser_POSTGRES, createUser_NEO4J, createStatuses_POSTGRES } from '@/repositories/users/userRepository';
+import { createImageTable_POSTGRES } from "@/repositories/users/imageRepository";
 
 
 dotenv.config();
@@ -18,6 +19,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     // Hash the password before storing it in the database
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    await createImageTable_POSTGRES();
 
     const params = {
       firstname,

@@ -372,7 +372,7 @@ font-size: 12px;
 .admintab .MuiTabs-scroller{
   overflow: auto;
   margin-bottom: 0px;
-  position: fixed;
+  /* position: fixed; */
   background: white;
-  z-index: 1000;
+  /* z-index: 1000; */
 }

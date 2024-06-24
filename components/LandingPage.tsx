@@ -1,10 +1,17 @@
+'use client';
+import { useCssMediaQueries } from '@/hooks/useCssMediaQueries';
+import clsx from 'clsx';
 import React from 'react';
 
 const LandingPage = () => {
+  const {hideAfterLargerScreens} = useCssMediaQueries();
   return (
-    <div className="bg-gray-100">
+    <div className={clsx("bg-gray-100",
+    hideAfterLargerScreens && "pt-[1.3rem] px-[1rem] pb-[1.3rem]",
+    )}>
       {/* Header */}
-      <header className="text-center py-20">
+      <header className={clsx("text-center py-20",
+      )}>
         <h1 className="text-4xl font-bold mb-4">Welcome to Our Automated School Management System</h1>
         <p className="text-lg text-gray-600">Empowering education with innovative technology</p>
         <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 mt-8 rounded-md">Get Started</button>

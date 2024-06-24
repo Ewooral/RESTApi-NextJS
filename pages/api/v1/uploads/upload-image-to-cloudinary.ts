@@ -74,6 +74,8 @@ export default async function handler(req: MulterRequest, res: NextApiResponse) 
             imageId: cloudinaryResult.public_id,
         })
     } catch (err: any) {
+        console.log("ERROR:: ", err);
+        
         res.status(500).json({ message: 'Error uploading image', error: err.message })
     }
 }

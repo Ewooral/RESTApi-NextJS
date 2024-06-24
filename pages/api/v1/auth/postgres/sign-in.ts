@@ -5,6 +5,8 @@ import { getSession, updateSession } from "@/lib/sessionManager";
 import { assignUserRole } from "@/lib/userRoleAssigner";
 import { userStatusAssigner } from "@/lib/userStatusAssigner";
 import { createStatuses_POSTGRES, getUsersInfoByEmail, updateUserRoleAndStatus_POSTGRES } from "@/repositories/users/userRepository";
+import { logError } from "@/lib/logger";
+
 
 const ADMIN_SECRET_KEY = process.env.ADMIN_SECRET_KEY;
 
@@ -15,6 +17,7 @@ export default async function handler(
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
+  const session = await getSession(req, res);
 
   const { email, password, adminKey, isAdmin } = req.body;
 
@@ -52,7 +55,7 @@ export default async function handler(
     await updateUserRoleAndStatus_POSTGRES(user.id, updatedRole, updatedStatus);
 
     // Retrieve and update session
-    const session = await getSession(req, res);
+    
     session.session_id = generateSessionId();
     session.userId = user?.id;
     session.email = user?.email;
@@ -70,8 +73,10 @@ export default async function handler(
 
     return res.json({ message: "Successfully logged in", session: session });
   } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json({ error: "Internal Server Error" });
+    console.log("Errorsssss:::: ", (error as Error).message);
+    
+    logError('Error Signing in: ' + (error as Error).message);
+    return res.status(500).json({ status: 'Sign in failed miserably', error: (error as Error).message });
   }
 }
 

@@ -33,7 +33,7 @@ export default function RootLayout({
           
           {/* Wrap the children with AuthProvider */}
           {/* <Header /> */}
-          <AdminHeader />
+          <AdminHeader  />
           <Toaster />
           {children}
         </AuthProvider>

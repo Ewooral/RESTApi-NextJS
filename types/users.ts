@@ -28,8 +28,10 @@ export type sessionType ={
   imageUrl?: string;
   imageId?: string;
   role: string;
+  status: string;
   firstname: string;
   lastname: string
+  expiryTime: string
 }
 
 export type errorType = {
@@ -122,6 +124,8 @@ export type PostgresUser =
       lastname: string;
       isAdmin: boolean;
       role: string;
+      status: string;
+      expiryTime: string;
     };
   };
 };

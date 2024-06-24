@@ -17,6 +17,9 @@ import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import { IoCloudUpload } from "react-icons/io5";
 import { useCustomToast } from "@/hooks/useToast";
+import { format } from "date-fns";
+import { Snippet, Card } from "@nextui-org/react";
+import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
 
 type Data = {
   message: string;
@@ -48,6 +51,12 @@ const StudentDetails: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { showSuccessToast, showErrorToast } = useCustomToast();
+  const {showAfterMedium, hideAfterMedium, hideAfterLargerScreens} = useCssMediaQueries();
+
+  const formattedExpiryTime = format(
+    session.expiryTime,
+    "MMMM dd, yyyy HH:mm:ss"
+  );
 
   const fetchImage = async (email: string) => {
     try {
@@ -154,10 +163,12 @@ const StudentDetails: React.FC = () => {
     <>
       <section className="grid grid-cols-5 justify-center items-start w-full gap-4">
         {/* FIRST COLUMN */}
-        <div className="col-span-1 bg-[white]">
+        <div className={clsx("col-span-1 bg-[white]",
+          hideAfterLargerScreens && "col-span-5",
+        )}>
           <div className="border-b-2 w-full">
             <h1 className="font-extrabold text-lg p-2 text-[#3b82f6]">
-              Details
+              Student Details Page
             </h1>
           </div>
           <div className="flex flex-col justify-center items-start gap-4 p-4">
@@ -188,8 +199,18 @@ const StudentDetails: React.FC = () => {
             </h2>
             <h2>
               Status:{" "}
-              <span className="bg-[#0080002c] text-[#125012] p-1 rounded-lg">
-                {session.isLoggedIn ? "Active" : "Not active"}
+              <span
+                className={clsx(
+                  "p-1 rounded-lg",
+                  session.status === "Inactive" &&
+                    "bg-[#80000052] text-[#501212]",
+                  session.status === "Active" &&
+                    "bg-[#0080002c] text-[#125012]",
+                  session.status === "Pending" &&
+                    "bg-[#6200802c] text-[#620080]"
+                )}
+              >
+                {session.status}
               </span>
             </h2>
             <h2>
@@ -210,6 +231,12 @@ const StudentDetails: React.FC = () => {
                 {session.email}
               </span>
             </h2>
+            <h2>
+              Expiry Time:{" "}
+              <span className="text-[#153464] bg-[#3b83f63b] p-1 rounded-lg">
+                {formattedExpiryTime}
+              </span>
+            </h2>
           </div>
           {/* BUTTON */}
           <div className="flex justify-start p-4 border-t-2">
@@ -221,7 +248,9 @@ const StudentDetails: React.FC = () => {
         </div>
 
         {/* SECOND COLUMN */}
-        <div className="col-span-3 bg-[white]">
+        <div className={clsx("col-span-3 bg-[white]",
+           hideAfterLargerScreens && "col-span-5",
+        )}>
           <div className="border-b-2 w-full">
             <h1 className="font-extrabold text-lg p-2 bg-white text-[#3b82f6]">
               More Details
@@ -234,11 +263,31 @@ const StudentDetails: React.FC = () => {
               architecto. Nemo expedita officia odio facilis quos odit dolores
               quam qui quibusdam corporis.
             </p>
+
+            {/* NEXTUI ORG COMPONENT */}
+            <Card className="w-[200px] space-y-5 p-4" radius="lg">
+              <Skeleton color="green" className="rounded-lg">
+                <div className="h-24 rounded-lg bg-green-200"></div>
+              </Skeleton>
+              <div className="space-y-3">
+                <Skeleton className="w-3/5 rounded-lg">
+                  <div className="h-3 w-3/5 rounded-lg bg-[#0000001c]"></div>
+                </Skeleton>
+                <Skeleton className="w-4/5 rounded-lg">
+                  <div className="h-3 w-4/5 rounded-lg bg-[#0000001c]"></div>
+                </Skeleton>
+                <Skeleton className="w-2/5 rounded-lg">
+                  <div className="h-3 w-2/5 rounded-lg bg-[#0000001c]"></div>
+                </Skeleton>
+              </div>
+            </Card>
           </div>
         </div>
 
         {/* THIRD COLUMN */}
-        <div className="col-span-1 bg-[white]">
+        <div className={clsx("col-span-1 bg-[white]",
+           hideAfterLargerScreens && "col-span-5",
+        )}>
           <div className="border-b-2 w-full">
             <h1 className="font-extrabold text-lg p-2 bg-white text-[#3b82f6]">
               Upload Image
@@ -260,7 +309,7 @@ const StudentDetails: React.FC = () => {
                   className="rounded-[50px] border-[8px] border-[#f1f1f1] p-4"
                 />
               ) : (
-                <Skeleton className="w-[240px] h-[240px] bg-black" />
+                <Skeleton className="w-[240px] h-[240px] bg-[#bddfff] rounded-[50px] border-[8px] border-[#6b6b6b]" />
               )}
               <FaRegEdit
                 onClick={handleAnimateFaRegEdit}

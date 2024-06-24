@@ -14,6 +14,7 @@ import { LoginForm } from "./LoginForm";
 
 
 
+
 const LogIn: React.FC = () => {
   const {
   } = useForm({
@@ -32,7 +33,6 @@ const LogIn: React.FC = () => {
   const router = useRouter();
   const [areYouLoading, setAreYouLoading] = useState(false);
 
-
  
 
   
@@ -49,9 +49,11 @@ const LogIn: React.FC = () => {
       setSession(response?.data.session);
       setIsLoggedIn(true);
       showSuccessToast(response?.data.message, `Welcome ${response?.data.session.firstname}!`);
-        router.push("/myadmin/dashboard");
+        router.push("/myadmin/user-management/student-details");
     } catch (err: any) {
-      showErrorToast(err.response?.data, 'Login Failed');
+      console.log("Errorrr:::: ", err as string);
+      
+      showErrorToast(err.error, 'Login Failed');
     } finally {
       setIsLoading(false);
       setIsSubmitting(false);
