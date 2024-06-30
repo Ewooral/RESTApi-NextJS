@@ -9,10 +9,10 @@ const PersonalInfo: React.FC = () => {
       {/* Form or content for Personal Info */}
       <h1>Personal Information content goes here...</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-        maxime numquam voluptatum facilis, neque quae ducimus autem quam esse
-        minima debitis porro incidunt necessitatibus vitae illum libero ipsum
-        eaque qui?
+        The Personal Info section captures essential details like your full
+        name, date of birth, and contact information, ensuring a personalized
+        and seamless experience. This comprehensive profile setup allows us to
+        tailor services to meet your unique needs and preferences.
       </p>
       <Accordion />
     </div>

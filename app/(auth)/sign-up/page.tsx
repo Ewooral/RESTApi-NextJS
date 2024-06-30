@@ -139,12 +139,12 @@ export default function SignUp() {
     <>
       {isClient && (
         <div
-          style={{
-            backgroundImage: "url('/bg_B.jpg')",
-            backgroundSize: "contain",
-            backgroundPosition: "right",
-            backgroundRepeat: "no-repeat",
-          }}
+          // style={{
+          //   backgroundImage: "url('/bg_B.jpg')",
+          //   backgroundSize: "contain",
+          //   backgroundPosition: "right",
+          //   backgroundRepeat: "no-repeat",
+          // }}
           className={clsx(
             "flex justify-start items-center h-screen bg-[#dcdfe6]"
           )}
