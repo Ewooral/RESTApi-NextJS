@@ -52,3 +52,5 @@ For changing the author information on multiple commits, more complex commands i
 - **Credential Manager**: If you're on Windows, the Git Credential Manager might have stored credentials for the other account. You might need to update or clear these credentials.
 
 After updating your Git configuration, future commits should reflect the correct user information. Remember to push any changes to the remote repository to reflect these updates.
+
+#The next thing
