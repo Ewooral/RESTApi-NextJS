@@ -2,7 +2,7 @@ import { useState } from "react";
 
 type AccordionItemProps = {
   title: string;
-  content: string;
+  content: any;
 };
 
 const AccordionItem: React.FC<AccordionItemProps> = ({ title, content }) => {

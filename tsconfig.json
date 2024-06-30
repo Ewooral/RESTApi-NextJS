@@ -52,6 +52,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.test.ts", "**/*.test.tsx", ".next/types/**/*.ts", "app/profile/content/tests/header.test.jsx", "lib/connectToNeo4J.mts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.test.ts", "**/*.test.tsx", ".next/types/**/*.ts", "app/profile/content/tests/header.test.jsx", "lib/connectToNeo4J.mts", "types/TabComponentProps.ts"],
   "exclude": ["node_modules"]
 }

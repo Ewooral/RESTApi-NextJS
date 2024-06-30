@@ -1,5 +1,4 @@
 import {query} from '@/lib/connectToPostgres'
-import { stat } from 'fs'
 export const dynamic = 'force-dynamic' // defaults to auto
 
 export async function GET() {

@@ -13,7 +13,8 @@ let poolConfig;
   if (NODE_ENV_BS === 'production') {
   // Use connection string for production, e.g., AWS RDS
   poolConfig = {
-    connectionString: process.env.POSTGRES_DB_STRING,
+    connectionString: process.env.POSTGRES_DB_STRING_,
+    // connectionString: process.env.POSTGRES_DB_STRING,
     ssl: {
       rejectUnauthorized: false,
     },

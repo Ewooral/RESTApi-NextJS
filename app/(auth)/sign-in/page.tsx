@@ -63,7 +63,7 @@ const LogIn: React.FC = () => {
   useEffect(() => {
     setAreYouLoading(true);
     if (session.isLoggedIn) {
-      router.push("/myadmin/dashboard");
+      router.push("/myadmin/user-management/student-details");
     } else {
       setAreYouLoading(false);
     }

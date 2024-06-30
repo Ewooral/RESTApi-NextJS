@@ -20,6 +20,9 @@ import { useIsClient } from "@/hooks/useIsClient";
 import ButtonSpinner from "@/components/spinners/ButtonSpinner";
 import { clsx } from "clsx";
 import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
+import DynamicButton from "@/components/CustomButton";
+import { BsFillSendCheckFill } from "react-icons/bs";
+import { FaCashRegister } from "react-icons/fa6";
 
 const schema = z.object({
   firstname: z.string().min(1, { message: "First name is required" }),
@@ -180,7 +183,7 @@ export default function SignUp() {
               </div>
               <div className="grid grid-cols-2 gap-2 justify-evenly mb-4">
                 <div
-                  className="col-span-1 flex  gap-3 justify-start bg-[#22318f]
+                  className="col-span-1 flex  gap-3 justify-start bg-[#3b82f6]
              hover:bg-[#5f73f1] text-white p-2 rounded-xl items-center cursor-pointer"
                 >
                   <span className="font-extrabold text-5xl">G</span>
@@ -399,19 +402,13 @@ export default function SignUp() {
 
               {/* SIGN UP BUTTON */}
               <section className="flex items-center justify-between mt-4 p-2">
-                <button
-                  className={clsx(
-                    "flex justify-center items-center gap-3 bg-black hover:bg-[#0000008f] text-white",
-                    "font-bold py-4 text-xs px-8 rounded-3xl focus:outline-none focus:shadow-outline",
-                    isLoading && "cursor-not-allowed",
-                    isLoading && "opacity-50"
-                  )}
+                <DynamicButton
+                  className={clsx("px-0 mx-[-.5rem]")}
+                  label={isLoading ? "Signing up..." : "Sign up"}
+                  icon={<FaCashRegister className="size-3 text-white" />}
+                  isLoading={isLoading}
                   type="submit"
-                  // onClick={onSubmit}
-                >
-                  <span>{isLoading ? "Signing up..." : "Sign up"}</span>
-                  <span>{isLoading && <ButtonSpinner />}</span>
-                </button>
+                />
                 <div className="">
                   <div className="text-xs">Already have an account?</div>
                   <div>

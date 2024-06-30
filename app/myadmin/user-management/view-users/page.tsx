@@ -11,4 +11,4 @@ const ViewUser = () => {
   )
 }
 
-export default ViewUser
+export default ViewUser                 

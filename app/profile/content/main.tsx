@@ -10,7 +10,7 @@ const Main = () => {
   }, []);
   return (
     <Fragment>
-      <div className="grid grid-cols-1 ml-[12%] mr-[3%] px-4 py-16 mt-[68px]">
+      <div className="grid grid-cols-1 ml-[12%] mr-[3%] px-4 py-16 pt-[108px]">
         <div className="flex flex-col items-center space-y-8">
           {/* <Image src="/coverA.png" alt="Cover Photo" className="w-full h-48 object-cover" height={200} width={200} /> */}
           {isClient && (

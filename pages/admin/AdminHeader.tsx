@@ -22,10 +22,13 @@ import { UserImagePlaceholder } from "@/data/data";
 import { formatDistanceToNow } from "date-fns";
 // import useInternetConnectivity from "@/hooks/useInternetConnectivity";
 import { useCustomToast } from "@/hooks/useToast";
-import { FaCircleArrowDown } from "react-icons/fa6";
+import { FaCashRegister, FaCircleArrowDown } from "react-icons/fa6";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { RiMenuFold2Fill } from "react-icons/ri";
 import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
+import { LuMenu } from "react-icons/lu";
+import DynamicButton from "@/components/CustomButton";
+import { AiOutlineLogin } from "react-icons/ai";
 
 function AdminHeader() {
   // const userIsOnline = useInternetConnectivity()
@@ -38,7 +41,8 @@ function AdminHeader() {
   const remainingTime = useInactivityTimer(logoutTime);
   const { showSuccessToast, showErrorToast } = useCustomToast();
   const [showProfile, setShowProfile] = useState(false);
- const {showAfterMedium, hideAfterMedium, hideAfterLargerScreens} = useCssMediaQueries();
+  const { showAfterMedium, hideAfterMedium, hideAfterLargerScreens } =
+    useCssMediaQueries();
 
   const [lastSeenTime, setLastSeenTime] = useState<Date | null>(null); // Time when user went offline
 
@@ -82,10 +86,11 @@ function AdminHeader() {
     <>
       {isClient && (
         <nav
-          className={clsx("fixed w-full flex justify-between items-center bg-[white]", 
-    "drop-shadow-sm px-5 py-1 z-50  border-[#1e1e1e]]",
-    hideAfterLargerScreens && ""
-  )}
+          className={clsx(
+            "fixed w-full flex justify-between items-center bg-[white]",
+            "drop-shadow-sm px-5 py-1 z-50  border-[#1e1e1e]]",
+            hideAfterLargerScreens && ""
+          )}
         >
           {/*LEFT SECTION - LOGO */}
           <section>
@@ -157,16 +162,30 @@ function AdminHeader() {
             )}
             {/* LOGIN */}
             {!session.isLoggedIn && (
-              <section className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline">
-                <Link href="/sign-in">Login</Link>
-              </section>
+              <>
+                <Link href="/sign-in">
+                  <DynamicButton
+                    className="text-white mx-2"
+                    label="Sign in"
+                    icon={<AiOutlineLogin className="size-3" />}
+                    type="button"
+                  />
+                </Link>
+              </>
             )}
 
             {/* REGISTER */}
             {!session.isLoggedIn && (
-              <section className="mx-2 bg-black hover:bg-[#0000008f] text-white font-bold py-2 text-xs px-4 rounded-3xl focus:outline-none focus:shadow-outline">
-                <Link href="/sign-up">Register</Link>
-              </section>
+              <>
+                <Link href="/sign-up">
+                  <DynamicButton
+                    className="text-white"
+                    label="Sign up"
+                    icon={<FaCashRegister className="size-3" />}
+                    type="button"
+                  />
+                </Link>
+              </>
             )}
 
             {/* USER NAMES */}
@@ -255,7 +274,7 @@ function AdminHeader() {
             </>
             {!hideAfterMedium && (
               <div className="mx-4">
-                <RiMenuFold2Fill className="size-7 text-black" />
+                <LuMenu className="size-7 text-black" />
               </div>
             )}
           </section>
@@ -284,3 +303,4 @@ function AdminHeader() {
 }
 
 export default AdminHeader;
+//Proton vpn zSuuXM>vedJA=Dvq

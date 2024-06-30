@@ -10,11 +10,12 @@ export default function Home() {
   return (
     <main 
     style={{
-      backgroundImage: "linear-gradient(to right, red 10%, lightblue)" ,
+      // backgroundImage: "linear-gradient(to right, red 10%, lightblue)" ,
       backgroundSize: "cover",
       backgroundPosition: "center"
     }}
     className={clsx('bg-gradient-to-tr',
+      "landing-page"
 
     )}
     // className="flex h-screen flex-col bg-gradient-to-tr items-center graden font-extrabold text-4xl justify-between p-24"

@@ -27,7 +27,9 @@ interface UserStore {
   lastSeenTimes: { [key: string]: Date };
   open: boolean[];
   activeLink: string | null;
+  isButtonLoading: boolean;
 
+  setIsButtonLoading: (loading: boolean) => void;
   setActiveLink: (newActiveLink: string | null) => void;
   setOpen: (newOpen: boolean[]) => void;
   setLastSeenTime: (userId: string, time: Date) => void;
@@ -147,6 +149,9 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
     activeLink: 'Student Details',
     setActiveLink: (newActiveLink) => set(() => ({ activeLink: newActiveLink }), false, 'setActiveLink'),
   
+
+    isButtonLoading: false,
+    setIsButtonLoading: (loading) => set(() => ({ isButtonLoading: loading }), false, 'setIsButtonLoading'),
       // ...................................................................
         logOut: () => {
         set(state => ({ user: {
@@ -191,6 +196,8 @@ const userStore = create<UserStore>(devtools(persist((set) => ({
 
           open: [],
           activeLink: 'Student Details',
+
+          isButtonLoading: false,
         
       }), false, 'logOut')
       },

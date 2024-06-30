@@ -10,6 +10,9 @@ import { GithubIcon } from "lucide-react";
 import ButtonSpinner from "@/components/spinners/ButtonSpinner";
 import clsx from "clsx";
 import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
+import { DevTool } from "@hookform/devtools";
+import DynamicButton from "@/components/CustomButton";
+import { AiOutlineLogin } from "react-icons/ai";
 
 interface LoginFormProps {
   onSubmit: (data: any) => void;
@@ -18,6 +21,7 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const {
     register,
+    control,
     handleSubmit,
     watch,
     formState: { errors },
@@ -85,7 +89,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               </div>
               <div className="grid grid-cols-2 gap-2 justify-evenly mb-4">
                 <div
-                  className="col-span-1 flex  gap-3 justify-start bg-[#22318f]
+                  className="col-span-1 flex  gap-3 justify-start bg-[#3b82f6]
          hover:bg-[#5f73f1] text-white p-2 rounded-xl items-center cursor-pointer"
                 >
                   <span className="font-extrabold text-5xl">G</span>
@@ -209,19 +213,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               )}
 
               {/* SIGN IN BUTTON */}
-              <section className="flex items-center justify-between mt-4 p-2">
-                <button
-                  className={clsx("flex justify-center items-center gap-3 bg-black hover:bg-[#0000008f] text-white", 
-                    "font-bold py-4 text-xs px-8 rounded-3xl focus:outline-none focus:shadow-outline",
-                    isLoading && "cursor-not-allowed",
-                    isLoading && "opacity-50"
-                  )}
+              <section className="flex items-center justify-between mt-4 p-2">              
+                <DynamicButton
+                  className={clsx("px-0 mx-[-.5rem]")}
+                  label={isLoading ? "Signing in..." : "Sign in"}
+                  icon={<AiOutlineLogin className="size-4 text-white" />}
+                  isLoading={isLoading}
                   type="submit"
-                  // onClick={onSubmit}
-                >
-                  <span>{isLoading ? "Signing in..." : "Sign in"}</span>
-                  <span>{isLoading && <ButtonSpinner />}</span>
-                </button>
+                />
 
                 <div className="">
                   <div className="text-xs">Don&apos;t have an account?</div>
@@ -237,6 +236,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               </section>
             </div>
           </form>
+          <DevTool control={control} />
         </div>
       )}
     </>

@@ -671,3 +671,10 @@ export const UserImagePlaceholder = {
     "https://res.cloudinary.com/dn1lqngds/image/upload/v1713170322/uploads/profilepicplaceholder.png.png",
   };
 
+
+    // Data options for the select component
+    export const genderOptions = [
+      { value: "male", label: "Male" },
+      { value: "female", label: "Female" },
+      { value: "other", label: "Other" },
+    ];

@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       {session.isLoggedIn && isClient && (
-        <div className={clsx("flex h-screen bg-[#f9f7f7]")}>
+        <div className={clsx("flex h-[100%] bg-[#f9f7f7]")}>
           {/* Left Sidebar */}
           <aside
             style={{ height: " calc(100vh - 3.8rem)" }}
