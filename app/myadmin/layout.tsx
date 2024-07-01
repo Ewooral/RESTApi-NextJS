@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <aside
             style={{ height: " calc(100vh - 3.8rem)" }}
             className={clsx(
-              "fixed w-[15%] bg-[#fff] border-r-2 mt-[3.8rem] p-2 overflow-y-auto text-[12px]",
+              "fixed w-[15%] bg-[#fff] border-r-2 mt-[4.3rem] p-2 overflow-y-auto text-[12px]",
               hideSidebarMenu && "hidden"
             )}
           >
@@ -34,7 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Main Section */}
           <section
             className={clsx(
-              "w-[100%] bg-[#f9f7f7] mt-[3.8rem] pl-[15.4%] text-[12px] mr-[.5rem]",
+              "w-[100%] bg-[#f9f7f7] mt-[4.3rem] pl-[15.4%] text-[12px] mr-[.5rem]",
               hideSidebarMenu && "mr-[0] pl-[2.7%] pr-[2.7%]"
             )}
           >

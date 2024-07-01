@@ -179,7 +179,7 @@ const LandingPage = () => {
               admissions process. It&apos;s intuitive, efficient, and has
               significantly reduced our workload.
             </p>
-            <cite className="block">- John Doe, Principal, [School Name]</cite>
+            <cite className="block">- Apostle Prof. K. Agyapong-Kodua  , Vice Chancellor, [Pentecost University]</cite>
           </div>
           {/* Add more testimonials here */}
         </section>

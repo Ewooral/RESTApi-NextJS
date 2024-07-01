@@ -88,7 +88,7 @@ function AdminHeader() {
         <nav
           className={clsx(
             "fixed w-full flex justify-between items-center bg-[white]",
-            "drop-shadow-sm px-5 py-1 z-50  border-[#1e1e1e]]",
+            "drop-shadow-sm px-5 py-3 z-50  border-[#1e1e1e]]",
             hideAfterLargerScreens && ""
           )}
         >
@@ -133,10 +133,10 @@ function AdminHeader() {
                   >
                     <BellIcon className="h-5 w-5 text-black hover:text-white transform transition-transform duration-200 ease-in-out" />
                     <div
-                      className="absolute top-0 right-0 inline-flex items-center justify-center w-3 h-3 text-[9px]
+                      className="absolute top-0 right-0 inline-flex items-center justify-center w-auto h-auto p-1  text-[9px]
                   font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
                     >
-                      {/* {notificationCount} */}0
+                      <p>{22}</p>
                     </div>
                   </div>
                 )}

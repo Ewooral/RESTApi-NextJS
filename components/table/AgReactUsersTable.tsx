@@ -24,7 +24,7 @@ export const AgReactUsersTable = () => {
 
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users"], 
     queryFn: userService_POSTGRES.fetchUsersData,
   });
 
@@ -61,8 +61,9 @@ export const AgReactUsersTable = () => {
         </div>
       ) : (
           <>
-            <div className="ag-theme-quartz h-[350px] custom-header-color">
+            <div className="ag-theme-quartz h-[350px] custom-header-color ">
               <AgGridReact
+              
                   columnDefs={columnDefs}
                   rowData={data.users}
                   defaultColDef={defaultColDef}

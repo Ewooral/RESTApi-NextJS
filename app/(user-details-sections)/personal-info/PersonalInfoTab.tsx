@@ -7,7 +7,7 @@ const PersonalInfo: React.FC = () => {
   return (
     <div>
       {/* Form or content for Personal Info */}
-      <h1>Personal Information content goes here...</h1>
+      {/* <h1>Personal Information content goes here...</h1> */}
       <p>
         The Personal Info section captures essential details like your full
         name, date of birth, and contact information, ensuring a personalized

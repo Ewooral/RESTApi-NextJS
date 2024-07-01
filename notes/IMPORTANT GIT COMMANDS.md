@@ -1,11 +1,11 @@
-ApaaEmma: so how do i write a git commit message for the utility function created and also moving all local types to the parent global type folder, following the right git message conventional standards?
+# ApaaEmma: so how do i write a git commit message for the utility function created and also moving all local types to the parent global type folder, following the right git message conventional standards?
 
 GitHub Copilot: Writing good commit messages is crucial for maintaining a readable history. The Conventional Commits specification is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history.
 
 Here's how you might write a commit message for the changes you described:
 
 ```
-feat: add getInitialsForAvatar utility function and refactor local types
+-`feat:` add getInitialsForAvatar utility function and refactor local types
 
 - Add a new utility function `getInitialsForAvatar` that generates avatar initials from a user's first and last name.
 - Move all local types to the parent global type folder for better organization and reusability.
@@ -18,8 +18,8 @@ This commit message follows the Conventional Commits standard:
 - The bullet points provide more detailed information about what was changed.
 
 Remember, the goal of a commit message is to clearly and concisely explain what the commit does. It should be understandable not only for you but also for other developers who might work on your project in the future.
-
-ApaaEmma: which command shows the git message console for the message to be typed in vscode
+s
+# ApaaEmma: which command shows the git message console for the message to be typed in vscode
 
 GitHub Copilot: To write a commit message directly in the Visual Studio Code (VS Code) editor, you can use the integrated Git support. Here's how:
 
@@ -43,7 +43,7 @@ If you want to write a longer commit message with a title and a body, you can us
 git commit -m "Title of your commit" -m "Body of your commit"
 ```
 
-ApaaEmma: I create a branch and renamed it but when i do git branch -a, i see the old branch and the renamed branch but when i go on my github, i see only the renamed branch, how do i delete the old branch
+# ApaaEmma: I create a branch and renamed it but when i do git branch -a, i see the old branch and the renamed branch but when i go on my github, i see only the renamed branch, how do i delete the old branch
 
 - bug/correct-typescript
   main
@@ -78,7 +78,7 @@ Again, replace `old-branch-name` with the name of the local branch you want to d
 
 Please be careful when deleting branches, as this operation cannot be undone.
 
-ApaaEmma: git push origin --delete feature/correct-typescript-bugs
+# ApaaEmma: git push origin --delete feature/correct-typescript-bugs
 error: unable to delete 'feature/correct-typescript-bugs': remote ref does not exist
 error: failed to push some refs to 'github.com:EGANOW-FRONTEND-ORG/EGANOW-BUSINESS-WEB-PORTAL-NEXTJS.git'
 
@@ -95,7 +95,7 @@ The `git fetch origin` command updates your local copy of the remote repository.
 
 If the branch does not exist on the remote repository, you don't need to do anything else. The branch has already been deleted from the remote repository.
 
-ApaaEmma: so why do i see the branc when i do git branch -a . check below for remotes/origin/feature/correct-typescript-bugs
+# ApaaEmma: so why do i see the branch when i do git branch -a . check below for remotes/origin/feature/correct-typescript-bugs
 
 - bug/correct-typescript
   main
@@ -120,7 +120,7 @@ git fetch --prune origin
 
 After running this command, `git branch -a` should no longer show the deleted branch.
 
-ApaaEmma: so for the utility function you've created above, how will you name its branch on github?
+# ApaaEmma: so for the utility function you've created above, how will you name its branch on github?
 
 GitHub Copilot: When naming a branch for a specific task or feature, it's a good practice to make the branch name descriptive and concise. It should give an idea about the work that's being done in that branch.
 
@@ -136,7 +136,7 @@ This command creates a new branch named `feature/add-avatar-initials-utility` an
 
 The `feature/` prefix is used to indicate that this branch is used for adding a new feature. This is a common practice and helps in identifying the purpose of the branch.
 
-ApaaEmma: is renaming a branch possible on the terminal?
+# ApaaEmma: is renaming a branch possible on the terminal?
 
 GitHub Copilot: Yes, renaming a branch in Git from the terminal is possible and quite straightforward. Here's how you can do it:
 
@@ -166,9 +166,9 @@ git push origin -u new-branch-name
 
 Please replace `old-branch-name` and `new-branch-name` with your actual branch names. Be careful when renaming branches that are being used by others, as it can cause confusion and potential merge conflicts.
 
-ApaaEmma: so how about the typescript changes i made, how will the branch name be?
+# ApaaEmma: so how about the typescript changes i made, how will the branch name be?
 
-GitHub Copilot: If the changes you made are related to fixing TypeScript issues, you could name the branch something like `fix/typescript-issues`. If the changes are more specific, you could include that in the branch name. For example, if you updated TypeScript types, you could use `update/typescript-types`.
+  GitHub Copilot: If the changes you made are related to fixing TypeScript issues, you could name the branch something like `fix/typescript-issues`. If the changes are more specific, you could include that in the branch name. For example, if you updated TypeScript types, you could use `update/typescript-types`.
 
 Here's how you can create this branch:
 
@@ -180,9 +180,9 @@ This command creates a new branch named `fix/typescript-issues` and switches to 
 
 The `fix/` prefix is used to indicate that this branch is used for fixing an issue. This is a common practice and helps in identifying the purpose of the branch.
 
-ApaaEmma: i moved all local types into their parent global type folder, what should the branch name be?
+# ApaaEmma: i moved all local types into their parent global type folder, what should the branch name be?
 
-GitHub Copilot: If you moved all local types into their parent global type folder, a descriptive branch name could be `refactor/move-local-types-to-global`. This indicates that the branch contains refactoring work related to moving local types to a global location.
+  GitHub Copilot: If you moved all local types into their parent global type folder, a descriptive branch name could be `refactor/move-local-types-to-global`. This indicates that the branch contains refactoring work related to moving local types to a global location.
 
 Here's how you can create this branch:
 
@@ -250,3 +250,7 @@ git checkout dev
 If the `dev` branch does not exist locally, Git will create it and set it up to track the remote `dev` branch.
 
 Please note that you don't need to clone the repository again if you already have it locally. The `git fetch` command updates your local repository with all branches and commits from the remote repository. The `git checkout` command then switches to the specific branch you want to work on.
+
+
+
+
