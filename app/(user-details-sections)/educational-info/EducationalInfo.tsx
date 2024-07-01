@@ -16,6 +16,8 @@ import axios from "axios";
 import { SelectComponent } from "@/components/SelectTagComponent";
 import { genderOptions } from "@/data/data";
 import TextareaComponent from "@/components/TextAreaComponent";
+import { MdEmergencyShare } from "react-icons/md";
+import { useCustomToast } from "@/hooks/useToast";
 
 type PersonalInfoFormProps = {
   onSubmitPersonalForm?: any;
@@ -23,13 +25,12 @@ type PersonalInfoFormProps = {
   usePersonalForm?: Function;
 };
 
-const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = usePersonalForm();
+const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
+  const { register, control, watch, handleSubmit, reset, formState } =
+    usePersonalForm();
+
+  const { errors } = formState;
+  const { showErrorToast, showSuccessToast } = useCustomToast();
 
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
 
@@ -39,13 +40,20 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
       setIsButtonLoading(true);
 
       const res = await axios.post(
-        "/api/user-profile/update-user-details",
+        "/api/v1/crud/create/createPersonalInfo",
         data
       );
       setIsButtonLoading(false);
+      showSuccessToast("Successful!", res.data.message);
       console.log(res.data);
-    } catch (error) {
+      reset()
+    } catch (error: any) {
+      showErrorToast(
+        "Error",
+        `Failed to save, ${error.response.data.error as unknown}`
+      );
       console.error(error);
+      setIsButtonLoading(false);
     }
   };
 
@@ -57,11 +65,26 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
       >
         {/* TAKES THE WHOLE COL SPAN 4/4 */}
         <h3 className="font-extrabold  col-span-4 text-xs bg-white text-[#a58c2a]">
-          Educational Information
+          Personal Information
         </h3>
 
         {/* TAKES 2/4 */}
         <div className="col-span-2 my-2 mx-2">
+          {/*  User id */}
+          <InputComponent
+            register={register}
+            name="user_id"
+            label="User Id"
+            placeholder="Enter your User Id"
+            icon={<MdDriveFileRenameOutline className="size-4" />}
+            inputId="user_id"
+            labelId="user_id"
+            type="text"
+            error={errors.user_id?.message}
+            formState={formState}
+            watch={watch}
+          />
+
           {/* Middle Name */}
           <InputComponent
             register={register}
@@ -73,6 +96,8 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             labelId="middle_name"
             type="text"
             error={errors.middle_name?.message}
+            formState={formState}
+            watch={watch}
           />
 
           {/* Date of Birth */}
@@ -86,6 +111,8 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             type="date"
             disabled={false}
             error={errors.date_of_birth?.message}
+            formState={formState}
+            watch={watch}
           />
 
           {/* Gender */}
@@ -110,20 +137,39 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             labelId="nationality"
             type="text"
             error={errors.nationality?.message}
+            formState={formState}
+            watch={watch}
           />
           <TextareaComponent
             register={register}
-            name="student_support"
-            label="other information"
+            name="other_information"
+            label="Other information"
             placeholder="other information"
             // icon={<MdLocationOn className="size-4" />}
-            textareaId="student_support"
-            error={errors.student_support?.message}
+            textareaId="other_information"
+            error={errors.other_information?.message}
+            watch={watch}
+            formState={formState}
           />
         </div>
 
         {/* TAKES 2/4 */}
         <div className="col-span-2 my-2  mx-2">
+          {/* Marriage status */}
+          <InputComponent
+            register={register}
+            name="marriage_status"
+            label="Marriage Status"
+            placeholder="Enter your Marraige Status"
+            icon={<MdDriveFileRenameOutline className="size-4" />}
+            inputId="marriage_status"
+            labelId="marriage_status"
+            type="text"
+            error={errors.marriage_status?.message}
+            formState={formState}
+            watch={watch}
+          />
+
           {/* Username */}
           <InputComponent
             register={register}
@@ -135,6 +181,8 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             labelId="username"
             type="text"
             error={errors.username?.message}
+            formState={formState}
+            watch={watch}
           />
 
           {/*Home Address */}
@@ -148,19 +196,23 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             labelId="home_address"
             type="text"
             error={errors.home_address?.message}
+            formState={formState}
+            watch={watch}
           />
 
           {/* Emergency_contact_information */}
           <InputComponent
             register={register}
-            name="Emergency_contact_information"
+            name="emergency_contact_information"
             label="Emerg.. Contact Info"
             placeholder="Enter your emerg... "
-            icon={<PiPhonePlusThin className="size-4" />}
-            inputId="Emergency_contact_information"
-            labelId="Emergency_contact_information"
+            icon={<MdEmergencyShare className="size-4" />}
+            inputId="emergency_contact_information"
+            labelId="emergency_contact_information"
             type="text"
-            error={errors.Emergency_contact_information?.message}
+            error={errors.emergency_contact_information?.message}
+            formState={formState}
+            watch={watch}
           />
           {/* Phone Number */}
           <InputComponent
@@ -173,16 +225,20 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             labelId="phone_number"
             type="text"
             error={errors.phone_number?.message}
+            formState={formState}
+            watch={watch}
           />
 
           <TextareaComponent
             register={register}
-            name="student_support"
-            label="other information"
-            placeholder="other information"
+            name="add_description"
+            label="Add Description"
+            placeholder="Add Description"
             // icon={<MdLocationOn className="size-4" />}
-            textareaId="student_support"
-            error={errors.student_support?.message}
+            textareaId="add_description"
+            error={errors.add_description?.message}
+            watch={watch}
+            formState={formState}
           />
         </div>
 
@@ -202,4 +258,4 @@ const EducationalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
   );
 };
 
-export default EducationalInfoForm;
+export default PersonalInfoForm;
