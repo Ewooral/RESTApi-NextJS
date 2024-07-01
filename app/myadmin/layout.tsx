@@ -39,6 +39,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             )}
           >
             <main className="">
+              <div id="ewooral-overlay-root"></div>
+              <div id="portal-root"></div>
               <Providers>{children}</Providers>
             </main>
           </section>

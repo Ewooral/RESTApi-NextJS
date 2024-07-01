@@ -22,15 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await createImageTable_POSTGRES();
 
-    const params = {
-      firstname,
-      lastname,
-      email,
-      password: hashedPassword,
-      isStudent,
-      title,
-      terms
-    }
     // create user_statuses table if not exists
     await createStatuses_POSTGRES();
     // Create the user

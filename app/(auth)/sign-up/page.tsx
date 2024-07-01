@@ -403,7 +403,7 @@ export default function SignUp() {
               {/* SIGN UP BUTTON */}
               <section className="flex items-center justify-between mt-4 p-2">
                 <DynamicButton
-                  className={clsx("px-0 mx-[-.5rem]")}
+                  className={clsx("px-2 mx-[-.5rem] text-white")}
                   label={isLoading ? "Signing up..." : "Sign up"}
                   icon={<FaCashRegister className="size-3 text-white" />}
                   isLoading={isLoading}

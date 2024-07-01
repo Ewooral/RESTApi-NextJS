@@ -436,11 +436,7 @@ body {
 }
 
 .popover-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  z-index: 2051;
-  border: 2px solid #ccc;
+  border: 2px solid #3b82f6;
 }
 
 .parent-container {

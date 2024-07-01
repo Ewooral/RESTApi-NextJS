@@ -4,12 +4,13 @@ import ButtonSpinner from "./spinners/ButtonSpinner";
 import userStore from "@/store";
 
 type DynamicButtonProps = {
-  label: string;
-  icon: React.ReactNode;
+  label?: string;
+  icon?: React.ReactNode;
   className?: string;
   isLoading?: boolean;
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onClick?: any;
+  style?: React.CSSProperties;
 
 };
 
@@ -19,10 +20,13 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
   className,
   isLoading,
   type,
+  onClick,
+  style,
 }) => {
   return (
     <div className={className}>
       <button
+        onClick={onClick}
         disabled={isLoading}
         type={type}
         className={clsx(
@@ -31,14 +35,18 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
           isLoading && "cursor-not-allowed",
           isLoading && "opacity-70 bg-[#7e7e7e] font-bold"
         )}
+        style={style}
       >
         {icon}
-        <span className="text-white text-xs">{label}</span>
+        <span className={clsx("text-xs",
+          className
+        )}>{label}</span>
         {isLoading && (
           <span>
             <ButtonSpinner fillColor="#7e7e7e" />
           </span>
         )}
+        
       </button>
     </div>
   );

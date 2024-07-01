@@ -251,3 +251,119 @@ export async function deleteSession(sessionId: string) {
     throw new Error("Failed to delete session");
   }
 }
+
+import { Pool } from "pg";
+
+// Assuming you have a Pool instance for your database connection
+const pool = new Pool({
+  // your database connection details
+});
+
+/**
+ * Deletes a user from the database based on their email.
+ *
+ * @param {string} email - The email of the user to delete.
+ * @returns {Promise<boolean>} - A promise that resolves to true if the user was successfully deleted, false otherwise.
+ */
+export async function deleteUser_POSTGRES(email: string): Promise<boolean> {
+  const deleteQuery = "DELETE FROM users WHERE email = $1 RETURNING *";
+  const values = [email];
+
+  try {
+    const res = await query(deleteQuery, values);
+    // If the query successfully deleted a row, res.rowCount will be 1
+    return (res.rowCount as number) > 0;
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    throw error;
+  }
+}
+
+/**
+ * Creates the personalinformation table if it does not exist and inserts values into it.
+ *
+ * @param personalInfo - An object containing all the personal information fields.
+ * @returns {Promise<boolean>} - A promise that resolves to true if the operation was successful, false otherwise.
+ */
+export async function createAndInsertPersonalInformation(personalInfo: {
+  user_id?: string;
+  username: string;
+  middle_name?: string;
+  marriage_status: string;
+  date_of_birth: string; // Assuming ISO 8601 format (YYYY-MM-DD)
+  gender: string;
+  phone_number: string;
+  nationality: string;
+  home_address: string;
+  personal_statement?: string;
+  fee_code: string;
+  student_support?: string;
+  emergency_contact_information?: string;
+  add_description?: string;
+  other_information?: string;
+}): Promise<boolean> {
+  const createTableQuery = `
+  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE TABLE IF NOT EXISTS personalinformation (
+      user_id UUID,
+      username VARCHAR(100) NOT NULL,
+      middle_name VARCHAR(100),
+      marriage_status VARCHAR(20),
+      date_of_birth VARCHAR(30) NOT NULL,
+      gender VARCHAR(10) NOT NULL,
+      phone_number VARCHAR(20) NOT NULL,
+      nationality VARCHAR(50) NOT NULL,
+      home_address VARCHAR(255) NOT NULL,
+      personal_statement TEXT,
+      fee_code VARCHAR(10),
+      student_support VARCHAR(255),
+      emergency_contact_information VARCHAR(20),
+      add_description TEXT,
+      other_information TEXT ,
+      registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      deletion_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+      PRIMARY KEY (user_id),
+      FOREIGN KEY (user_id) REFERENCES Users(id)
+    );
+  `;
+
+  const insertQuery = `
+    INSERT INTO personalinformation (
+    user_id, username, middle_name, marriage_status, date_of_birth, gender, phone_number, nationality, 
+    home_address, personal_statement, fee_code, student_support, 
+    emergency_contact_information, add_description, other_information
+  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+  RETURNING *;
+  `;
+
+  const values = [
+    personalInfo.user_id,
+    personalInfo.username,
+    personalInfo.middle_name,
+    personalInfo.date_of_birth,
+    personalInfo.marriage_status,
+    personalInfo.gender,
+    personalInfo.phone_number,
+    personalInfo.nationality,
+    personalInfo.home_address,
+    personalInfo.personal_statement,
+    personalInfo.fee_code,
+    personalInfo.student_support,
+    personalInfo.emergency_contact_information,
+    personalInfo.add_description,
+    personalInfo.other_information,
+  ];
+
+  try {
+    // Create the table if it doesn't exist
+    await query(createTableQuery, []);
+    // Insert the personal information
+    const res = await query(insertQuery, values);
+    // If the query successfully inserted a row, res.rowCount will be 1
+    return (res.rowCount as number) > 0;
+  } catch (error) {
+    console.error("Error in createAndInsertPersonalInformation:", error);
+    throw error;
+  }
+}

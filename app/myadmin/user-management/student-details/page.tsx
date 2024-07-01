@@ -273,7 +273,7 @@ const StudentDetails: React.FC = ({}) => {
           {/* TAKES FULL COL SPAN 10/10 */}
           <div className="border-b-2 w-full col-span-10">
             <h1 className="font-extrabold text-lg p-2 bg-white text-[#3b82f6]">
-              Update Details
+              Complete User Profile
             </h1>
           </div>
 
@@ -313,7 +313,7 @@ const StudentDetails: React.FC = ({}) => {
           <div className="col-span-5">
             <div className="border-b-2 w-full">
               <h1 className="font-extrabold text-lg border-b-2 p-2 bg-white text-[#3b82f6]">
-                More Details
+                View Details
               </h1>
 
               <div className="p-4">

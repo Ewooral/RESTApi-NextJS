@@ -215,7 +215,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               {/* SIGN IN BUTTON */}
               <section className="flex items-center justify-between mt-4 p-2">              
                 <DynamicButton
-                  className={clsx("px-0 mx-[-.5rem]")}
+                  className={clsx("px-2 mx-[-.5rem] text-white")}
                   label={isLoading ? "Signing in..." : "Sign in"}
                   icon={<AiOutlineLogin className="size-4 text-white" />}
                   isLoading={isLoading}
