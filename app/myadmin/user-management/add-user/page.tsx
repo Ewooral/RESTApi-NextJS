@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const AddUser = () => {
+const page = () => {
   return (
-    <div>Add a user</div>
+    <div>page</div>
   )
 }
+
+export default page
