@@ -21,7 +21,7 @@ import EducationalInfo from "@/app/(user-details-sections)/educational-info/Educ
 import DocumentTab from "@/app/(user-details-sections)/document-upload/DocumentTab";
 import { Tab } from "@/types/TabComponentProps";
 import UploadUserProfileImage from "@/components/uploads/images/UploadUserProfileImage";
-import AddUser from "../add-user/page";
+
 
 type Data = {
   message: string;
