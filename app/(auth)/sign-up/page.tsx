@@ -119,6 +119,7 @@ export default function SignUp() {
       router.push("/myadmin/dashboard");
     } else {
       setAreYouLoading(false);
+      router.push("/sign-up");
     }
   }, []);
 

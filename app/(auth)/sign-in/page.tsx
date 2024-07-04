@@ -66,6 +66,7 @@ const LogIn: React.FC = () => {
       router.push("/myadmin/user-management/student-details");
     } else {
       setAreYouLoading(false);
+      router.push("/sign-up");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
