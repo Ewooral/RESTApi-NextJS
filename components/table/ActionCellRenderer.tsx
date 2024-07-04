@@ -5,6 +5,7 @@ import { useCustomToast } from "@/hooks/useToast";
 import DecisionPopover from "../popout/DecisionPopover";
 import EwooralCustomOverlay from "../overlays/EwooralOverlay";
 import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const ActionCellRenderer = (props: any) => {
   const [open, setOpen] = React.useState(false);
@@ -16,9 +17,8 @@ export const ActionCellRenderer = (props: any) => {
     setOpen(true);
   };
 
-  const handleDeleteUserByEmail = async () => {
-    setIsLoading(true);
-    console.log("Deleted user id...", props.data.email); 
+  // Delete User
+  const deleteUser = async (email: string) => {
     const url = "/api/v1/crud/delete/deleteUser"; // Replace with your actual endpoint URL
     const config = {
       headers: {
@@ -28,20 +28,41 @@ export const ActionCellRenderer = (props: any) => {
         email: props.data.email,
       },
     };
+    try {
+      const res = await axios.delete(url, config);
+      console.log("Deleted", res.data);
+      showSuccessToast("Deleted", res.data.message);
+    } catch (error) {
+      console.error("Error deleting user", error);
+      showErrorToast("Error", "Failed to delete");
+      setIsPopoverOpen(false);
+      setIsLoading(false);
+    }
+  };
+
+  // Inside your component
+  const queryClient = useQueryClient();
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      // Invalidate the users query to refetch data
+      // @ts-ignore
+      queryClient.invalidateQueries("users");
+    },
+  });
+
+  const handleDeleteUserByEmail = async () => {
+    setIsLoading(true);
+    console.log("Deleted user id...", props.data.email);
 
     try {
       // Call the delete function here
-      const res = await axios.delete(url, config);
-      console.log("Deleted", res.data);
+      await deleteUserMutation.mutateAsync(props.data.email);
 
-      showSuccessToast("Deleted", res.data.message);
       setIsPopoverOpen(false);
       setIsLoading(false);
     } catch (error) {
-      showErrorToast("Error", "Failed to delete");
       console.error("Error deleting user", error);
-      setIsPopoverOpen(false);
-      setIsLoading(false);
     }
   };
 

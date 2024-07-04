@@ -169,37 +169,6 @@ const StudentDetails: React.FC = ({}) => {
     console.error(error);
   }
 
-  // PERSONAL INFO FORM SUBMISSION
-  const onSubmitPersonalForm = async (data: FieldValues) => {
-    // (event as unknown as React.FormEvent<HTMLFormElement>).preventDefault();
-    // trigger();
-    console.log("logging...");
-    setIsPersonalInfoButtonLoading(true);
-    const parsePersonalInfodData = personalInfoSchema.safeParse(data);
-
-    if (parsePersonalInfodData.success) {
-      console.log("Data:: ", parsePersonalInfodData);
-      setIsPersonalInfoButtonLoading(false);
-    } else {
-      console.log(parsePersonalInfodData.error);
-    }
-  };
-
-  // EDUCATIONAL INFO FORM SUBMISSION
-  const onSubmitEducationalForm = async (data: FieldValues) => {
-    // (event as unknown as React.FormEvent<HTMLFormElement>).preventDefault();
-    console.log("logging...");
-
-    setIsEducationalinfoButtonLoading(true);
-    const parsePersonalInfodData = personalInfoSchema.safeParse(data);
-
-    if (parsePersonalInfodData.success) {
-      console.log("Data:: ", parsePersonalInfodData);
-      setIsEducationalinfoButtonLoading(true);
-    } else {
-      console.log(parsePersonalInfodData.error);
-    }
-  };
 
   // CUSTOM EWOORAL TAB DATA
   const tabs: Tab[] = [

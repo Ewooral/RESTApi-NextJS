@@ -32,13 +32,14 @@ export const AgReactUsersTable = () => {
   });
 
   useEffect(() => {
+    
     if (!isLoading && !error && data) {
       setData(data);
+      console.log("Data:::", data);
     }
   }, [isLoading, error, data, setData]);
 
-  console.log("Data:::", data);
-
+ 
   if (error) return <div>Error: {error.message}</div>;
 
   const columnDefs = [

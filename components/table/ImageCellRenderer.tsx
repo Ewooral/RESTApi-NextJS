@@ -7,8 +7,23 @@ type ImageCellRendererProps = {
 const ImageCellRenderer: React.FC<ImageCellRendererProps> = ({ value }) => {
 
   if (!value) {
-    // Render placeholder image or nothing
-    return null;
+    return (
+      <div
+        style={{
+          width: "30px",
+          height: "30px",
+          borderRadius: "50%",
+          backgroundColor: "#ccc",
+          color: "white",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "16px",
+        }}
+      >
+       <span className='text-[9px]'>N/A</span>
+      </div>
+    );
   }
 
   // Provide the width and height properties to the Image component
