@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "@/lib/schemas";
@@ -19,6 +19,9 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+  // .............................................
+
+  // ..............................................
   const {
     register,
     control,
@@ -31,7 +34,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const { isLoading } = userStore();
   const [isFocusedOnEmail, setIsFocusedOnEmail] = useState(false);
   const [isFocusedOnPassword, setIsFocusedOnPassword] = useState(false);
-  const {hideAfterLargerScreens} = useCssMediaQueries();
+  const { hideAfterLargerScreens } = useCssMediaQueries();
 
   const isClient = useIsClient();
   const emailValue = watch("email");
@@ -52,10 +55,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         >
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className={clsx("justify-start items-start grid md:grid-cols-1 gap-2 md:ml-10 md:mr-10 bg-[#fdfdfdce] rounded-3xl",
-            "shadow-md md:px-[2rem]",
-            hideAfterLargerScreens && "mt-[6.3rem]"
-          )}
+            className={clsx(
+              "justify-start items-start grid md:grid-cols-1 gap-2 md:ml-10 md:mr-10 bg-[#fdfdfdce] rounded-3xl",
+              "shadow-md md:px-[2rem]",
+              hideAfterLargerScreens && "mt-[6.3rem]"
+            )}
           >
             {/* FORM ELEMENTS */}
             <div className="p-[2rem]">
@@ -213,7 +217,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               )}
 
               {/* SIGN IN BUTTON */}
-              <section className="flex items-center justify-between mt-4 p-2">              
+              <section className="flex items-center justify-between mt-4 p-2">
                 <DynamicButton
                   className={clsx("px-2 mx-[-.5rem] text-white")}
                   label={isLoading ? "Signing in..." : "Sign in"}

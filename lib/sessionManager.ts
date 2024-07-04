@@ -59,6 +59,25 @@ export const getSession = async (req: NextApiRequest, res: NextApiResponse) => {
   }
     return session;
   };
+
+  export const getSessionA = async (req: Request, res: Response, sessionOptions: SessionOptions) => {
+    const session = await getIronSession<sessionData>(req, res, sessionOptions);
+    if (!session.isLoggedIn) {
+      session.isLoggedIn = defaultSession.isLoggedIn;
+      return session;
+      
+    }
+
+     // Check if session has expired
+     if (session.expiryTime && session.expiryTime <= new Date().getTime()){
+      // Invalidate session if expired
+      session.isLoggedIn = false;
+      session.expiryTime = undefined;
+      // Log user out from database
+      // await deleteSession(session.userId as string);
+  }
+    return session;
+  };
  
 
 

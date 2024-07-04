@@ -444,3 +444,8 @@ body {
   width: 100%; /* Adjust as needed */
   height: 100%; /* Adjust as needed */
 }
+
+
+.custom-min-width .ag-root-wrapper {
+  min-width: 100% !important;
+}

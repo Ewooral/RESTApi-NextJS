@@ -1,12 +1,10 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ShadcnModal } from "../ShadcnModal";
 import { DeleteOutline, ModeEditOutline } from "@mui/icons-material";
 import { useCustomToast } from "@/hooks/useToast";
 import DecisionPopover from "../popout/DecisionPopover";
 import EwooralCustomOverlay from "../overlays/EwooralOverlay";
 import axios from "axios";
-import { useFetchAllUsers } from "@/hooks/useFetchAllUsers";
-import { userService_POSTGRES } from "@/services/userService";
 
 export const ActionCellRenderer = (props: any) => {
   const [open, setOpen] = React.useState(false);
@@ -20,7 +18,7 @@ export const ActionCellRenderer = (props: any) => {
 
   const handleDeleteUserByEmail = async () => {
     setIsLoading(true);
-    console.log("Deleted user id...", props.data.email);
+    console.log("Deleted user id...", props.data.email); 
     const url = "/api/v1/crud/delete/deleteUser"; // Replace with your actual endpoint URL
     const config = {
       headers: {

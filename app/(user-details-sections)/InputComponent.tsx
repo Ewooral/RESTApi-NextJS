@@ -57,14 +57,18 @@ export const InputComponent: React.FC<InputComponentProps> = ({
   return (
     <section className={`col-span-2 flex flex-col gap-2 my-2 ${customStyles}`}>
       <label htmlFor={inputId}>{label}</label>{" "}
-      {/* Step 4: Enhance Accessibility */}
+      {/* Step 4: Enhance Accessibility */}   
       <div
         className={clsx(
           "flex justify-center items-center p-1 w-full border border-[gray]",
           disabled && "bg-[#d6d6d6] cursor-not-allowed",
           customStyles, // Step 5: Apply custom styles,
           error && "border-red-500",
-          isTouched && isDirty && !isEmpty && "border-green-600 transition-all  duration-500",
+          isTouched &&
+            isDirty &&
+            !isEmpty &&
+            "border-green-600 transition-all  duration-500",
+            
         )}
       >
         {icon && (
@@ -90,11 +94,11 @@ export const InputComponent: React.FC<InputComponentProps> = ({
           // required
           {...rest} // Ensure rest of the props are passed to the input
         />
-        {isTouched && isDirty && !error && (
+        {isDirty && !error && !isEmpty && (
           <IoCheckmarkCircleOutline
             className={clsx(
               "size-4",
-              isTouched && isDirty && !error && "text-green-600"
+               !error && isDirty && "text-green-600"
             )}
           />
         )}

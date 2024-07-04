@@ -10,6 +10,14 @@ import AdminTab from "@/components/tabs/AdminTabs";
 import { Card } from "@/components/ui/card";import { useQueries } from "@tanstack/react-query";
 import axios from "axios";
 import { data } from "@/data/data";
+import { sessionOptions } from "@/lib/lib";
+import { getIronSession } from "iron-session";
+import {  getSessionA } from "@/lib/sessionManager";
+
+
+
+
+
 
 
 /**
@@ -20,6 +28,7 @@ import { data } from "@/data/data";
  */
 
 const Dashboard = () => {
+
   // Get the current user session
   const { session } = userStore();
   // Get the router instance
@@ -28,6 +37,21 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true); // Set isLoading to true initially
   // State for storing the response data
   const [ress, setRess] = useState(0)
+
+  // const apiEndpoints = [
+  //   { key: 'users', url: '/api/users-total' },
+  //   { key: 'admins', url: '/api/admin-total' },
+  //   { key: 'guests', url: '/api/guest-total' },
+  //   { key: 'applicants', url: '/api/applicant-total' },
+  // ];
+
+  // const queryResults = useQueries({
+  //   queries: apiEndpoints.map(endpoint => ({
+  //     queryKey: [endpoint.key],
+  //     queryFn: () => axios.get(endpoint.url).then(res => res.data),
+  //   })),
+  // });
+
 
 
 
@@ -86,6 +110,15 @@ const Dashboard = () => {
    * It also sets the response data to the ress state.
    */
   useEffect(() => {
+    results.map((item, index) => {
+      item.refetch()
+      setRess(item.data?.res) 
+    })
+
+  }, [results, ress])
+
+
+    useEffect(() => {
     results.map((item, index) => {
       item.refetch()
       setRess(item.data?.res) 

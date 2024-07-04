@@ -5,7 +5,7 @@ import {InfoCardProps} from "@/data/data";
 
 const InfoCard: React.FC<InfoCardProps> = ({ Icon, iconColor, title, value, bgColor, Component, colSpan="col-span-10 md:col-span-5 lg:col-span-2" }) => {
     return (
-        <div className={`flex ${colSpan} bg-[${bgColor}] p-2 items-center border border-[#ddd]`}>
+        <div className={`flex ${colSpan} bg-[${bgColor}] p-2 items-center border border-[#ddd] flex-wrap min-w-[fit-content]`}>
             <div>
                 <span
                     style={{color: iconColor}}
