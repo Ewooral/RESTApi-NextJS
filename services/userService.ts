@@ -45,10 +45,10 @@ export const userService_POSTGRES = {
          }
      },
 
-    signUp: async() => {
+    signUp: async(data: any) => {
         try{
-            const {data} = await axios.post(`${BASE_URL_POSTGRES}/sign-up`);
-            return data
+            const response = await axios.post(`${BASE_URL_POSTGRES}/sign-up`, data);
+            return response
         }
         catch(error){
             console.error('Error:', error);

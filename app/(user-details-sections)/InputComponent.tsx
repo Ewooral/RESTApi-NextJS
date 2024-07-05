@@ -8,11 +8,12 @@ interface InputComponentProps {
   label: string;
   placeholder?: string;
   icon?: JSX.Element;
-  inputId: string;
-  labelId: string;
-  type: string;
+  inputId?: string;
+  labelId?: string;
+  value?: string;
+  type?: string;
   disabled?: boolean;
-  register: Function;
+  register?: Function;
   error?: string;
   customStyles?: string; // Step 5: New prop for custom styles
   control?: any;
@@ -24,6 +25,8 @@ interface InputComponentProps {
     dirtyFields: Record<string, boolean>;
   };
   watch: Function;
+  paragraphClass?: string;
+  otherNotes?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -45,6 +48,8 @@ export const InputComponent: React.FC<InputComponentProps> = ({
   isvalid,
   formState,
   watch,
+  paragraphClass,
+  otherNotes,
 
   ...rest
 }) => {
@@ -57,7 +62,7 @@ export const InputComponent: React.FC<InputComponentProps> = ({
   return (
     <section className={`col-span-2 flex flex-col gap-2 my-2 ${customStyles}`}>
       <label htmlFor={inputId}>{label}</label>{" "}
-      {/* Step 4: Enhance Accessibility */}   
+      {/* Step 4: Enhance Accessibility */}
       <div
         className={clsx(
           "flex justify-center items-center p-1 w-full border border-[gray]",
@@ -67,8 +72,7 @@ export const InputComponent: React.FC<InputComponentProps> = ({
           isTouched &&
             isDirty &&
             !isEmpty &&
-            "border-green-600 transition-all  duration-500",
-            
+            "border-green-600 transition-all  duration-500"
         )}
       >
         {icon && (
@@ -82,7 +86,7 @@ export const InputComponent: React.FC<InputComponentProps> = ({
           </div>
         )}{" "}
         <input
-          {...register(name, { required: true })} // Step 2: Update registration with custom validation rules
+          {...(register && register(name, { required: true }))} // Add null check before invoking register function
           id={inputId}
           className={clsx(
             "p-1 outline-none bg-transparent w-full  input-focused",
@@ -96,10 +100,7 @@ export const InputComponent: React.FC<InputComponentProps> = ({
         />
         {isDirty && !error && !isEmpty && (
           <IoCheckmarkCircleOutline
-            className={clsx(
-              "size-4",
-               !error && isDirty && "text-green-600"
-            )}
+            className={clsx("size-4", !error && isDirty && "text-green-600")}
           />
         )}
         {/* Step 3: Conditional Rendering for Icon */}
@@ -111,6 +112,93 @@ export const InputComponent: React.FC<InputComponentProps> = ({
         </div>
       )}{" "}
       {/* Step 6: Improved Error Handling */}
+    </section>
+  );
+};
+
+export const CheckboxComponent: React.FC<InputComponentProps> = ({
+  name,
+  label,
+  inputId,
+  labelId,
+  disabled,
+  register,
+  error,
+  customStyles,
+  formState,
+  paragraphClass,
+  otherNotes,
+  ...rest
+}) => {
+  return (
+    <section
+      className={`flex flex-col items-start justify-start gap-2 my-2 ${customStyles}`}
+    >
+      <div className="flex gap-4">
+        <input
+          type="checkbox"
+          id={inputId}
+          {...(register && register(name))}
+          disabled={disabled}
+          {...rest}
+          className="mt-[-13.6px]"
+        />
+        <div className="flex flex-col">
+          <label htmlFor={inputId} id={labelId}>
+            {label}
+          </label>
+          <p className={paragraphClass}>{otherNotes}</p>
+        </div>
+      </div>
+      {error && (
+        <div className="flex gap-2 justify-start items-center">
+          <RiErrorWarningLine className="text-red-500 size-4" />
+          <span className="text-red-500">{error}</span>
+        </div>
+      )}{" "}
+    </section>
+  );
+};
+
+export const RadioButtonComponent: React.FC<InputComponentProps> = ({
+  name,
+  label,
+  value,
+  inputId,
+  type,
+  labelId,
+  disabled,
+  register,
+  error,
+  customStyles,
+  formState,
+  paragraphClass,
+  otherNotes,
+  ...rest
+}) => {
+  const isError = !!error;
+
+  return (
+    <section
+      className={`flex flex-col items-center gap-2 my-2 ${customStyles}`}
+    >
+      <input
+        type={type}
+        id={inputId}
+        name={name}
+        value={value}
+        className="mt-[1.8px]"
+        {...(register && register(name))}
+        disabled={disabled}
+        {...rest}
+      />
+      <div className="flex flex-col">
+        <label htmlFor={inputId} id={labelId}>
+          {label}
+        </label>
+        <p className={paragraphClass}>{otherNotes}</p>
+      </div>
+      {isError && <span className="text-red-500">{error}</span>}
     </section>
   );
 };

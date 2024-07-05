@@ -23,18 +23,8 @@ import { useCssMediaQueries } from "@/hooks/useCssMediaQueries";
 import DynamicButton from "@/components/CustomButton";
 import { BsFillSendCheckFill } from "react-icons/bs";
 import { FaCashRegister } from "react-icons/fa6";
+import { signUpSchema } from "@/lib/schemas";
 
-const schema = z.object({
-  firstname: z.string().min(1, { message: "First name is required" }),
-  lastname: z.string().min(1, { message: "Last name is required" }),
-  email: z.string().email({ message: "Email must be a valid email" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" }),
-  title: z.string().min(1, { message: "Title is required" }),
-  terms: z.boolean().refine((v) => v === true, { message: "Agree to terms" }),
-  isStudent: z.boolean().optional(),
-});
 
 export default function SignUp() {
   const [response, setResponse] = React.useState([]);
@@ -47,7 +37,7 @@ export default function SignUp() {
     watch,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(signUpSchema),
   });
   const [initialsRes, setInitialsRes] = useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -73,7 +63,7 @@ export default function SignUp() {
 
   const onSubmit = async (data: FieldValues) => {
     // perform safeparse and log data using zod safeparse
-    const parsed = schema.safeParse(data);
+    const parsed = signUpSchema.safeParse(data);
     console.log("Parsed::", parsed);
     // when parsing, if there are errors, log them
     if (!parsed.success) {

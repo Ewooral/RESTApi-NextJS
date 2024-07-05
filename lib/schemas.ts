@@ -1,5 +1,19 @@
 import { z } from "zod";
 
+// SIGN UP ZOD SCHEMA
+export  const signUpSchema = z.object({
+  firstname: z.string().min(1, { message: "First name is required" }),
+  lastname: z.string().min(1, { message: "Last name is required" }),
+  email: z.string().email({ message: "Email must be a valid email" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" }),
+  title: z.string().min(1, { message: "Title is required" }),
+  terms: z.boolean().refine((v) => v === true, { message: "Agree to terms" }),
+  isStudent: z.boolean().optional(),
+});
+
+
 // SIGN IN ZOD SCHEMA
 export const signInSchema = z.object({
   email: z.string().email({ message: "Email must be a valid email" }),

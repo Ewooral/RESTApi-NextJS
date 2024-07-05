@@ -367,24 +367,24 @@ export const sidebarData: SidebarItem[] = [
         url: '/myadmin/user-management/view-users',
       },
       {
-        label: 'Student Details',
+        label: 'User Profile',
         icon: <VisibilityIcon />,
         children: [],
         url: '/myadmin/user-management/student-details',
       },
-      {
-        label: 'Add User',
-        icon: <PersonAddIcon />,
-        children: [],
-        url: '/myadmin/user-management/add-user',
+      // {
+      //   label: 'Add User',
+      //   icon: <PersonAddIcon />,
+      //   children: [],
+      //   url: '/myadmin/user-management/add-user',
         
-      },
-      {
-        label: 'Edit User',
-        icon: <PersonIcon />,
-        children: [],
-        url: '/myadmin/user-management/edit-user',
-      },
+      // },
+      // {
+      //   label: 'Edit User',
+      //   icon: <PersonIcon />,
+      //   children: [],
+      //   url: '/myadmin/user-management/edit-user',
+      // },
       {
         label: 'Reset Password',
         icon: <LockIcon />,
@@ -678,3 +678,4 @@ export const UserImagePlaceholder = {
       { value: "female", label: "Female" },
       { value: "other", label: "Other" },
     ];
+
