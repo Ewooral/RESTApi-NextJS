@@ -3,7 +3,7 @@ import {
   InputComponent,
 } from "@/app/(user-details-sections)/InputComponent";
 import { usePersonalForm, useSignUpForm } from "@/hooks/usePersonalInfoForm";
-import React from "react";
+import React, { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { DevTool } from "@hookform/devtools";
@@ -21,6 +21,11 @@ import { FaUserPlus } from "react-icons/fa6";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userService_POSTGRES } from "@/services/userService";
 import { useCustomToast } from "@/hooks/useToast";
+import ButtonSpinner from "@/components/spinners/ButtonSpinner";
+import DynamicButton from "@/components/CustomButton";
+import clsx from "clsx";
+import { BsFillSendCheckFill } from "react-icons/bs";
+import { BiSolidMessageRoundedError } from "react-icons/bi";
 
 type AddUserFormProps = {
   register: any;
@@ -43,20 +48,19 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
 }) => {
   const { register, control, watch, handleSubmit, reset, formState } =
     useSignUpForm();
-    const { showErrorToast, showSuccessToast } = useCustomToast();
+  const { showErrorToast, showSuccessToast } = useCustomToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { errors } = formState;
   const { title } = userStore();
 
-  async function createUser(data: FieldValues){
+  async function createUser(data: FieldValues) {
     const res = await userService_POSTGRES.signUp(data);
     console.log("User added!", res?.data);
     showSuccessToast("User created Successfully", res?.data.message);
     onPrimaryAction?.(); // Assuming this is the action you want to trigger on form submit
     dialogRef?.current?.close();
-
   }
-
 
   const queryClient = useQueryClient();
   const createUserMutation = useMutation({
@@ -65,20 +69,18 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
       // @ts-ignore
       queryClient.invalidateQueries("createAUserNow");
     },
-  
-  })
+  });
 
   async function onSubmit(data: FieldValues) {
-    // const res = await userService_POSTGRES.signUp(data);
-    // console.log("User added!", res?.data);
-    // onPrimaryAction?.(); // Assuming this is the action you want to trigger on form submit
-    // dialogRef?.current?.close();
-    try{
+    console.log("Data:::", data);
+    setIsLoading(true);
+    try {
       await createUserMutation.mutateAsync(data);
-    }
-    catch(error){
+    } catch (error) {
       console.error("Error adding user", error);
       showErrorToast("Error", "Failed to add user");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -181,7 +183,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
             <CheckboxComponent
               register={register}
               label="Are you a student?"
-              name="isstudent"
+              name="isStudent"
               customStyles="outline-none"
               error={errors.isStudent?.message}
               watch={watch}
@@ -198,18 +200,30 @@ const AddUserForm: React.FC<AddUserFormProps> = ({
             <FaUserPlus className="size-11 mt-[.5rem] text-blue-500" />
           </div>
           <div className="flex justify-end gap-4 mt-4 p-5 ">
-            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 transition duration-300">
-              {primaryButtonText}
-            </button>
-            <button
+            <DynamicButton
+              className={clsx("px-1")}
+              label={isLoading ? "Adding..." : "Add User"}
+              icon={<BsFillSendCheckFill className="size-4 text-white" />}
+              isLoading={isLoading}
+              type="submit"
+              style={{ backgroundColor: "#3b82f6", color: "#fff" }}
+              fillColor="#3b82f6"
+            />
+
+            <DynamicButton
+              className={clsx("px-1")}
+              label={"Cancel"}
+              icon={
+                <BiSolidMessageRoundedError className="size-4 text-white" />
+              }
+              type="submit"
+              style={{ backgroundColor: "#EF4444", color: "#fff" }}
+              fillColor="#3b82f6"
               onClick={() => {
                 onSecondaryAction?.();
                 dialogRef?.current?.close();
               }}
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition duration-300"
-            >
-              {secondaryButtonText}
-            </button>
+            />
           </div>
         </div>
       </form>

@@ -20,6 +20,7 @@ import { InputComponent } from "@/app/(user-details-sections)/InputComponent";
 import { usePersonalForm, useSignUpForm } from "@/hooks/usePersonalInfoForm";
 import AddUserForm from "@/app/myadmin/user-management/view-users/AddUserForm";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { FaUserPlus } from "react-icons/fa6";
 
 export const AgReactUsersViewTable = () => {
   const { setData, session } = userStore();
@@ -90,7 +91,6 @@ export const AgReactUsersViewTable = () => {
     setIsCustomModalOpen(false);
   }
 
- 
   return (
     <>
       {isLoading ? (
@@ -101,13 +101,13 @@ export const AgReactUsersViewTable = () => {
         <>
           <div className=" mt-[4rem]">
             {/* BUTTON ELEMENT THAT TRIGGERS THE  DYNAMIC MODAL TO OPEN */}
-            <div className="mr-5 border-b">
+            <div className="flex justify-center items-center mr-5 border-b bg-blue-500">
               <button
                 onClick={() => setIsCustomModalOpen(true)}
                 className="flex justify-center items-center text-2xl my-4 gap-4"
               >
-                <IoMdPersonAdd className="text-[#2196f3] size-10 " />
-                <span>Add a user</span>
+                <FaUserPlus className="text-white size-7 " />
+                <span className="text-white text-lg">Add a user</span>
               </button>
             </div>
 
@@ -134,7 +134,7 @@ export const AgReactUsersViewTable = () => {
               </DynamicDialogModal>
             )}
 
-            <section className="ag-theme-quartz  custom-header-color h-[83vh] my-4">
+            <section className="ag-theme-quartz  custom-header-color h-[73vh] my-4">
               <AgGridReact
                 columnDefs={columnDefs}
                 rowData={data.users}

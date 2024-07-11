@@ -169,6 +169,7 @@ function AdminHeader() {
                     label="Sign in"
                     icon={<AiOutlineLogin className="size-3" />}
                     type="button"
+                    style={{backgroundColor: "#3b82f6", color: "#fff"}}
                   />
                 </Link>
               </>
@@ -183,6 +184,7 @@ function AdminHeader() {
                     label="Sign up"
                     icon={<FaCashRegister className="size-3" />}
                     type="button"
+                    style={{backgroundColor: "#3b82f6", color: "#fff"}}
                   />
                 </Link>
               </>

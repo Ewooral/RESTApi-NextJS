@@ -24,6 +24,8 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import React from "react";
 import {AcademicCapIcon, UserGroupIcon, WindowIcon, UserMinusIcon, GiftIcon} from "@heroicons/react/24/outline";
 import SimpleRadarChart from "@/components/charts/SimpleRadarChart";
+import { IoDocumentLockOutline } from 'react-icons/io5';
+import { ListChecks } from 'lucide-react';
 
 
 export const serviceObjectList = [
@@ -372,13 +374,13 @@ export const sidebarData: SidebarItem[] = [
         children: [],
         url: '/myadmin/user-management/student-details',
       },
-      // {
-      //   label: 'Add User',
-      //   icon: <PersonAddIcon />,
-      //   children: [],
-      //   url: '/myadmin/user-management/add-user',
+      {
+        label: 'Todo Lists',
+        icon: <ListChecks  />,
+        children: [],
+        url: '/myadmin/user-management/todo-lists',
         
-      // },
+      },
       // {
       //   label: 'Edit User',
       //   icon: <PersonIcon />,
@@ -586,12 +588,12 @@ export const sidebarData: SidebarItem[] = [
       },
     ],
   },
-  {
-    label: 'Logout',
-    icon: <ExitToAppIcon />,
-    children: [],
-    url: '/logout',
-  },
+  // {
+  //   label: 'Logout',
+  //   icon: <ExitToAppIcon />,
+  //   children: [],
+  //   url: '/logout',
+  // },
 ];
 
 

@@ -379,7 +379,7 @@ export default function SignUp() {
                     Are you a student?
                   </label>
                   <p className="text-sm text-muted-foreground">
-                    Kindly check this box if you are a student, thanks!.
+                    Kindly check this box if you are a student, thanks!.  
                   </p>
                 </div>
 
@@ -398,6 +398,7 @@ export default function SignUp() {
                   icon={<FaCashRegister className="size-3 text-white" />}
                   isLoading={isLoading}
                   type="submit"
+                  style={{backgroundColor: "#3b82f6", color: "#fff"}}
                 />
                 <div className="">
                   <div className="text-xs">Already have an account?</div>

@@ -53,7 +53,7 @@ const TextareaComponent: React.FC<TextareaComponentProps> = ({
       <label htmlFor={textareaId}>{label}</label>{" "}
       <div
         className={clsx(
-          "flex items-center border border-[gray]",
+          "flex items-center border border-[gray] p-5",
           error && "border-red-500",
           isTouched && isDirty && !error && !isEmpty && "border-green-500",
           isTouched && isDirty && isEmpty && "border-red-500"

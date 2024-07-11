@@ -250,6 +250,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({}) => {
             icon={<BsFillSendCheckFill className="size-4 text-white" />}
             isLoading={isButtonLoading}
             type="submit"
+            style={{backgroundColor: "#3b82f6", color: "#fff"}}
           />
         </div>
       </form>

@@ -224,6 +224,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                   icon={<AiOutlineLogin className="size-4 text-white" />}
                   isLoading={isLoading}
                   type="submit"
+                  style={{backgroundColor: "#3b82f6", color: "#fff"}}
                 />
 
                 <div className="">

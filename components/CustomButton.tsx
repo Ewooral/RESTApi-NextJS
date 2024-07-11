@@ -11,6 +11,7 @@ type DynamicButtonProps = {
   type?: "button" | "submit" | "reset";
   onClick?: any;
   style?: React.CSSProperties;
+  fillColor?: string;
 
 };
 
@@ -22,6 +23,7 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
   type,
   onClick,
   style,
+  fillColor,
 }) => {
   return (
     <div className={className}>
@@ -30,10 +32,11 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
         disabled={isLoading}
         type={type}
         className={clsx(
-          "flex items-center justify-center bg-[#3b82f6]",
+          "flex items-center justify-center",
           "border border-gray-300 px-2 py-2 rounded-lg gap-2 text-xs",
           isLoading && "cursor-not-allowed",
-          isLoading && "opacity-70 bg-[#7e7e7e] font-bold"
+          isLoading && "opacity-70 bg-[#7e7e7e] font-bold",
+          className
         )}
         style={style}
       >
@@ -43,7 +46,7 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
         )}>{label}</span>
         {isLoading && (
           <span>
-            <ButtonSpinner fillColor="#7e7e7e" />
+            <ButtonSpinner fillColor={fillColor ? fillColor : "#7e7e7e" } />
           </span>
         )}
         
@@ -53,3 +56,4 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
 };
 
 export default DynamicButton;
+

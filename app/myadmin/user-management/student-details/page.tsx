@@ -225,8 +225,9 @@ const StudentDetails: React.FC = ({}) => {
           <DynamicButton
             label={isEditButtonLoading ? "Editing..." : "Edit Details"}
             icon={<FaRegEdit className="text-[#fff] size-4" />}
-            className="flex justify-start px-3 py-2"
+            className="flex justify-start items-center"
             type="submit"
+            style={{backgroundColor: "#3b82f6", color: "#fff"}}
           />
         </div>
 
