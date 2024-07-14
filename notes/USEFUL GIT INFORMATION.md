@@ -53,4 +53,16 @@ For changing the author information on multiple commits, more complex commands i
 
 After updating your Git configuration, future commits should reflect the correct user information. Remember to push any changes to the remote repository to reflect these updates.
 
-#The next thing
+# How to unstage or undo a git add
+
+To undo a git add operation that has mistakenly added node_modules or any other files, you can use the git reset command. If you haven't committed the changes yet, this will unstage the files:
+
+```bash
+git reset
+```
+
+If you specifically want to unstage node_modules after accidentally adding it, you can use:
+
+```bash
+git reset HEAD -- node_modules
+```
