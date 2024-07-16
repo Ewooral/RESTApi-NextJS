@@ -367,3 +367,5 @@ export async function createAndInsertPersonalInformation(personalInfo: {
     throw error;
   }
 }
+
+
