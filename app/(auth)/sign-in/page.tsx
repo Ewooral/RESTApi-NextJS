@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { RerouteLoader } from "@/components/Loading";
 import { signInSchema } from "@/lib/schemas";
 import { useCustomToast } from "@/hooks/useToast";
-import { userService_POSTGRES } from "@/services/userService";
+import { userService_POSTGRES, userService_POSTGRES_REFACTORED } from "@/services/userService";
 import { LoginForm } from "./LoginForm";
 
 
@@ -40,26 +40,67 @@ const LogIn: React.FC = () => {
     setIsSubmitting(true);
     try {
       setIsLoading(true);
-      // @ts-ignore
+      // Ensure signIn is completed before proceeding
       const response: UserResponseProps = await userService_POSTGRES.signIn(data);
-      const userId = response?.data.session.userId;
+  
+      // Check if the response and its data are valid
+      if (!response || !response.data) {
+        throw new Error("Invalid response structure from signIn");
+      }
+  
+      // At this point, response is ready and valid, proceed with userId
+      const userId = response.data.session.userId;
+  
+      // Ensure fetchUserImage is completed before proceeding
       const GetUserImageResponse: UserImageProps = await userService_POSTGRES.fetchUserImage(userId);
       console.log("User Image Object::", GetUserImageResponse);
+  
+      // Proceed with the rest of your logic
       setImageUrl(GetUserImageResponse.imageUrl);
-      setSession(response?.data.session);
+      setSession(response.data.session);
       setIsLoggedIn(true);
-      showSuccessToast(response?.data.message, `Welcome ${response?.data.session.firstname}!`);
-        router.push("/myadmin/user-management/student-details");
+      showSuccessToast(response.data.message, `Welcome ${response.data.session.firstname}!`);
+      router.push("/myadmin/user-management/student-details");
     } catch (err: any) {
       console.log("Errorrr:::: ", err as string);
-      
-      showErrorToast(err.error, 'Login Failed');
+      showErrorToast(err.message || "An error occurred", 'Login Failed');
     } finally {
+      // Ensure loading state is reset whether operation succeeds or fails
       setIsLoading(false);
       setIsSubmitting(false);
     }
   };
 
+
+  // const onSubmit = async (data: { email: string; password: string }) => {
+  //   setIsSubmitting(true);
+  //   try {
+  //     setIsLoading(true);
+  //     // Log the raw response for debugging
+  //     const response = await userService_POSTGRES.signIn(data);
+  //     console.log("Raw signIn response:", response);
+  
+  //     // Fallback or conditional check for undefined data
+      // if (!response || !response.message || !response.data || !response.session) {
+      //   throw new Error("Invalid response structure from signIn");
+      // }
+  
+  //     const userId = response.data?.session.userId;
+  //     const GetUserImageResponse: UserImageProps = await userService_POSTGRES.fetchUserImage(userId);
+  //     console.log("User Image Object::", GetUserImageResponse);
+  //     setImageUrl(GetUserImageResponse.imageUrl);
+  //     setSession(response.data?.session);
+  //     setIsLoggedIn(true);
+  //     showSuccessToast(response.data?.message, `Welcome ${response.data?.session.firstname}!`);
+  //     router.push("/myadmin/user-management/student-details");
+  //   } catch (err: any) {
+  //     console.log("Errorrr:::: ", err);
+  //     showErrorToast(err.message || "An error occurred", 'Login Failed');
+  //   } finally {
+  //     setIsLoading(false);
+  //     setIsSubmitting(false);
+  //   }
+  // };
   useEffect(() => {
     setAreYouLoading(true);
     if (session.isLoggedIn) {

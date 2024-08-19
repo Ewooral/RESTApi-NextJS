@@ -10,7 +10,7 @@ let poolConfig;
 
 // Check if the application is running in a production environment
 // if (process.env.NODE_ENV === 'production') {
-  if (NODE_ENV_BS === 'production') {
+if (NODE_ENV_BS === 'production') {
   // Use connection string for production, e.g., AWS RDS
   poolConfig = {
     connectionString: process.env.POSTGRES_DB_STRING_COCROACH,
@@ -29,7 +29,7 @@ let poolConfig;
     database: process.env.DB_NAME,
     password: process.env.DB_PASS,
     port: Number(process.env.DB_PORT),
-  
+
   };
 }
 
