@@ -118,15 +118,6 @@ const Dashboard = () => {
   }, [results, ress])
 
 
-    useEffect(() => {
-    results.map((item, index) => {
-      item.refetch()
-      setRess(item.data?.res) 
-    })
-
-  }, [results, ress])
-
-
 
 
   /**

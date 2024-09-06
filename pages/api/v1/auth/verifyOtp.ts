@@ -20,7 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await db.collection('users').updateOne({ email }, { $set: { otp: null, otpExpire: null } });
 
     res.status(200).json({ message: 'OTP verified successfully' });
-  } else {
     res.status(400).json({ message: 'Only POST requests are allowed' });
   }
 };

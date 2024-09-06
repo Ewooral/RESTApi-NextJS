@@ -15,8 +15,8 @@ export default function Home() {
       backgroundPosition: "center"
     }}
     className={clsx('bg-gradient-to-tr',
-      "landing-page"
-
+      "landing-page",
+     
     )}
     // className="flex h-screen flex-col bg-gradient-to-tr items-center graden font-extrabold text-4xl justify-between p-24"
     >
